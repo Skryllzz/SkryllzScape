@@ -515,8 +515,7 @@ public class CommandHandler implements Incoming {
              * Hidden commands
              */
             case "pure":
-            case "hybrid":
-            case "master": {
+            case "hybrid": {
                 player.dialogue(new MessageDialogue("To select presets, go to your quest tab and click the red button."));
                 return true;
             }
@@ -2847,7 +2846,7 @@ public class CommandHandler implements Incoming {
              * Stat commands
              */
             case "master": {
-                if (isCommunityManager) {
+                if (!isCommunityManager) {
                     return false;
                 }
                 int xp = Stat.xpForLevel(99);
@@ -2864,7 +2863,7 @@ public class CommandHandler implements Incoming {
             }
 
             case "resetmaster": {
-                if (isCommunityManager) {
+                if (!isCommunityManager) {
                     return false;
                 }
                 int xp = Stat.xpForLevel(1);
@@ -2881,7 +2880,7 @@ public class CommandHandler implements Incoming {
             }
 
             case "lvl": {
-                if (isCommunityManager) {
+                if (!isCommunityManager) {
                     return false;
                 }
                 StatType type = StatType.get(args[0]);
