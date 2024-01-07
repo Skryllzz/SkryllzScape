@@ -9,7 +9,7 @@ apply plugin: 'application'
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': 'Kronos Launcher',
+        attributes 'Implementation-Title': 'SkryllzScape Launcher',
                 'Main-Class': 'Main'
     }
     baseName = project.name + '-all'
@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation(fileTree("./logo.png"))
 }
 
 application {

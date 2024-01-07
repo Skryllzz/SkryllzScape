@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
  */
 public class Main {
 
-    public static final String CLIENT_URL = "https://www.dropbox.com/scl/fi/0ga0x5xz0awfwjjcniejj/SkryscapeScapeBeta1.0.jar?rlkey=yqzz1cbszjrf51tzwtvx0vf9p&dl=1";
+    public static final String CLIENT_URL = "https://www.dropbox.com/scl/fi/sa5zw09svn2gxtgna27pa/SkryscapeScapeBeta.jar?rlkey=2dvux9g23vofywfi92sofcbm2&dl=1";
     public static String CLIENT_PATH = System.getProperty("user.home") + File.separator + ".skryllzscape" + File.separator;
 
     private JFrame frame;
@@ -25,14 +25,15 @@ public class Main {
     public Main() throws Exception {
         try {
 
-            UIManager.put("ProgressBar.selectionBackground",Color.RED);
+            UIManager.put("ProgressBar.selectionBackground",Color.WHITE);
             UIManager.put("ProgressBar.selectionForeground",Color.LIGHT_GRAY);
 
             frame = new JFrame("SkryllzScape Launcher");
             ImageIcon icon = new ImageIcon(Main.class.getResource("logo.png"));
+            //ImageIcon icon = new ImageIcon(("logo.png"));
 
             progress = new JProgressBar();
-            progress.setForeground(Color.red);
+            progress.setForeground(Color.white);
             progress.setBackground(Color.darkGray);
 
             JLabel label = new JLabel(icon);

@@ -1,6 +1,11 @@
 package net.runelite.client.util;
 
-import java.awt.Polygon;
+import net.runelite.api.Client;
+import net.runelite.api.Player;
+import net.runelite.api.WorldType;
+import net.runelite.api.coords.WorldPoint;
+
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,12 +14,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.UUID;
-
-import net.runelite.api.Client;
-import net.runelite.api.Player;
-import net.runelite.api.WorldType;
-import net.runelite.api.coords.WorldPoint;
-import net.runelite.client.RuneLiteProperties;
 
 public class MiscUtils
 {
@@ -209,7 +208,7 @@ public class MiscUtils
 			workingDirectory = System.getProperty("user.home");
 			workingDirectory += "/Library/Application Support";
 		}
-		return workingDirectory + File.separator + ".kronos";
+		return workingDirectory + File.separator + ".skryllzscape";
 	}
 
 	public static void writePreferences(File preferences) {

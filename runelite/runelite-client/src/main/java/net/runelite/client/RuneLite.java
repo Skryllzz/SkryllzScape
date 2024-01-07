@@ -86,7 +86,7 @@ import java.util.Locale;
 @Slf4j
 public class RuneLite
 {
-	public static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".kronos");
+	public static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".skryllzscape");
 	public static final File PROFILES_DIR = new File(RUNELITE_DIR, "profiles");
 	public static final File PLUGIN_DIR = new File(RUNELITE_DIR, "plugins");
 	public static final File SCREENSHOT_DIR = new File(RUNELITE_DIR, "screenshots");

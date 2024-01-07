@@ -55,7 +55,7 @@ public class InfoPanel extends JPanel
 	private static final BufferedImage TRANSPARENT_LOGO = ImageUtil.getResourceStreamFromClass(InfoPanel.class, "/skryllzscape.png");
 	static final Dimension PANEL_SIZE = new Dimension(200, RuneLiteSplashScreen.FRAME_SIZE.height);
 	private static final Dimension VERSION_SIZE = new Dimension(PANEL_SIZE.width, 25);
-	private static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".kronos");
+	private static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".skryllzscape");
 	private static final File LOGS_DIR = new File(RUNELITE_DIR, "logs");
 
 	private final Properties properties = new Properties();
