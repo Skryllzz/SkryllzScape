@@ -727,7 +727,8 @@ public class VarbitDefinition extends DualNode implements RSVarbitDefinition {
                byte var38 = 100;
                byte var6 = 35;
                Skeleton.field1821.method6320(var45, var46);
-               var0.method5332("World" + " " + Client.worldId, var38 / 2 + var45, var6 / 2 + var46 - 2, 16777215, 0);
+               //var0.method5332("World" + " " + Client.worldId, var38 / 2 + var45, var6 / 2 + var46 - 2, 16777215, 0);
+               var0.method5332(CustomMain.worldType.getName(), var38 / 2 + var45, var6 / 2 + var46 - 2, 16777215, 0);
                if(class37.World_request != null) {
                   var1.method5332("Loading...", var38 / 2 + var45, var6 / 2 + var46 + 12, 16777215, 0);
                } else {

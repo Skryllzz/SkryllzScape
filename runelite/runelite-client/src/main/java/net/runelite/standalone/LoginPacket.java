@@ -215,11 +215,15 @@ public class LoginPacket implements class168 {
                      byte var6 = 100;
                      byte var7 = 35;
                      if(MouseHandler.MouseHandler_lastPressedX >= var4 && MouseHandler.MouseHandler_lastPressedX <= var6 + var4 && MouseHandler.MouseHandler_lastPressedY >= var14 && MouseHandler.MouseHandler_lastPressedY <= var14 + var7) {
-                        if(BufferedNetSocket.method5242()) {
-                           Login.worldSelectOpen = true;
-                           Login.worldSelectPage = 0;
-                           Login.worldSelectPagesCount = 0;
+                        if (CustomMain.worldType == CustomWorldType.BETA) {
+                           Client.worldId = 2;
+                           CustomMain.worldType = CustomWorldType.DEV;
                         }
+                        else if (CustomMain.worldType == CustomWorldType.DEV) {
+                           Client.worldId = 1;
+                           CustomMain.worldType = CustomWorldType.BETA;
+                        }
+                        class158.worldHost = CustomMain.worldType.getGameServerAddress();
 
                         return;
                      }
@@ -662,15 +666,13 @@ public class LoginPacket implements class168 {
                            }
                         } else if(Login.loginIndex == 12) {
                            String var16 = "";
-                           switch(Login.field769) {
-                           case 0:
-                              var16 = "https://support.kronos.rip/hc/en-gb/articles/115002238729-Account-Bans";
-                              break;
-                           case 1:
-                              var16 = "https://support.kronos.rip/hc/en-gb/articles/206103939-My-account-is-locked";
-                              break;
-                           default:
-                              TilePaint.method2911(false);
+                           switch (Login.field769) {
+                              case 0:
+                              case 1:
+                                 var16 = "https://discord.gg/7RkuGes5dB/";
+                                 break;
+                              default:
+                                 TilePaint.method2911(false);
                            }
 
                            var8 = Login.loginBoxX + 180;
