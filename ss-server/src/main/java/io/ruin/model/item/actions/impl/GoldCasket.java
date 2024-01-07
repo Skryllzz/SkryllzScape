@@ -10,7 +10,6 @@ import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.item.actions.impl.jewellery.RingOfWealth;
 import io.ruin.model.map.Position;
-import io.ruin.model.map.ground.GroundItem;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -69,7 +68,7 @@ public enum GoldCasket {
         if (casket == null) {
             return;
         }
-        new GroundItem(casket.itemId, 1).owner(player).position(dropPosition).spawn();
+        //new GroundItem(casket.itemId, 1).owner(player).position(dropPosition).spawn();
     }
 
     public static GoldCasket roll(Player player, NPC npc) {
