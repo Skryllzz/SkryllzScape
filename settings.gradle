@@ -1,0 +1,11 @@
+rootProject.name = "SkryllzScape"
+
+include ':ss-server'
+include ':ss-server-live'
+include ':ss-client'
+include ':ss-api'
+include ':ss-update-server'
+include ':ss-central-server'
+include ':ss-launcher'
+include ':ss-webhooks'
+
