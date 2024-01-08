@@ -5,7 +5,6 @@ import io.ruin.Server;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.Color;
 import io.ruin.cache.ItemDef;
-import io.ruin.model.World;
 import io.ruin.model.activities.duelarena.DuelRule;
 import io.ruin.model.activities.pvp.leaderboard.Leaderboard;
 import io.ruin.model.activities.raids.xeric.ChambersOfXeric;
@@ -1034,11 +1033,12 @@ public class PlayerCombat extends Combat {
                 player.sendMessage("Oh dear, you are dead!");
                 if(player.wildernessLevel > 15)
                     player.presetDelay.delaySeconds(10);
-                if (player.edgeHome) {
+                /**if (player.edgeHome) {
                     player.getMovement().teleport(World.EDGEHOME);
                 } else {
                     player.getMovement().teleport(2017, 3577, 0);
-                }
+                }**/
+                player.getMovement().teleport(3222, 3219, 0);
 
 
                 /**
