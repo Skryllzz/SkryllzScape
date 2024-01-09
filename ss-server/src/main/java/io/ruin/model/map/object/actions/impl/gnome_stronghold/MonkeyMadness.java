@@ -1,10 +1,73 @@
 package io.ruin.model.map.object.actions.impl.gnome_stronghold;
 
+import io.ruin.model.entity.npc.NPCAction;
+import io.ruin.model.inter.dialogue.ItemDialogue;
+import io.ruin.model.inter.dialogue.MessageDialogue;
+import io.ruin.model.inter.dialogue.NPCDialogue;
+import io.ruin.model.inter.dialogue.PlayerDialogue;
 import io.ruin.model.map.object.actions.ObjectAction;
+import io.ruin.model.stat.StatType;
 
 public class MonkeyMadness {
 
     static {
+        /** Daero **/
+        NPCAction.register(1444, "talk-to", (player, npc) -> {
+            if (player.getStats().check(StatType.Agility, 25) && (player.getStats().totalLevel >= 50)) {
+                player.dialogue(
+                        new PlayerDialogue("I need to return to Crash Island."),
+                        new NPCDialogue(npc, "You know the routine..."),
+                        new ItemDialogue().one(1025, "You wear the blindfold Daero hands you.")
+                );
+                player.startEvent(event -> {
+                    event.delay(4);
+                    player.lock();
+                    player.getPacketSender().fadeOut();
+                    event.delay(2);
+                    player.getMovement().teleport(2893, 2726, 0);
+                    //player.getMovement().teleport(2803, 2706, 0); //Ape Atoll
+                    event.delay(2);
+                    player.getPacketSender().fadeIn();
+                    player.unlock();
+                });
+            } else {
+                player.dialogue(new MessageDialogue("You need to have 25 agility and 50 combat before speaking to him."));
+            }
+        });
+
+        /** Lumdo **/
+        NPCAction.register(1453, "talk-to", (player, npc) -> {
+            if (player.getAbsX() >= 2850) {
+                player.dialogue(
+                        new PlayerDialogue("Can you take me to Ape Atoll please."),
+                        new NPCDialogue(npc, "Sure, no problem."));
+                player.startEvent(event -> {
+                    event.delay(4);
+                    player.lock();
+                    player.getPacketSender().fadeOut();
+                    event.delay(2);
+                    player.getMovement().teleport(2803, 2706, 0); //Ape Atoll
+                    event.delay(2);
+                    player.getPacketSender().fadeIn();
+                    player.unlock();
+                });
+            } else if (player.getAbsX() <= 2849) {
+                player.dialogue(
+                        new PlayerDialogue("Can you take me to Crash Island please."),
+                        new NPCDialogue(npc, "Sure, no problem."));
+                        player.startEvent(event -> {
+                            event.delay(4);
+                            player.lock();
+                            player.getPacketSender().fadeOut();
+                            event.delay(2);
+                            player.getMovement().teleport(2893, 2726, 0);
+                            event.delay(2);
+                            player.getPacketSender().fadeIn();
+                            player.unlock();
+                        });
+            }
+        });
+
         /**
          * Cave
          */
