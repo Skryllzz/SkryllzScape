@@ -98,6 +98,10 @@ public class Ladder {
         //Lumbridge Basement
         ObjectAction.register(17385, 3209, 9616, 0, "climb-up", ((player, obj) -> climb(player, 3210, 3216, 0, true, true, true)));
 
+        //MonkeyMadness Dungeon
+        ObjectAction.register(4780, 2763, 2703, 0, "climb-down", (player, obj) -> climb(player, 2764, 9103, 0, false, true, false));
+        ObjectAction.register(4781, 2763, 9103, 0, "climb-up", (player, obj) -> climb(player, 2764, 2703, 0, true, true, false));
+
         /**
          * Stairs
          */
