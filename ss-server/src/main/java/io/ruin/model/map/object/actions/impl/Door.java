@@ -69,6 +69,17 @@ public class Door {
             }
             player.sendMessage("Unhandled door, report this to a staff member! ID: "+def.id);
         }
+        if (def.id == 4787 || def.id == 4788) { //Gate Near Drezel
+            if (player.getAbsX() >= 2720 && player.getAbsY() == 2765) {
+                player.getMovement().teleport(player.getAbsX(), 2767);
+                return;
+            }
+            if (player.getAbsX() >= 2720 && player.getAbsY() == 2767) {
+                player.getMovement().teleport(player.getAbsX(), 2765);
+                return;
+            }
+            player.sendMessage("Unhandled door, report this to a staff member! ID: "+def.id);
+        }
         if (player.getAbsX() == 3098 && player.getAbsY() == 3107 && def.id == 9398) {
             player.sendMessage("The " + (def.gateType ? "gates" : "doors") + " seem to be stuck.");
             return;
