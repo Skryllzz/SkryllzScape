@@ -148,6 +148,9 @@ public class PlayerCombat extends Combat {
                 player.sendMessage("You can't attack that npc.");
             return false;
         }
+        if(player.getAppearance().getNpcId() != -1) {
+            return false;
+        }
         if(target.getCombat().isDead())
             return false;
         if(player.isStunned()) {
