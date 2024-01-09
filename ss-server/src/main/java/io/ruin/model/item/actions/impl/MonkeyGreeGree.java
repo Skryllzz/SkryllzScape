@@ -50,6 +50,10 @@ public enum MonkeyGreeGree {
             player.sendMessage("You attempt to use the Monkey Greegree but nothing happens.");
             return;
         }
+        if(player.getAppearance().getNpcId() != -1 && !player.getPosition().inBounds(APE_ATOLL_DUNG)) {
+            player.sendMessage("You attempt to use the Monkey Greegree but nothing happens.");
+            return;
+        }
         player.getEquipment().equip(greegree);
         if(player.getEquipment().getId(Equipment.SLOT_WEAPON) == greegreeId) {
             player.privateSound(1677); //rs probably has unique sounds per greegree..
@@ -62,7 +66,7 @@ public enum MonkeyGreeGree {
                     Item item = player.getEquipment().get(Equipment.SLOT_WEAPON);
                     if(item == null || item.getId() != greegreeId)
                         break;
-                    if(!player.getPosition().inBounds(ZOO_BOUNDS) && (!player.getPosition().inBounds(APE_ATOLL))) {
+                    if(!player.getPosition().inBounds(ZOO_BOUNDS) && (!player.getPosition().inBounds(APE_ATOLL) && (!player.getPosition().inBounds(APE_ATOLL_DUNG)))) {
                         item.remove();
                         player.setHidden(false);
                         player.getInventory().addOrDrop(item.getId(), 1);
@@ -85,5 +89,7 @@ public enum MonkeyGreeGree {
 
     private Bounds ZOO_BOUNDS = new Bounds(2592, 3264, 2639, 3287, 0);
     private Bounds APE_ATOLL = new Bounds(2600,2650, 2900, 2900, 0);
+
+    private Bounds APE_ATOLL_DUNG = new Bounds(2692,9089, 2809, 9148, 0);
 
 }
