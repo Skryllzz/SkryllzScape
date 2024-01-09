@@ -286,7 +286,7 @@ public class NPC extends NPCAttributes {
      * Spawning - For a Player
      */
 
-    protected Player targetPlayer;
+    public Player targetPlayer;
 
     private boolean targetIcon;
 
