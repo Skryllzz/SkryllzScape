@@ -535,7 +535,8 @@ public class CommandHandler implements Incoming {
                 return true;
             }
             case "vote": {
-                player.openUrl(World.type.getWorldName() + " Voting", World.type.getWebsiteUrl() + "/voting");
+                //player.openUrl(World.type.getWorldName() + " Voting", World.type.getWebsiteUrl() + "/voting");
+                player.openUrl(World.type.getWorldName() + " Voting", "https://skryllzscape.everythingrs.com/services/vote");
                 return true;
             }
             case "guides": {
