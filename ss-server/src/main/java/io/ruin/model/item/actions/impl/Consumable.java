@@ -64,6 +64,7 @@ public class Consumable {
         registerEat(2142, 4, "meat");
 
         registerEat(315, 3, "shrimps");
+        registerEat(319, 1, "anchovies");
         registerEat(325, 4, "sardine");
         registerEat(347, 5, "herring");
         registerEat(355, 6, "mackerel");
