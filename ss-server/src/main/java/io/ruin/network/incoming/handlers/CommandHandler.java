@@ -2448,6 +2448,11 @@ public class CommandHandler implements Incoming {
                 return true;
             }
 
+            case"invin":
+                player.setInvincible(!player.isInvincible());
+                player.sendMessage("Your Invincibility status is: " + player.isInvincible());
+                return true;
+
             case "reloaditems": {
                 new Thread(() -> {
                     player.sendMessage("Reloading item info...");
