@@ -12,7 +12,6 @@ import io.ruin.model.item.actions.impl.skillcapes.MiningSkillCape;
 import io.ruin.model.item.containers.Equipment;
 import io.ruin.model.map.object.GameObject;
 import io.ruin.model.map.object.actions.ObjectAction;
-import io.ruin.model.skills.CapePerks;
 import io.ruin.model.stat.Stat;
 import io.ruin.model.stat.StatType;
 
@@ -327,8 +326,8 @@ public class Mining {
          * Crystals
          */
         Object[][] crystals = {
-                {Rock.AMETHYST, 30371, 30373, PlayerCounter.MINED_AMETHYST},
-                {Rock.AMETHYST, 30372, 30373, PlayerCounter.MINED_AMETHYST}
+                {Rock.AMETHYST, 11388, 30373, PlayerCounter.MINED_AMETHYST},
+                {Rock.AMETHYST, 11389, 30373, PlayerCounter.MINED_AMETHYST}
         };
         for (Object[] c : crystals) {
             Rock rock = (Rock) c[0];
