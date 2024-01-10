@@ -1634,7 +1634,7 @@ public class CommandHandler implements Incoming {
             }
 
             case "update": {
-                if (isCommunityManager) {
+                if (!isCommunityManager) {
                     return false;
                 }
                 World.update(Integer.valueOf(args[0]));
