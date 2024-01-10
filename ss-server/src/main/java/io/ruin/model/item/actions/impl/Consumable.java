@@ -40,6 +40,8 @@ public class Consumable {
         registerPizza(2297, 2299, 18, "anchovy pizza");
         registerPizza(2301, 2303, 22, "pineapple pizza");
 
+        registerStew(2003, 1923, 11, "stew");
+
         registerPie(2325, 2333, 10, "redberry pie", null);
         registerPie(2327, 2331, 12, "meat pie", null);
         registerPie(2323, 2335, 14, "apple pie", null);
@@ -160,6 +162,10 @@ public class Consumable {
         heal /= 2;
         registerEat(fullId, halfId, heal, 1,false, p -> p.sendFilteredMessage("You eat half of the " + name + "."));
         registerEat(halfId, -1, heal, 2,false, p -> p.sendFilteredMessage("You eat the remaining " + name + "."));
+    }
+
+    private static void registerStew(int fullId, int emptyId, int heal, String name) {
+        registerEat(fullId, emptyId, heal, 1,false, p -> p.sendFilteredMessage("You drink the stew, it heals some health."));
     }
 
     private static void registerPie(int fullId, int halfId, int heal, String name, Consumer<Player> postEffect) {
