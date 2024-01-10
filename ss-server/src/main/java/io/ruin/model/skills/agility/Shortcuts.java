@@ -1,7 +1,5 @@
 package io.ruin.model.skills.agility;
 
-import io.ruin.model.entity.shared.LockType;
-import io.ruin.model.map.Direction;
 import io.ruin.model.map.Position;
 import io.ruin.model.map.Tile;
 import io.ruin.model.map.object.actions.ObjectAction;
@@ -36,6 +34,9 @@ public class Shortcuts {
         ObjectAction.register(23568, 2705, 3209, 0, "swing-on", (p, obj) -> RopeSwing.shortcut(p, obj, 10, Position.of(2709, 3209, 0), Position.of(2704, 3209, 0)));
         ObjectAction.register(23569, 2703, 3205, 0, "swing-on", (p, obj) -> RopeSwing.shortcut(p, obj, 10, Position.of(2705, 3205, 0), Position.of(2709, 3205, 0)));
 
+        // Dwarf Mining Crevince
+        ObjectAction.register(16543, 3034, 9806, 0, "squeeze-through", (p, obj) -> Crevice.shortcut(p, obj, 42, Position.of(3035, 9806, 0), Position.of(3028, 9806, 0)));
+        ObjectAction.register(16543, 3029, 9806, 0, "squeeze-through", (p, obj) -> Crevice.shortcut(p, obj, 42, Position.of(3028, 9806, 0), Position.of(3035, 9806, 0)));
         // (Grapple) Scale Falador wall
         ObjectAction.register(17050, 3032, 3389, 0, "grapple", (p, obj) -> Grappling.grapple(p, obj, 11, 19, 37, 4455, 760, 10, Position.of(3032, 3388, 0), Position.of(3032, 3389, 1)));
         ObjectAction.register(17049, 3033, 3390, 0, "grapple", (p, obj) -> Grappling.grapple(p, obj, 11, 19, 37, 4455, 760, 10, Position.of(3033, 3390, 0), Position.of(3033, 3389, 1)));
