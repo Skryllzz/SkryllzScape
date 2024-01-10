@@ -31,7 +31,7 @@ public class MonkeyMadness {
                     player.unlock();
                 });
             } else {
-                player.dialogue(new MessageDialogue("You need to have 25 agility and 50 combat before speaking to him."));
+                player.dialogue(new MessageDialogue("Daero doesn't speak to anyone under 25 agility and 50 combat."));
             }
         });
 
