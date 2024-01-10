@@ -1,5 +1,6 @@
 package io.ruin.model.entity.npc.actions.guild.mining;
 
+import io.ruin.cache.ItemID;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
@@ -53,11 +54,37 @@ public class Dwarf {
         );
     }
 
+    private static void Skillcapes(Player player, NPC npc) {
+        player.dialogue(
+                new PlayerDialogue("Can you tell me about your skillcape?"),
+                new NPCDialogue(npc, "Sure, this is a Skillcape of Mining. It shows my stature as a master miner! It has all sorts of uses including a skill boost to my Mining skill and a chance of mining extra ores. When you get to level 99 come and talk to.").animate(607),
+                new NPCDialogue(npc, "me and I'll sell you one."),
+                new PlayerDialogue("Can I buy a Skillcape of Mining from you?.").animate(593),
+                new NPCDialogue(npc, "You believe right, miner. You have earned the right to wear one and when you do you'll have a small chance of finding an extra ore, but I'll need 99000 coins from you first.").animate(570),
+                new OptionsDialogue(
+                        new Option("Sorry, that's overpiced.", () -> whatHaveYouGot(player, npc)),
+                        new Option("Okay than.", () -> {
+                            if (player.getInventory().hasItem(995, 99000)) {
+                                player.getInventory().remove(995, 99000);
+                                player.getInventory().add(ItemID.MINING_HOOD, 1);
+                                if (player.getStats().total99s >= 2) {
+                                    player.getInventory().add(ItemID.MINING_CAPET, 1);
+                                } else {
+                                    player.getInventory().add(ItemID.MINING_CAPE, 1);
+                                }
+                            } else {
+                                player.dialogue( new PlayerDialogue("But, unfortunately, I don't have enough money with me"),
+                                                 new NPCDialogue(npc, "Well, come back and see me when you do."));
+                            }
+                        })
+                )
+        );
+    }
+
     private static void noThanks(Player player) {
         player.dialogue(new PlayerDialogue("No thanks, I'm fine.").animate(562));
     }
-
-    static final int[] DWARF_SET_ONE = {7712, 7713, 7716};
+    static final int[] DWARF_SET_ONE = {7712, 7713};
     static final int[] DWARF_SET_TWO = {7714, 7715};
 
     static {
@@ -89,5 +116,29 @@ public class Dwarf {
                         new Option("No thanks, I'm fine.", () -> noThanks(player))
                 )
         ));
+
+        NPCAction.register(7716, "talk-to", (player, npc) -> {
+            if (player.getStats().check(StatType.Mining, 99)) {
+                player.dialogue(
+                        new NPCDialogue(npc, "Welcome to the Mining Guild. Can I help you with anything?").animate(568),
+                        new OptionsDialogue(
+                                new Option("What have you got in the Guild?", () -> whatHaveYouGot(player, npc)),
+                                new Option("What do you dwarves do with the ore you mine?", () -> whatDwarvesDo(player, npc)),
+                                new Option("Can you tell me about your skillcape?", () -> Skillcapes(player, npc)),
+                                new Option("No thanks, I'm fine.", () -> noThanks(player))
+                        )
+                );
+            } else {
+                player.dialogue(
+                        new NPCDialogue(npc, "Welcome to the Mining Guild. Can I help you with anything?").animate(568),
+                        new OptionsDialogue(
+                                new Option("What have you got in the Guild?", () -> whatHaveYouGot(player, npc)),
+                                new Option("What do you dwarves do with the ore you mine?", () -> whatDwarvesDo(player, npc)),
+                                new Option("No thanks, I'm fine.", () -> noThanks(player))
+                        )
+                );
+            }
+    });
+
     }
 }
