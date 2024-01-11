@@ -3,11 +3,8 @@ package io.ruin.model.inter.handlers;
 import io.ruin.Server;
 import io.ruin.api.utils.TimeUtils;
 import io.ruin.cache.Color;
-import io.ruin.cache.Icon;
 import io.ruin.model.World;
-import io.ruin.model.activities.pvp.PVPInstance;
 import io.ruin.model.activities.wilderness.Wilderness;
-import io.ruin.model.entity.player.DoubleDrops;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.listeners.LoginListener;
 import io.ruin.model.inter.Interface;
@@ -17,10 +14,8 @@ import io.ruin.model.inter.InterfaceType;
 import io.ruin.model.inter.actions.SimpleAction;
 import io.ruin.model.inter.journal.Journal;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -36,35 +31,49 @@ public class TabQuest {
     @Getter
     private enum NoticeboardComponent {
 
-        COMPONENT_8(8, player -> "Players Online: " + Color.GREEN.wrap(String.valueOf(World.players.count()))),
-        COMPONENT_9(9, player -> "Online Staff: " + Color.GREEN.wrap(String.valueOf(getStaffOnlineCount())), (SimpleAction) player -> sendStaffOnline(player)),
+        //COMPONENT_8(8, player -> "Players Online: " + Color.GREEN.wrap(String.valueOf(World.players.count()))),
+        COMPONENT_8(8, player -> "Players Online: " + Color.GREEN.wrap(String.valueOf(getOnlineCount())), (SimpleAction) TabQuest::sendOnlinePlayers),
+        COMPONENT_9(9, player -> "Online Staff: " + Color.GREEN.wrap(String.valueOf(getStaffOnlineCount())), (SimpleAction) TabQuest::sendStaffOnline),
         COMPONENT_10(10, player -> "Players in Wild: " + Color.GREEN.wrap(String.valueOf(Wilderness.players.size()))),
-        COMPONENT_11(11, player -> "Players in Tournament: " + Color.GREEN.wrap(String.valueOf(PVPInstance.players.size()))),
-        COMPONENT_12(12, player -> "Server Uptime: " + Color.GREEN.wrap(TimeUtils.fromMs(Server.currentTick() * Server.tickMs(), false))),
-        COMPONENT_43(43, player -> "XP Bonus: " + Color.GREEN.wrap(String.valueOf(World.xpMultiplier))),
-        COMPONENT_44(44, player -> "Double Drops: " + Color.GREEN.wrap(getDoubleDrops())),
-        COMPONENT_45(45, player -> "Double PK Points: " + Color.GREEN.wrap(getDoublePkp())),
-        COMPONENT_46(46, player -> "Double Slayer Points: " + Color.GREEN.wrap(getDoubleSlayerPoints())),
-        COMPONENT_47(47, player -> "Double Pest Control: " + Color.GREEN.wrap(getDoublePcPoints())),
-        COMPONENT_14(14, player -> {
-            boolean hasTwoFactor = player.tfa;
-            String text = "Two-factor authentication";
-            return hasTwoFactor ? Color.GREEN.wrap(text) : Color.RED.wrap(text);
-        }, (SimpleAction) player -> player.openUrl("https://community.kronos.rip/index.php?account/security")), //need to hookup tfa to the website somehow
-        COMPONENT_15(15, player -> "Time Played: " + Color.GREEN.wrap(TimeUtils.fromMs(player.playTime * Server.tickMs(), false))),
-        COMPONENT_16(16, player -> "Total Spent: " + Color.GREEN.wrap( "$" + player.storeAmountSpent)),
-        COMPONENT_17(17, player -> "Base XP: " + Color.GREEN.wrap(String.valueOf(getXpBonus(player)))),
-        COMPONENT_18(18, player -> "Double Drop Chance: " + Color.GREEN.wrap(DoubleDrops.getChance(player) + "%")),
-        COMPONENT_49(49, player -> "PVM Points: " + Color.GREEN.wrap(Integer.toString(player.PvmPoints))),
+        //COMPONENT_11(11, player -> "Players in Tournament: " + Color.GREEN.wrap(String.valueOf(PVPInstance.players.size()))),
+        COMPONENT_11(11, player -> "Server Uptime: " + Color.GREEN.wrap(TimeUtils.fromMs(Server.currentTick() * Server.tickMs(), false))),
+        COMPONENT_12(12, player -> "Time Played: " + Color.GREEN.wrap(TimeUtils.fromMs(player.playTime * Server.tickMs(), false))),
+        //COMPONENT_43(43, player -> "XP Bonus: " + Color.GREEN.wrap(String.valueOf(World.xpMultiplier))),
+        //COMPONENT(43, player -> "Online Players List", (SimpleAction) TabQuest::sendOnlinePlayers),
+        COMPONENT_43(43, player -> "-------------------------------------------------------------", null),
+        COMPONENT_44(44, player -> "", null),
+        COMPONENT_45(45, player -> "", null),
+        COMPONENT_46(46, player -> "", null),
+        COMPONENT_47(47, player -> "", null),
+        COMPONENT_13(13, player -> "", null),
+        COMPONENT_14(14, player -> "", null),
+        COMPONENT_15(15, player -> "", null),
+        COMPONENT_16(16, player -> "", null),
+        COMPONENT_17(17, player -> "", null),
+        COMPONENT_18(18, player -> "", null),
+        COMPONENT_49(49, player -> "", null),
+        //COMPONENT_44(44, player -> "Double Drops: " + Color.GREEN.wrap(getDoubleDrops())),
+        //COMPONENT_45(45, player -> "Double PK Points: " + Color.GREEN.wrap(getDoublePkp())),
+        //COMPONENT_46(46, player -> "Double Slayer Points: " + Color.GREEN.wrap(getDoubleSlayerPoints())),
+        //COMPONENT_47(47, player -> "Double Pest Control: " + Color.GREEN.wrap(getDoublePcPoints())),
+        //COMPONENT_14(14, player -> {
+           // boolean hasTwoFactor = player.tfa;
+           // String text = "Two-factor authentication";
+           // return hasTwoFactor ? Color.GREEN.wrap(text) : Color.RED.wrap(text);
+        //}, (SimpleAction) player -> player.openUrl("https://community.kronos.rip/index.php?account/security")), //need to hookup tfa to the website somehow
+        //COMPONENT_16(16, player -> "Total Spent: " + Color.GREEN.wrap( "$" + player.storeAmountSpent)),
+        //COMPONENT_17(17, player -> "Base XP: " + Color.GREEN.wrap(String.valueOf(getXpBonus(player)))),
+        //COMPONENT_18(18, player -> "Double Drop Chance: " + Color.GREEN.wrap(DoubleDrops.getChance(player) + "%")),
+        //COMPONENT_49(49, player -> "PVM Points: " + Color.GREEN.wrap(Integer.toString(player.PvmPoints))),
 
         COMPONENT_50(50, player -> "Achievements", (SimpleAction) player -> sendAchievements(player)),
         COMPONENT_51(51, player -> "Drop Tables", (SimpleAction) player -> sendBestiary(player)),
         COMPONENT_52(52, player -> "Settings", (SimpleAction) player -> sendToggles(player)),
 
-        COMPONENT_19(19, player -> "Website", (SimpleAction) player -> player.openUrl("http://kronos.rip/")),
-        COMPONENT_20(20, player -> "Community", (SimpleAction) player -> player.openUrl("https://community.kronos.rip/index.php")),
-        COMPONENT_21(21, player -> "Discord", (SimpleAction) player -> player.openUrl("https://discord.com/invite/ZyWAmpS")),
-        COMPONENT_22(22, player -> "Store", (SimpleAction) player -> player.openUrl("http://kronos.rip/store"));
+        COMPONENT_19(19, player -> "Website", (SimpleAction) player -> player.openUrl("https://discord.com/invite/VgJjr7nEmz/")),
+        COMPONENT_20(20, player -> "Community", (SimpleAction) player -> player.openUrl("https://discord.com/invite/VgJjr7nEmz")),
+        COMPONENT_21(21, player -> "Discord", (SimpleAction) player -> player.openUrl("https://discord.com/invite/VgJjr7nEmz")),
+        COMPONENT_22(22, player -> "Store", (SimpleAction) player -> player.openUrl("https://skryllzscape.everythingrs.com/services/store"));
 
         private int componentId;
         private TextField text;
@@ -112,6 +121,17 @@ public class TabQuest {
             player.getPacketSender().sendString(interId, component++, p1.getPrimaryGroup().tag() + " " + p1.getName());
         }
     }
+
+    private static void sendOnlinePlayers(Player player) {
+        int interId = 116;
+        player.openInterface(InterfaceType.MAIN, interId);
+        player.getPacketSender().sendString(interId, 4, "Players Online");
+        List<Player> onlineList = World.getPlayerStream().filter(Player::isOnline).collect(Collectors.toList());
+        int component = 6;
+        for (Player p1 : onlineList) {
+            player.getPacketSender().sendString(interId, component++, p1.getPrimaryGroup().tag() + " " + p1.getName());
+        }
+    }
     private static void sendBestiary(Player player) {
         Journal.BESTIARY.send(player);
     }
@@ -154,6 +174,11 @@ public class TabQuest {
     private static int getStaffOnlineCount() {
         List<Player> staffList = World.getPlayerStream().filter(Player::isStaff).collect(Collectors.toList());
         return staffList.size();
+    }
+
+    private static int getOnlineCount() {
+        List<Player> onlineList = World.getPlayerStream().filter(Player::isOnline).collect(Collectors.toList());
+        return onlineList.size();
     }
 
     private static double getXpBonus(Player player) {
