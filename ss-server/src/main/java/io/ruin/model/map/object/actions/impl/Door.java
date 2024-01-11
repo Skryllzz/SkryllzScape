@@ -4,6 +4,7 @@ import io.ruin.Server;
 import io.ruin.cache.ObjectDef;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.StepType;
+import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.map.Tile;
 import io.ruin.model.map.object.GameObject;
@@ -79,6 +80,22 @@ public class Door {
                 return;
             }
             player.sendMessage("Unhandled door, report this to a staff member! ID: "+def.id);
+        }
+        if (def.id == 1805 && obj.x == 3191 && obj.y == 3363) { //Champions Guild
+            if (player.getStats().totalLevel >= 400 ) {
+                if (player.getAbsX() <= 3194 && player.getAbsY() == 3363) {
+                    player.stepAbs(3191, 3362, StepType.FORCE_WALK);
+                    player.dialogue(new NPCDialogue(814, "Greetings bold adventurer. Welcome to the guild of Champion"));
+                    return;
+                }
+                if (player.getAbsX() == 3191 && player.getAbsY() == 3362) {
+                    player.stepAbs(3191, 3363, StepType.FORCE_WALK);
+                    return;
+                }
+            } else {
+                player.dialogue(new NPCDialogue(814, "You are not worthy of entering the guild of a Champion."), new MessageDialogue("You need a total level of at least 400 to enter."));
+                return;
+            }
         }
         if (player.getAbsX() == 3098 && player.getAbsY() == 3107 && def.id == 9398) {
             player.sendMessage("The " + (def.gateType ? "gates" : "doors") + " seem to be stuck.");
