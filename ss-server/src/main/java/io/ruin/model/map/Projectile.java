@@ -4,7 +4,6 @@ import io.ruin.Server;
 import io.ruin.model.entity.Entity;
 import io.ruin.model.entity.player.Player;
 import io.ruin.utility.Misc;
-import lombok.Setter;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -329,6 +328,9 @@ public class Projectile {
     }
 
     public static final Projectile BOLT = new Projectile(27, 38, 36, 41, 51, 5, 5, 11);
+
+    public static final Projectile WATER_STRIKE = new Projectile(94, 43, 31, 51, 56, 10, 16, 64);
+
 
     public static final Projectile DRAGON_BOLT = new Projectile(1468, 38, 36, 41, 51, 5, 5, 11);
 
