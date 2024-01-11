@@ -70,7 +70,7 @@ public class Door {
             }
             player.sendMessage("Unhandled door, report this to a staff member! ID: "+def.id);
         }
-        if (def.id == 4787 || def.id == 4788) { //Gate Near Drezel
+        if (def.id == 4787 || def.id == 4788) { //Ape Atoll Gate
             if (player.getAbsX() >= 2720 && player.getAbsY() == 2765) {
                 player.getMovement().teleport(player.getAbsX(), 2767);
                 return;
