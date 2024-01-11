@@ -1,6 +1,7 @@
 package io.ruin.model.skills.thieving;
 
 import io.ruin.api.utils.Random;
+import io.ruin.cache.ItemID;
 import io.ruin.model.World;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
@@ -19,7 +20,7 @@ import static io.ruin.cache.ItemID.COINS_995;
 
 public enum Stall {
 
-    VEGETABLE_STALL(2, 2, 10.0, 52000, "vegetable stall",
+    VEGETABLE_STALL(2, 2, 10, 52000, "vegetable stall",
             PlayerCounter.VEGETABLE_STALL_THIEVES,
             new int[][]{
                     {4706, 634},
@@ -27,14 +28,13 @@ public enum Stall {
             },
             null,
             new LootTable().addTable(1,
-                    new LootItem(1957, 1, 1),                    //Onion
-                    new LootItem(1965, 1, 1),                    //Cabbage
-                    new LootItem(1942, 1, 1),                    //Potato
-                    new LootItem(1982, 1, 1),                    //Tomato
-                    new LootItem(1550, 1, 1),                    //Garlic
-                    new LootItem(COINS_995, 400, 500, 12) //Coins
+                    new LootItem(ItemID.ONION, 1, 1),                    //Onion
+                    new LootItem(ItemID.CABBAGE, 1, 1),                    //Cabbage
+                    new LootItem(ItemID.POTATO, 1, 1),                    //Potato
+                    new LootItem(ItemID.TOMATO, 1, 1),                    //Tomato
+                    new LootItem(ItemID.GARLIC, 1, 1)                    //Garlic
             )),
-    BAKERS_STALL(1, 2, 16.0, 49000, "baker's stall",
+    BAKERS_STALL(5, 2, 16.0, 49000, "baker's stall",
             PlayerCounter.BAKER_STALL_THIEVES,
             new int[][]{
                     {6163, 6984},
@@ -44,8 +44,7 @@ public enum Stall {
             new LootTable().addTable(1,
                     new LootItem(1891, 1, 3),                    //Cake
                     new LootItem(2309, 1, 1),                    //Bread
-                    new LootItem(1901, 1, 1),                    //Chocolate slice
-                    new LootItem(COINS_995, 3000, 4000, 3) //Coins
+                    new LootItem(1901, 1, 1)                    //Chocolate slice
             )),
     CRAFTING_STALL(5, 7, 16.0, 49000, "crafting stall",
             PlayerCounter.CRAFTING_STALL_THIEVES,
@@ -57,8 +56,7 @@ public enum Stall {
             new LootTable().addTable(1,
                     new LootItem(1755, 1, 1),                    //Chisel
                     new LootItem(1592, 1, 1),                    //Ring mould
-                    new LootItem(1597, 1, 1),                    //Necklace mould
-                    new LootItem(COINS_995, 3500, 4500, 3) //Coins
+                    new LootItem(1597, 1, 1)                    //Necklace mould
             )),
     MONKEY_FOOD_STALL(5, 7, 16.0, 49000, "food stall",
             PlayerCounter.MONKEY_FOOD_STALL_THIEVES,
@@ -67,8 +65,7 @@ public enum Stall {
             },
             null,
             new LootTable().addTable(1,
-                    new LootItem(1963, 1, 1),                    //Banana
-                    new LootItem(COINS_995, 400, 800, 2) //Coins
+                    new LootItem(1963, 1, 1)                    //Banana
             )),
     MONKEY_GENERAL_STALL(5, 7, 16.0, 49000, "general stall",
             PlayerCounter.MONKEY_GENERAL_STALL_THIEVES,
@@ -79,8 +76,7 @@ public enum Stall {
             new LootTable().addTable(1,
                     new LootItem(1931, 1, 1),                    //Pot
                     new LootItem(2347, 1, 1),                    //Hammer
-                    new LootItem(560, 1, 1),                     //Tinderbox
-                    new LootItem(COINS_995, 400, 800, 4) //Coins
+                    new LootItem(560, 1, 1)                     //Tinderbox
             )),
     TEA_STALL(5, 5, 16.0, 42000, "tea stall",
             PlayerCounter.TEA_STALL_THIEVES,
@@ -91,8 +87,7 @@ public enum Stall {
             },
             null,
             new LootTable().addTable(1,
-                    new LootItem(712, 1, 2),                     //Cup of tea
-                    new LootItem(COINS_995, 400, 800, 3) //Coins
+                    new LootItem(712, 1, 2)                     //Cup of tea
             )),
     SILK_STALL(20, 2, 24.0, 42000, "silk stall",
             PlayerCounter.SILK_STALL_THIEVES,
@@ -102,8 +97,7 @@ public enum Stall {
             },
             new Item(22522, 1),
             new LootTable().addTable(1,
-                    new LootItem(950, 1, 1),                     //Silk
-                    new LootItem(COINS_995, 6000, 8000, 2) //Coins
+                    new LootItem(950, 1, 1)                     //Silk
             )),
     WINE_STALL(22, 3, 27.0, 41000, "wine stall",
             PlayerCounter.WINE_STALL_THIEVES,
@@ -116,8 +110,26 @@ public enum Stall {
                     new LootItem(1993, 1, 1),                     //Jug of wine
                     new LootItem(1988, 5,15, 4),                     //Grapes
                     new LootItem(3732, 1, 1),                     //Empty jug
-                    new LootItem(7919, 1, 1),                     //Bottle of wine
-                    new LootItem(COINS_995, 600, 1200, 4) //Coins
+                    new LootItem(7919, 1, 1)                     //Bottle of wine
+            )),
+    FRUIT_STALL(25, 3, 28.5, 41000, "fruit stall",
+            PlayerCounter.FRUIT_STALL_THIEVES,
+            new int[][]{
+                    {14011, 634},
+            },
+            null,
+            new LootTable().addTable(1,
+                    new LootItem(ItemID.COOKING_APPLE, 1, 2),                     //Jug of water
+                    new LootItem(ItemID.BANANA, 1, 1),                     //Jug of wine
+                    new LootItem(ItemID.STRAWBERRY, 5,15, 4),                     //Grapes
+                    new LootItem(ItemID.REDBERRIES, 1, 1),                     //Empty jug
+                    new LootItem(ItemID.JANGERBERRIES, 1, 1),
+                    new LootItem(ItemID.STRANGE_FRUIT, 1, 1),
+                    new LootItem(ItemID.LIME, 1, 1),
+                    new LootItem(ItemID.LEMON, 1, 1),
+                    new LootItem(ItemID.PINEAPPLE, 1, 1),
+                    new LootItem(ItemID.PAPAYA_FRUIT, 1, 1),
+                    new LootItem(ItemID.GOLOVANOVA_FRUIT_TOP, 1, 1)
             )),
     SEED_STALL(27, 3, 10.0, 40000, "seed stall",
             PlayerCounter.SEED_STALL_THIEVES,
@@ -135,8 +147,7 @@ public enum Stall {
                     new LootItem(5097, 1, 3),                     //Rosemary seed
                     new LootItem(5098, 1, 3),                     //Nasturtium seed
                     new LootItem(5321, 3, 6, 1),                     //Watermelon seed
-                    new LootItem(5323, 3, 6, 1),                     //Strawberry seed
-                    new LootItem(COINS_995, 2000, 3000, 60) //Coins
+                    new LootItem(5323, 3, 6, 1)                     //Strawberry seed
             )),
     FUR_STALL(35, 5, 36.0, 22000, "fur stall",
             PlayerCounter.FUR_STALL_THIEVES,
@@ -146,8 +157,7 @@ public enum Stall {
             },
             null,
             new LootTable().addTable(1,
-                    new LootItem(958, 1, 1),                       //Grey wolf fur
-                    new LootItem(COINS_995, 2000, 4000, 5) //Coins
+                    new LootItem(958, 1, 1)                       //Grey wolf fur
             )),
     FISH_STALL(42, 5, 42.0, 21000, "fish stall",
             PlayerCounter.FISH_STALL_THIEVES,
@@ -160,8 +170,7 @@ public enum Stall {
             new LootTable().addTable(1,
                     new LootItem(332, 1,3, 4),                      //Raw salmon
                     new LootItem(360, 1,3, 3),                      //Raw tuna
-                    new LootItem(378, 1, 2,2),                      //Raw lobster
-                    new LootItem(COINS_995, 2200, 4400, 12) //Coins
+                    new LootItem(378, 1, 2,2)                     //Raw lobster
             )),
     CROSSBOW_STALL(49, 5, 52.0, 20000, "crossbow stall",
             PlayerCounter.CROSSBOW_STALL_THIEVES,
@@ -172,9 +181,7 @@ public enum Stall {
             new LootTable().addTable(1,
                     new LootItem(877, 3, 2),                        //Bronze bolts
                     new LootItem(9420, 1, 2),                       //Bronze limbs
-                    new LootItem(9440, 1, 2),                       //Wooden stock
-                    new LootItem(9431, 1, 2),                       //Runite stock
-                    new LootItem(COINS_995, 2500,5000, 14) //Coins
+                    new LootItem(9440, 1, 2)                       //Wooden stock
             )),
     SILVER_STALL(50, 5, 54.0, 19000, "silver stall",
             PlayerCounter.SILVER_STALL_THIEVES,
@@ -184,8 +191,7 @@ public enum Stall {
             },
             new Item(22523, 1),
             new LootTable().addTable(1,
-                    new LootItem(442, 1, 1),                       //Silver ore
-                    new LootItem(COINS_995, 8000, 10000, 2)               //Coins
+                    new LootItem(442, 1, 1)                       //Silver ore
             )),
     SPICE_STALL(65, 5, 81.0, 13000, "spice stall",
             PlayerCounter.SPICE_STALL_THIEVES,
@@ -196,8 +202,7 @@ public enum Stall {
             },
             null,
             new LootTable().addTable(1,
-                    new LootItem(2007, 1, 2),                      //Spice
-                    new LootItem(COINS_995, 2000, 7000, 4)  //Coins
+                    new LootItem(2007, 1, 2)                      //Spice
             )),
     MAGIC_STALL(65, 7, 100, 12000, "magic stall",
             PlayerCounter.MAGIC_STALL_THIEVES,
@@ -210,20 +215,17 @@ public enum Stall {
                     new LootItem(557, 50, 5),                      //Earth rune
                     new LootItem(554, 50, 5),                      //Fire rune
                     new LootItem(555, 50, 5),                      //Water rune
-                    new LootItem(563, 25, 1),                      //Law rune
-                    new LootItem(COINS_995, 2000, 5000, 10) //Coins
+                    new LootItem(563, 25, 1)                      //Law rune
             )),
-    SCIMITAR_STALL(65, 7, 100.0, 1000, "scimitar stall",
+    SCIMITAR_STALL(65, 7, 160.0, 1000, "scimitar stall",
             PlayerCounter.SCIMITAR_STALL_THIEVES,
             new int[][]{
                     {4878, 4797},
             },
             null,
             new LootTable().addTable(1,
-                    new LootItem(1323, 1, 30),                      //Iron scimitar
-                    new LootItem(1333, 1, 4),                      //Rune scimitar
-                    new LootItem(4587, 1, 1),                      //Dragon scimitar
-                    new LootItem(COINS_995, 4000, 6000, 70) //Coins
+                    new LootItem(ItemID.IRON_SCIMITAR, 1, 30),                      //Iron scimitar
+                    new LootItem(ItemID.STEEL_SCIMITAR, 1, 20)                      //Steel scimitar
             )),
     GEM_STALL(75, 10, 160.0, 8500, "gem stall",
             PlayerCounter.GEM_STALL_THIEVES,
@@ -237,8 +239,7 @@ public enum Stall {
                     new LootItem(1621, 1, 8),                      //Uncut emerald
                     new LootItem(1619, 1, 6),                      //Uncut ruby
                     new LootItem(1617, 1, 4),                      //Uncut diamond
-                    new LootItem(1631, 1, 1),                      //Uncut dragonstone
-                    new LootItem(COINS_995, 12000, 15000, 10) //Coins
+                    new LootItem(1631, 1, 1)                      //Uncut dragonstone
             )),
     MOR_GEM_STALL(75, 10, 160.0, 8500, "gem stall",
             PlayerCounter.MOR_GEM_STALL_THIEVES,
@@ -255,10 +256,9 @@ public enum Stall {
                     new LootItem(1617, 1, 2),                      //Uncut diamond
                     new LootItem(1602, 1, 2),                      //Diamond
                     new LootItem(1631, 1, 1),                      //Uncut dragonstone
-                    new LootItem(1616, 1, 1),                      //Dragonstone
-                    new LootItem(COINS_995, 2000, 3000, 3) //Coins
+                    new LootItem(1616, 1, 1)                      //Dragonston
             )),
-    ORE_STALL(82, 10, 210.0, 8500, "ore stall",
+    ORE_STALL(82, 10, 180.0, 8500, "ore stall",
             PlayerCounter.ORE_STALL_THIEVES,
             new int[][]{
                     {30279, 30278}
