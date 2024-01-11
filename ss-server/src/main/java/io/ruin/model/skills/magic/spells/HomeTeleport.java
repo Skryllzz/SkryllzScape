@@ -37,34 +37,41 @@ public class HomeTeleport extends Spell {
                     return;
                 }
             }
+            if (p.getCombat().isDefending(10)) {
+                p.sendMessage("You can't cast this spell while in combat.");
+                return;
+            }
             Position override = getHomeTeleportOverride(p);
             if (override != null) {
                 ModernTeleport.teleport(p, override.getX(), override.getY(), override.getZ());
             } else {
-//                if (p.getMovement().hasMoved()) {
-//                    p.resetAnimation();
-//                    p.sendMessage("test");
-//                }
                 p.addEvent(event -> {
-                    event.delay(2);
-                    p.lock();
-                    p.animate(4847);
-                    p.graphics(800);
-                    p.privateSound(193);
-                    event.delay(5);
-                    p.animate(4850);
-                    p.privateSound(196);
-                    event.delay(3);
-                    p.animate(4853);
-                    p.graphics(803);
-                    p.privateSound(194);
-                    event.delay(5);
-                    p.animate(4857);
-                    p.graphics(804);
-                    p.privateSound(195);
-                    event.delay(2);
-                    consumer.accept(p);
-                    p.unlock();
+                    if (!p.getMovement().hasMoved()) {
+                    while (true) {
+                        event.delay(2);
+                        p.lock();
+                        p.animate(4847);
+                        p.graphics(800);
+                        p.privateSound(193);
+                        event.delay(5);
+                        p.animate(4850);
+                        p.privateSound(196);
+                        event.delay(3);
+                        p.animate(4853);
+                        p.graphics(803);
+                        p.privateSound(194);
+                        event.delay(5);
+                        p.animate(4857);
+                        p.graphics(804);
+                        p.privateSound(195);
+                        event.delay(2);
+                        consumer.accept(p);
+                        p.unlock();
+                    }
+                } else {
+                        p.unlock();
+                        p.resetAnimation();
+                    }
                 });
             }
         };
