@@ -9,6 +9,9 @@ import io.ruin.model.stat.StatType;
 
 public class MageGuild {
 
+    public static int Aubury = 0;
+    public static int Distentor = 0;
+
     public static final int[] MAGEDOOR = {1732, 1733 };
     public static final int[] ESSNPC = {3248, 2886 };
 
@@ -55,6 +58,8 @@ public class MageGuild {
             NPCAction.register(3248, "Teleport", (player, npc) -> {
                 npc.addEvent(e -> {
                         npc.face(player);
+                        //player.setMageGuild(false);
+                        Distentor = 1;
                         npc.forceText("Senventior Disthine Molenko");
                         npc.animate(1818);
                         npc.graphics(343);
@@ -68,12 +73,26 @@ public class MageGuild {
                 });
             });
 
-            ObjectAction.register(34774, 2885, 4850, 0, "use", (player, obj) -> player.getMovement().teleport(2590, 3086, 0));
+            /** ESS Mine Portals **/
+            ObjectAction.register(34774, "use", (player, obj) -> { //2885, 4850, 0,
+                if (obj.x <= 2940 && obj.x >= 2880) {
+                    if (Aubury > 0) {
+                        player.getMovement().teleport(3253, 3400, 0);
+                        Aubury = 0;
+                    }
+                    if (Distentor > 0) {
+                        player.getMovement().teleport(2590, 3086, 0);
+                        Distentor = 0;
+                    }
+            }
+                    });
 
             /** Aubury **/
             NPCAction.register(2886, "Teleport", (player, npc) -> {
                 npc.addEvent(e -> {
                         npc.face(player);
+                        //player.setAubury(false);
+                        Aubury = 1;
                         npc.forceText("Senventior Disthine Molenko");
                         npc.animate(1818);
                         npc.graphics(343);
@@ -81,13 +100,11 @@ public class MageGuild {
                         player.animate(1816);
                         e.delay(2);
                         npc.faceNone(true);
-                        player.getMovement().teleport(2890, 4846, 0);
+                        player.getMovement().teleport(2910, 4831, 0);
                         e.delay(2);
                         player.animate(715);
                 });
             });
-
-            ObjectAction.register(34774, 2932, 4854, 0, "use", (player, obj) -> player.getMovement().teleport(3253, 3400, 0));
 
     }
 }

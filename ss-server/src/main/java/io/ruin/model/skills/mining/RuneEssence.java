@@ -1,6 +1,5 @@
 package io.ruin.model.skills.mining;
 
-import io.ruin.api.utils.Random;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.LockType;
@@ -64,19 +63,24 @@ public class RuneEssence {
                    PlayerCounter counter = pure ? PlayerCounter.MINED_PURE_ESSENCE : PlayerCounter.MINED_RUNE_ESSENCE;
                    int itemId = pure ? 7936 : 1436;
                    double average = getEssenceAverage(player, pickaxe);
-                   if (average < 1 && Random.get() > average)
-                       continue;
-                   int essenceCount = 1;
-                   if (average > 1) {
-                       double fixed = Math.floor(average);
-                       essenceCount = (int) fixed;
-                       double chance = average - fixed;
-                       if (Random.get() < chance)
-                           essenceCount += 1;
+                   int essenceCount = 0;
+                   if (player.getStats().get(StatType.Mining).currentLevel >= 30 && player.getStats().get(StatType.Mining).currentLevel <= 59) {
+                       player.getInventory().add(itemId, essenceCount + 2);
+                       counter.increment(player, essenceCount);
+                       player.getStats().addXp(StatType.Mining, 5 * 2, true);
+                   } else if (player.getStats().get(StatType.Mining).currentLevel >= 60 && player.getStats().get(StatType.Mining).currentLevel <= 79) {
+                       player.getInventory().add(itemId, essenceCount + 3);
+                       counter.increment(player, essenceCount);
+                       player.getStats().addXp(StatType.Mining, 5 * 3, true);
+                   } else if (player.getStats().get(StatType.Mining).currentLevel >= 80) {
+                       player.getInventory().add(itemId, essenceCount + 4);
+                       counter.increment(player, essenceCount);
+                       player.getStats().addXp(StatType.Mining, 5 * 2, true);
+                   } else {
+                       player.getInventory().add(itemId, essenceCount + 1);
+                       counter.increment(player, essenceCount);
+                       player.getStats().addXp(StatType.Mining, 5, true);
                    }
-                   player.getInventory().add(itemId, essenceCount);
-                   counter.increment(player, essenceCount);
-                   player.getStats().addXp(StatType.Mining, 1.5 * essenceCount, true);
                }
            }
         });
