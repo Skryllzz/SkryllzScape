@@ -50,6 +50,15 @@ public class Castle {
                 }
             });
 
+        ObjectAction.register(2883, 3268, 3228, 0, "open", (player, obj) -> {
+            if (player.isAt(3267, 3227) || player.isAt(3267, 3228)) {
+                player.getMovement().teleport(player.getAbsX() + 1, player.getAbsY(), 0);
+            }
+            if (player.isAt(3268, 3227) || player.isAt(3268, 3228)) {
+                player.getMovement().teleport(player.getAbsX() -1, player.getAbsY(), 0);
+            }
+        });
+
         /** Lumbridge Cellar Entrance **/
         //Tile.getObject(6905, 3221, 9618, 0).skipReachCheck = p -> p.equals(3221, 9618) || p.equals(3220, 9618) || p.equals(3219, 9618);
 
