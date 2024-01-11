@@ -9,7 +9,7 @@ import io.ruin.model.entity.player.Player
  */
 object Horvik {
 
-    private const val HORVIK = 2882
+    private const val HORVIK = 2881
     private const val CRYSTAL_SEED = 4207
     private const val PRICE = 10_000_000
     private const val CRYSTAL_BOW = 4212

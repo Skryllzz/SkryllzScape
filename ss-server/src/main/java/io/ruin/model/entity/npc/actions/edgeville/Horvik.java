@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.ruin.cache.ItemID.COINS_995;
-import static io.ruin.cache.NpcID.HORVIK;
+import static io.ruin.cache.NpcID.DOMINIC_ONION;
 
 public class Horvik {
 
@@ -44,7 +44,7 @@ public class Horvik {
                     player.dialogue(new ItemDialogue().one(upgrade.regularId, "You release the energy from the item."));
                 }));
             });
-            ItemNPCAction.register(upgrade.regularId, HORVIK, (player, item, npc) -> {
+            ItemNPCAction.register(upgrade.regularId, 0000, (player, item, npc) -> {
                 player.dialogue(new YesNoDialogue("Are you sure you want to do this?", "Upgrade your " + item.getDef().name + " for " + cost + " " + currencyName + "?", new Item(upgrade.upgradeId, 1), () -> {
                     Item bloodMoney = player.getInventory().findItem(currencyId);
                     if(bloodMoney == null || bloodMoney.getAmount() < cost) {
@@ -58,21 +58,21 @@ public class Horvik {
             });
         }
         String[] upgradeInfoArray = upgradeInfo.toArray(new String[0]);
-        NPCAction.register(HORVIK, "upgrade-items", (player, item) -> player.sendScroll("<col=800000>Item Upgrades", upgradeInfoArray));
+        NPCAction.register(DOMINIC_ONION, "dream", (player, item) -> player.sendScroll("<col=800000>Item Upgrades", upgradeInfoArray));
         /*
          * Repairing
          */
-        NPCAction.register(HORVIK, "repair-items", Horvik::repairAll);
+        NPCAction.register(0000, "repair-items", Horvik::repairAll);
         for(ItemBreaking brokenItem : ItemBreaking.values()) {
             ItemAction.registerInventory(brokenItem.brokenId, "fix", (player, item) -> repairItem(player, item, brokenItem));
             ItemItemAction.register(COINS_995, brokenItem.brokenId, (player, primary, secondary) -> repairItem(player, secondary, brokenItem));
-            ItemNPCAction.register(brokenItem.brokenId, HORVIK, (player, item, npc) -> repairItem(player, item, brokenItem));
+            ItemNPCAction.register(brokenItem.brokenId, 0000, (player, item, npc) -> repairItem(player, item, brokenItem));
         }
         /*
          * Zamorakian spear/hasta conversion
          */
         for(int id : new int[]{11824, 11889})
-            ItemNPCAction.register(id, HORVIK, Horvik::convertZamorakianWeapon);
+            ItemNPCAction.register(id, 0000, Horvik::convertZamorakianWeapon);
     }
 
     private static void repairAll(Player player, NPC npc) {
