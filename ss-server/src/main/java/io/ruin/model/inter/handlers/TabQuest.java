@@ -132,7 +132,7 @@ public class TabQuest {
             player.getPacketSender().sendString(interId, component++, p1.getPrimaryGroup().tag() + " " + p1.getName());
         }
     }
-    private static void sendBestiary(Player player) {
+    public static void sendBestiary(Player player) {
         Journal.BESTIARY.send(player);
     }
     private static void sendAchievements(Player player) {
