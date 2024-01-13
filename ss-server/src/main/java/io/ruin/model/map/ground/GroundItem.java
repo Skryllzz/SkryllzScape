@@ -50,6 +50,13 @@ public class GroundItem {
         this.attributes = attributes;
     }
 
+    public boolean droppedByIronPlayer(Player player) {
+        if(originalOwner != -1 && originalOwner != player.getUserId()) {
+            return false;
+        }
+        return true;
+    }
+
     public GroundItem owner(Player player) {
         return owner(player.getUserId());
     }
