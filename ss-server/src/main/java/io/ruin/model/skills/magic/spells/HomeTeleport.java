@@ -46,8 +46,6 @@ public class HomeTeleport extends Spell {
                 ModernTeleport.teleport(p, override.getX(), override.getY(), override.getZ());
             } else {
                 p.addEvent(event -> {
-                    if (!p.getMovement().hasMoved()) {
-                    while (true) {
                         event.delay(2);
                         p.lock();
                         p.animate(4847);
@@ -66,12 +64,8 @@ public class HomeTeleport extends Spell {
                         p.privateSound(195);
                         event.delay(2);
                         consumer.accept(p);
-                        p.unlock();
-                    }
-                } else {
-                        p.unlock();
                         p.resetAnimation();
-                    }
+                        p.unlock();
                 });
             }
         };
