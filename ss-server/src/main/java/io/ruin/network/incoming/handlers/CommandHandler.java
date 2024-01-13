@@ -2448,6 +2448,10 @@ public class CommandHandler implements Incoming {
                 return true;
             }
 
+            case "ktele": {
+                teleports.open(player);
+            }
+
             case"invin":
                 player.setInvincible(!player.isInvincible());
                 player.sendMessage("Your Invincibility status is: " + player.isInvincible());
