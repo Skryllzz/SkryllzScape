@@ -28,7 +28,6 @@ import io.ruin.process.event.EventConsumer;
 import io.ruin.process.event.EventType;
 import io.ruin.process.event.EventWorker;
 import io.ruin.utility.TickDelay;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -977,6 +976,14 @@ public abstract class Entity {
 
     public boolean isNpc() {
         return false;
+    }
+
+    public Player asPlayer() {
+        return this instanceof Player ? ((Player) this) : null;
+    }
+
+    public NPC asNPC() {
+        return this instanceof NPC ? ((NPC) this) : null;
     }
 
     public boolean dead() {
