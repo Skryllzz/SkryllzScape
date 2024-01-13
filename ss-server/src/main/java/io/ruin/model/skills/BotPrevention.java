@@ -56,7 +56,7 @@ public class BotPrevention {
                     e.delay(3);
                     World.sendGraphics(86, 60, 0, npc.getPosition());
                     World.sendGraphics(86, 60, 0, player.getPosition());
-                    Punishment.jail(player, npc, 250);
+                    Punishment.jail(player, npc, 50);
                     e.delay(1);
                     npc.remove();
                     player.unlock();
@@ -68,7 +68,7 @@ public class BotPrevention {
                     resetBlock(player);
                     e.delay(3);
                     World.sendGraphics(86, 60, 0, npc.getPosition());
-                    int randomGold = Random.get(10000, 25000);
+                    int randomGold = Random.get(1000, 2500);
                     player.getInventory().addOrDrop(COINS_995, randomGold);
                     player.sendMessage(Color.COOL_BLUE.wrap("The guard hands you " + NumberUtils.formatNumber(randomGold) + " gold coins for the trouble."));
                     e.delay(1);
