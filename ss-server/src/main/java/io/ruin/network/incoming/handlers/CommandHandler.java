@@ -2450,6 +2450,7 @@ public class CommandHandler implements Incoming {
 
             case "ktele": {
                 teleports.open(player);
+                return true;
             }
 
             case"invin":
