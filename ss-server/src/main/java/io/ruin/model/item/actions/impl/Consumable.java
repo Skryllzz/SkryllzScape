@@ -1,6 +1,7 @@
 package io.ruin.model.item.actions.impl;
 
 import io.ruin.cache.ItemDef;
+import io.ruin.cache.ItemID;
 import io.ruin.model.World;
 import io.ruin.model.activities.duelarena.DuelRule;
 import io.ruin.model.combat.Hit;
@@ -41,6 +42,8 @@ public class Consumable {
         registerPizza(2301, 2303, 22, "pineapple pizza");
 
         registerStew(2003, 1923, 11, "stew");
+
+        //registerTea(712, ItemID.EMPTY_CUP, 3, "Cup of tea");
 
         registerPie(2325, 2333, 10, "redberry pie", null);
         registerPie(2327, 2331, 12, "meat pie", null);
@@ -112,6 +115,18 @@ public class Consumable {
         ItemAction.registerInventory(13441, "eat", (player, item) -> {
             if(eatAngler(player, item))
                 player.sendFilteredMessage("You eat the anglerfish.");
+        });
+
+        ItemDef.get(712).consumable = true;
+        ItemAction.registerInventory(712, "drink", (player, item) -> {
+            player.getInventory().remove(712, 1);
+            player.getInventory().add(ItemID.EMPTY_CUP);
+            player.animate(829);
+            player.privateSound(2401);
+            player.forceText("Aaaah, nothing like a nice cuppa tea!");
+            player.getStats().get(StatType.Attack).boost(2, 0.0);
+            player.resetActions(true, player.getMovement().following != null, true);
+
         });
 
         ItemAction.registerInventory(30089, "eat", (player, item) -> {
