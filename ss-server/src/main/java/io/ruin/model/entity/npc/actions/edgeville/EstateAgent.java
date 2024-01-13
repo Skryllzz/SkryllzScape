@@ -24,7 +24,7 @@ import static io.ruin.cache.ItemID.COINS_995;
 
 public class EstateAgent {
 
-    private static final int HOUSE_COST = 100_000;
+    private static final int HOUSE_COST = 10000;
     private static final int ESTATE_AGENT = 5419;
 
     static {
@@ -37,7 +37,7 @@ public class EstateAgent {
                     new OptionsDialogue(
                             new Option("How can I get a house?", () -> {
                                 player.dialogue(new PlayerDialogue("How can I get a house?"),
-                                        new NPCDialogue(npc, "I can sell you a starting house in Edgeville for " + Color.COOL_BLUE.wrap(NumberUtils.formatNumber(HOUSE_COST)) + " coins. As you increase " +
+                                        new NPCDialogue(npc, "I can sell you a starting house in rimmington for " + Color.COOL_BLUE.wrap(NumberUtils.formatNumber(HOUSE_COST)) + " coins. As you increase " +
                                                 "your construction skill you will be able to have your house moved to other areas and redecorated in other styles."),
                                         new NPCDialogue(npc, "Would you like to purchase a starter house?"),
                                         new OptionsDialogue("Purchase a house for " + Color.COOL_BLUE.wrap(NumberUtils.formatNumber(HOUSE_COST)) + " coins?",

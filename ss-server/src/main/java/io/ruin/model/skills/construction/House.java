@@ -58,7 +58,7 @@ public class House {
 
     @Expose private Room[][][] rooms = new Room[3][8][8];
 
-    @Expose private HouseLocation location = HouseLocation.EDGEVILLE;
+    @Expose private HouseLocation location = HouseLocation.RIMMINGTON;
 
     @Expose private boolean locked;
 

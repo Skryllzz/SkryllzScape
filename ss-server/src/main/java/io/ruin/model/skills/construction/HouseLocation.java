@@ -10,7 +10,7 @@ import io.ruin.model.map.Position;
 import io.ruin.model.map.object.actions.ObjectAction;
 
 public enum HouseLocation {
-    EDGEVILLE(15478, 1, 10000, new Position(2030, 3570, 0)), // same as rimmington
+    RIMMINGTON(15478, 1, 10000, new Position(2953, 3224, 0)),
     TAVERLEY(15477, 10, 10000, new Position(2893, 3465, 0)),
     POLLNIVNEACH(15479, 20, 15000, new Position(3340, 3003, 0)),
     GREAT_KOUREND(28822, 25, 17500, new Position(1742, 3517, 0)),
