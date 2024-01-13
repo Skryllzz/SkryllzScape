@@ -1,11 +1,8 @@
 package io.ruin.model.entity.npc.actions.edgeville;
 
-import io.ruin.cache.ObjectID;
-import io.ruin.data.impl.teleports;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.shared.listeners.SpawnListener;
 import io.ruin.model.item.actions.impl.ItemSet;
-import io.ruin.model.map.object.actions.ObjectAction;
 
 public class HomePortal {
 
@@ -35,7 +32,7 @@ public class HomePortal {
             }
         }));
 
-//        ObjectAction.register(ObjectID.KRONOS_TELEPORTER, "teleport", (player, npc) -> teleports.open(player));
+ //       ObjectAction.register(ObjectID.KRONOS_TELEPORTER, "teleport", (player, npc) -> teleports.open(player));
 //        ObjectAction.register(ObjectID.KRONOS_TELEPORTER, "previous teleport", (player, npc) -> teleports.previous(player));
     }
 }
