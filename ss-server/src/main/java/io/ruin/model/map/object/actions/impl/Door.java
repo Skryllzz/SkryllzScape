@@ -81,6 +81,28 @@ public class Door {
             }
             player.sendMessage("Unhandled door, report this to a staff member! ID: "+def.id);
         }
+        if (def.id == 1967 || def.id == 1968) { //Grand Tree Doors
+            if (player.isAt(2465, 3491) || player.isAt(2466, 3491)) {
+                player.getMovement().teleport(player.getAbsX(), player.getAbsY() + 2);
+                return;
+            }
+            if (player.isAt(2465, 3493) || player.isAt(2466, 3493)) {
+                player.getMovement().teleport(player.getAbsX(), player.getAbsY() - 2);
+                return;
+            }
+            player.sendMessage("Unhandled door, report this to a staff member! ID: "+def.id);
+        }
+        if (def.id == 190) { //Tree Gnome Stronghold
+            if (player.isAt(2461, 3385)) {
+                player.getMovement().teleport(player.getAbsX(), player.getAbsY() - 3);
+                return;
+            }
+            if (player.isAt(2461, 3382)) {
+                player.getMovement().teleport(player.getAbsX(), player.getAbsY() + 3);
+                return;
+            }
+            player.sendMessage("You need to stand in the center in front of the door.");
+        }
         if (def.id == 1805 && obj.x == 3191 && obj.y == 3363) { //Champions Guild
             if (player.getStats().totalLevel >= 400 ) {
                 if (player.getAbsX() <= 3194 && player.getAbsY() == 3363) {
