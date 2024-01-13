@@ -55,9 +55,12 @@ public class PrayerAltar {
          * Registering all prayer altars
          */
         ObjectDef.forEach(def -> {
-            if(def.hasOption("pray-at"))
-                ObjectAction.register(def.id, "pray-at", (player, obj) -> pray(player));
-        });
+            if (def.id != 6552) {
+                if (def.hasOption("pray-at")) {
+                    ObjectAction.register(def.id, "pray-at", (player, obj) -> pray(player));
+                }
+             }
+            });
         /**
          * Custom Edgeville altar
          */
