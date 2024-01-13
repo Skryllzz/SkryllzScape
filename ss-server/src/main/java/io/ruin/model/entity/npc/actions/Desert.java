@@ -2,10 +2,7 @@ package io.ruin.model.entity.npc.actions;
 
 import io.ruin.cache.ItemID;
 import io.ruin.model.entity.npc.NPCAction;
-import io.ruin.model.inter.dialogue.ItemDialogue;
-import io.ruin.model.inter.dialogue.NPCDialogue;
-import io.ruin.model.inter.dialogue.OptionsDialogue;
-import io.ruin.model.inter.dialogue.PlayerDialogue;
+import io.ruin.model.inter.dialogue.*;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.loot.LootItem;
 import io.ruin.model.item.loot.LootTable;
@@ -48,6 +45,25 @@ public class Desert {
                     ));
 
         });
+
+        /** Eblis **/
+        NPCAction.register(688, "talk-to", (player, npc) -> player.dialogue(
+                new NPCDialogue(npc, "Hello, can I interest you in an ancient staff for 80k?"),
+                new OptionsDialogue(
+                        new Option("Sure", () -> {
+                            if (player.getInventory().hasItem(995, 80000)) {
+                                player.getInventory().remove(995, 80000);
+                                player.getInventory().add(ItemID.ANCIENT_STAFF);
+                                player.dialogue(new ItemDialogue().one(ItemID.ANCIENT_STAFF, "You purchase an Ancient Staff"));
+                            } else {
+                                player.dialogue(new MessageDialogue("You don't have enough coins to purchase the staff"));
+                            }
+                        }),
+                        new Option("No thanks, I'm fine.", () -> {
+                                player.dialogue(new NPCDialogue(npc, "Suit yourself.."));
+                        })
+                )
+        ));
 
         /** Karim **/
         NPCAction.register(2877, "talk-to", (player, npc) -> {
