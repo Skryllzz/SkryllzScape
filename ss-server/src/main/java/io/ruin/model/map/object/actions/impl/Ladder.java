@@ -105,6 +105,10 @@ public class Ladder {
         //Dwarven Mine
         ObjectAction.register(17387, 3019, 9850, 0, "climb-up", ((player, obj) -> climb(player, 3018, 3450, 0, true, true, true)));
         ObjectAction.register(11867, 3019, 3450, 0, "climb-down", ((player, obj) -> climb(player, 3020, 9850, 0, false, true, false)));
+
+        //Pyramid to Ancient Alar
+        ObjectAction.register(6497, 3233, 2897, 0, "climb-down", ((player, obj) -> climb(player, 3235, 9312, 0, false, true, false)));
+
         /**
          * Stairs
          */
