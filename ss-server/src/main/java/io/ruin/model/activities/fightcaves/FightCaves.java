@@ -119,7 +119,8 @@ public class FightCaves {
             if(lastWave == 0) {
                 player.dialogue(new NPCDialogue(HOST, "Well I suppose you tried... better luck next time.").animate(610));
             } else if(!practice) {
-                int tokkul = 2 + ((lastWave - 50) * (3 + lastWave));
+                //int tokkul = 2 + ((lastWave - 50) * (3 + lastWave));
+                int tokkul = lastWave * (lastWave - 1) / 2;
                 if(!killedJad) {
                     if(!player.isSapphire()) {
                         player.dialogue(new NPCDialogue(HOST, "Well done in the cave, here take TokKul as reward.").animate(588));
@@ -362,7 +363,7 @@ public class FightCaves {
         } else if (player.isGroup(PlayerGroup.SAPPHIRE)) {
             return 50;
         } else {
-            return 50;
+            return 1;
         }
     }
 
