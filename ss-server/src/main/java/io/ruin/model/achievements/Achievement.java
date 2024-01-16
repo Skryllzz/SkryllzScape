@@ -5,12 +5,6 @@ import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.achievements.listeners.ardougne.ArdyElite;
 import io.ruin.model.achievements.listeners.ardougne.ArdyHard;
 import io.ruin.model.achievements.listeners.ardougne.ArdyMed;
-import io.ruin.model.achievements.listeners.experienced.*;
-import io.ruin.model.achievements.listeners.intro.TheBestiary;
-import io.ruin.model.achievements.listeners.master.ExpertRunecrafter;
-import io.ruin.model.achievements.listeners.novice.ImplingHunter;
-import io.ruin.model.achievements.listeners.novice.IntoTheAbyss;
-import io.ruin.model.achievements.listeners.novice.Lightness;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.listeners.LoginListener;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -24,41 +18,7 @@ public enum Achievement {
     ARDY_EASY_DIARY(new ArdyEasy(null), AchievementCategory.Ardougne),
     ARDY_MED_DIARY(new ArdyMed(null), AchievementCategory.Ardougne),
     ARDY_HARD_DIARY(new ArdyHard(), AchievementCategory.Ardougne),
-    ARDY_ELITE_DIARY(new ArdyElite(), AchievementCategory.Ardougne),
-
-    /**
-     * Intro
-     */
-    THE_BESTIARY(new TheBestiary(), AchievementCategory.Introductory),
-    //COMMENCE_SLAUGHTER(new CommenceSlaughter(), AchievementCategory.Introductory),
-    //PRESETS(new PresetsIntro(), AchievementCategory.Introductory),
-
-    /**
-     * Novice
-     */
-    INTO_THE_ABYSS(new IntoTheAbyss(), AchievementCategory.Novice),
-    //MORYTANIA_FARMING(new MorytaniaFarming(), AchievementCategory.Novice),
-    LIGHTNESS(new Lightness(), AchievementCategory.Novice),
-    IMPLING_HUNTER(new ImplingHunter(), AchievementCategory.Novice),
-
-    /**
-     * Experienced
-     */
-    DOWN_IN_THE_DIRT(new DownInTheDirt(), AchievementCategory.Experienced),
-    ESSENCE_EXTRACTOR(new EssenceExtractor(), AchievementCategory.Experienced),
-    GOLDEN_TOUCH(new GoldenTouch(), AchievementCategory.Experienced),
-    NATURES_TOUCH(new NaturesTouch(), AchievementCategory.Experienced),
-    ABYSSAL_DISTURBANCE(new AbyssalDisturbance(), AchievementCategory.Experienced),
-    PRACTICE_MAKES_PERFECT(new PracticeMakesPerfect(), AchievementCategory.Experienced),
-    QUICK_HANDS(new QuickHands(), AchievementCategory.Experienced),
-    MY_ARMS_PATCH(new MyArmsPatch(), AchievementCategory.Experienced),
-    WELCOME_TO_THE_JUNGLE(new WelcomeToTheJungle(), AchievementCategory.Experienced),
-    DEMON_SLAYER(new DemonSlayer(), AchievementCategory.Experienced),
-
-    /**
-     * Master
-     */
-    EXPERT_RUNECRAFTER(new ExpertRunecrafter(), AchievementCategory.Master);
+    ARDY_ELITE_DIARY(new ArdyElite(), AchievementCategory.Ardougne);
 
     private final AchievementListener listener;
     private final AchievementCategory category;
