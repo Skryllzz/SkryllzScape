@@ -18,7 +18,7 @@ object TournamentManager {
     /**
      * A flag indicating if this activity is enabled.
      */
-    @JvmField var enabled = true
+    @JvmField var enabled = false
 
     /**
      * A flag indicating if the players are required to pay some sort of fee prior to entering the tournament.
