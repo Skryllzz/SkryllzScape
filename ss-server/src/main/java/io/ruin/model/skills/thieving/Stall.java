@@ -1,11 +1,13 @@
 package io.ruin.model.skills.thieving;
 
+import io.ruin.api.utils.ArrayUtils;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.ItemID;
 import io.ruin.model.World;
 import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
+import io.ruin.model.entity.shared.listeners.SpawnListener;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.Pet;
@@ -318,6 +320,17 @@ public enum Stall {
             player.sendMessage("You can't steal from a stall while a guard is watching you.");
             return;
         }
+        // Check if the player is in the Ardougne region and within distance of the guard NPC
+        /**if (player.getPosition().getRegion().id == 10547 && player.getPosition().isWithinDistance(guard.getPosition(), 2)) {
+            //SpawnListener.register(ArrayUtils.of("guard"), npc -> {
+                //npc.addEvent(e -> {
+                        guard.forceText("Stop thief!");
+                        guard.attackTargetPlayer();
+                //});
+            //});
+            // You can add code here to make the guard NPC attack the player
+            return;
+        }**/
 
         player.startEvent(event -> {
             player.sendFilteredMessage("You attempt to steal from the " + stall.name + "...");
@@ -328,7 +341,17 @@ public enum Stall {
                     player.sendMessage("<col=800000>Well done! You have completed an easy task in the Ardougne area. Your Achievement Diary has been updated.</col>");
                 }
             }
-            player.lock();
+            if (player.getPosition().getRegion().id == 10547) {
+                SpawnListener.register(ArrayUtils.of("guard"), npc -> {
+                npc.addEvent(e -> {
+                if (npc.getPosition().isWithinDistance(player.getPosition(), 3)) {
+                    npc.forceText("Stop thief!");
+                    npc.getCombat().setTarget(player);
+                }
+            });
+        });
+    }
+                player.lock();
             player.animate(832);
             event.delay(1);
             replaceStall(stall, object, replacementID, player);
