@@ -1010,6 +1010,7 @@ public abstract class PlayerAttributes extends Entity {
 
     @Expose public boolean ArdyEasyComplete = false;
 
+    @Expose public boolean ArdyEasyClaimed = false;
     @Expose public ArdyEasy[] ardyeasytask = new ArdyEasy[8];
     @Expose public boolean ArdyMedComplete = false;
     @Expose public ArdyMed[] ardymedtask = new ArdyMed[8];

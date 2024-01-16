@@ -13,6 +13,7 @@ import io.ruin.model.achievements.listeners.novice.IntoTheAbyss;
 import io.ruin.model.achievements.listeners.novice.Lightness;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.listeners.LoginListener;
+import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.journal.Journal;
 import io.ruin.model.inter.journal.JournalEntry;
 
@@ -84,7 +85,7 @@ public enum Achievement {
             } else if (newStage == AchievementStage.IN_PROGRESS) {
                 getListener().started(player);
             } else if(newStage == AchievementStage.FINISHED) {
-                player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + getListener().name());
+                player.dialogue(new MessageDialogue("Congratulations! You have completed all of the easy tasks in the Ardougne area. Speak to Two-pints at the Flying Horse Inn in Ardougne to claim your reward."));
                 getListener().finished(player);
             }
         }

@@ -107,13 +107,18 @@ public class ArdyNpcs {
 
         /** Two-pints **/
         NPCAction.register(5519, "talk-to", (player, npc) -> {
-            player.dialogue(new PlayerDialogue("I've completed all of the medium tasks in my Ardougne achievement diary!"),
-                            new NPCDialogue(npc,"I can see that, well done! You'll be wanting your reward then!"),
-                            new PlayerDialogue("Yes please!"),
-                            new NPCDialogue(npc,"This cloak is a symbol of your exploration of Ardougne. It will allow you to teleport to Ardougne Monastery at anytime."),
-                            new PlayerDialogue("Thanks!"));
-            player.getInventory().add(ARDOUGNE_CLOAK_1,1);
-            player.getInventory().add(ANTIQUE_LAMP,1 );
+            if (player.ArdyEasyComplete && !player.ArdyEasyClaimed) {
+                player.dialogue(new PlayerDialogue("I've completed all of the easy tasks in my Ardougne achievement diary!"),
+                        new NPCDialogue(npc, "I can see that, well done! You'll be wanting your reward then!"),
+                        new PlayerDialogue("Yes please!"),
+                        new NPCDialogue(npc, "This cloak is a symbol of your exploration of Ardougne. It will allow you to teleport to Ardougne Monastery at anytime."),
+                        new PlayerDialogue("Thanks!"));
+                player.getInventory().add(ARDOUGNE_CLOAK_1, 1);
+                player.getInventory().add(ANTIQUE_LAMP, 1);
+                player.ArdyEasyClaimed = true;
+            } else {
+            player.dialogue(new NPCDialogue(npc, "I have more chat options coming soon."));
+            }
         });
     }
 }
