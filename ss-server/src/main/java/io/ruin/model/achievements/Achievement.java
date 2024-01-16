@@ -1,8 +1,11 @@
 package io.ruin.model.achievements;
 
 import io.ruin.cache.Color;
+import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
+import io.ruin.model.achievements.listeners.ardougne.ArdyElite;
+import io.ruin.model.achievements.listeners.ardougne.ArdyHard;
+import io.ruin.model.achievements.listeners.ardougne.ArdyMed;
 import io.ruin.model.achievements.listeners.experienced.*;
-import io.ruin.model.achievements.listeners.intro.CommenceSlaughter;
 import io.ruin.model.achievements.listeners.intro.TheBestiary;
 import io.ruin.model.achievements.listeners.master.ExpertRunecrafter;
 import io.ruin.model.achievements.listeners.novice.ImplingHunter;
@@ -15,11 +18,18 @@ import io.ruin.model.inter.journal.JournalEntry;
 
 public enum Achievement {
 
+    /** Ardouge Diary **/
+
+    ARDY_EASY_DIARY(new ArdyEasy(null), AchievementCategory.Ardougne),
+    ARDY_MED_DIARY(new ArdyMed(null), AchievementCategory.Ardougne),
+    ARDY_HARD_DIARY(new ArdyHard(), AchievementCategory.Ardougne),
+    ARDY_ELITE_DIARY(new ArdyElite(), AchievementCategory.Ardougne),
+
     /**
      * Intro
      */
     THE_BESTIARY(new TheBestiary(), AchievementCategory.Introductory),
-    COMMENCE_SLAUGHTER(new CommenceSlaughter(), AchievementCategory.Introductory),
+    //COMMENCE_SLAUGHTER(new CommenceSlaughter(), AchievementCategory.Introductory),
     //PRESETS(new PresetsIntro(), AchievementCategory.Introductory),
 
     /**
@@ -71,6 +81,8 @@ public enum Achievement {
             if(newStage == AchievementStage.STARTED) {
                 player.sendMessage("<col=000080>You have started the achievement: <col=800000>" + getListener().name());
                 getListener().started(player);
+            } else if (newStage == AchievementStage.IN_PROGRESS) {
+                getListener().started(player);
             } else if(newStage == AchievementStage.FINISHED) {
                 player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + getListener().name());
                 getListener().finished(player);
@@ -88,7 +100,7 @@ public enum Achievement {
                 }
                 if(stage == AchievementStage.FINISHED)
                     send(player, getListener().name(), Color.GREEN);
-                else if(stage == AchievementStage.STARTED)
+                else if(stage == AchievementStage.IN_PROGRESS)
                     send(player, getListener().name(), Color.YELLOW);
                 else
                     send(player, getListener().name(), Color.RED);
@@ -115,6 +127,7 @@ public enum Achievement {
     public static String slashIf(String string, boolean slash) {
         return slash ? ("<str>" + string + "</str>") : string;
     }
+
 
     public AchievementListener getListener() {
         return listener;

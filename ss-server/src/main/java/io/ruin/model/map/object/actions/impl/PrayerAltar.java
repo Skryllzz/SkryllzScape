@@ -2,6 +2,7 @@ package io.ruin.model.map.object.actions.impl;
 
 import io.ruin.cache.ObjectDef;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
@@ -58,6 +59,18 @@ public class PrayerAltar {
             if (def.id != 6552) {
                 if (def.hasOption("pray-at")) {
                     ObjectAction.register(def.id, "pray-at", (player, obj) -> pray(player));
+                    ObjectAction.register(409, 2617, 3309, 0, "pray-at", (player, obj) ->{
+                        Stat prayer = player.getStats().get(StatType.Prayer);
+                        if(prayer.currentLevel == prayer.fixedLevel) {
+                            player.sendMessage("You already have full prayer points.");
+                        } else {
+                        pray(player);
+                        if (!ArdyEasy.isTaskCompleted(player, 4)) {
+                            ArdyEasy.completeTask(player, 4);
+                            player.sendMessage("<col=800000>Well done! You have completed an easy task in the Ardougne area. Your Achievement Diary has been updated.</col>");
+                        }
+                        }
+                    });
                 }
              }
             });

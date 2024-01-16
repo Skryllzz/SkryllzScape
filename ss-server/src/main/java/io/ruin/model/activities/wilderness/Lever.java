@@ -1,5 +1,6 @@
 package io.ruin.model.activities.wilderness;
 
+import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.activities.pvminstances.InstanceDialogue;
 import io.ruin.model.activities.pvminstances.InstanceType;
 import io.ruin.model.entity.player.Player;
@@ -31,7 +32,24 @@ public class Lever {
         /*
          * Ardougne
          */
-        ObjectAction.register(1814, 2561, 3311, 0, "pull", (player, obj) -> pull(player, obj, 3154, 3924, "...and teleport into the wilderness."));
+        ObjectAction.register(1814, 2561, 3311, 0, "pull", (player, obj) -> {
+            player.dialogue(
+                    new MessageDialogue("Warning! Pulling the lever will teleport you deep into the Wilderness."),
+                    new OptionsDialogue("Are you sure you wish to pull it?",
+                            new Option("Yes, I'm brave.", () -> {
+                                pull(player, obj, 3154, 3924, "...and teleport into the wilderness.");
+                                if (!ArdyEasy.isTaskCompleted(player, 7)) {
+                                    ArdyEasy.completeTask(player, 7);
+                                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Ardougne area. Your Achievement Diary has been updated.</col>");
+                                }
+                            }),
+                            new Option("Eep! The Wilderness... No thank you.", () -> player.sendFilteredMessage("You decide not to pull the lever. ")),
+                            new Option("Yes please, don't show this message again.", () -> {
+                                player.ardyLeverWarning = false;
+                                pull(player, obj, 3154, 3924, "...and teleport into the wilderness.");
+                            }))
+            );
+        });
 
         /*
          * Edge

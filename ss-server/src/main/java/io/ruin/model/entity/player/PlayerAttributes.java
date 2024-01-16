@@ -8,6 +8,8 @@ import io.ruin.content.activities.tournament.TournamentFightPair;
 import io.ruin.content.objects.Cannon;
 import io.ruin.model.achievements.Achievement;
 import io.ruin.model.achievements.AchievementStage;
+import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
+import io.ruin.model.achievements.listeners.ardougne.ArdyMed;
 import io.ruin.model.activities.ActivityTimer;
 import io.ruin.model.activities.barrows.BarrowsBrother;
 import io.ruin.model.activities.cluescrolls.ClueSave;
@@ -495,6 +497,8 @@ public abstract class PlayerAttributes extends Entity {
     public boolean npcTarget; //just so we can check if a player has a target or not.
 
     @Expose public boolean edgevilleLeverWarning = true;
+
+    @Expose public boolean ardyLeverWarning = true;
 
     @Expose public int mageArenaPoints;
 
@@ -1001,6 +1005,18 @@ public abstract class PlayerAttributes extends Entity {
     @Expose public long lastSacrifice;
 
     /**
+     * Ardy achievements fields
+     */
+
+    @Expose public boolean ArdyEasyComplete = false;
+
+    @Expose public ArdyEasy[] ardyeasytask = new ArdyEasy[8];
+    @Expose public boolean ArdyMedComplete = false;
+    @Expose public ArdyMed[] ardymedtask = new ArdyMed[8];
+    @Expose public boolean ArdyHard = false;
+    @Expose public boolean ArdyElite = false;
+
+    /**
      * Intro achievements fields
      */
     @Expose public boolean bestiaryIntro = false;
@@ -1122,6 +1138,8 @@ public abstract class PlayerAttributes extends Entity {
     public TickDelay presetDelay = new TickDelay();
 
     public StatType selectedSkillLampSkill;
+
+    public StatType selectedAntiqueLampSkill;
 
     /**
      * Risk protection toggle

@@ -1,5 +1,6 @@
 package io.ruin.model.map.object.actions.impl.yanille;
 
+import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.shared.StepType;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -11,6 +12,8 @@ public class MageGuild {
 
     public static int Aubury = 0;
     public static int Distentor = 0;
+
+    public static int Cromperty = 0;
 
     public static final int[] MAGEDOOR = {1732, 1733 };
     public static final int[] ESSNPC = {3248, 2886 };
@@ -84,6 +87,10 @@ public class MageGuild {
                         player.getMovement().teleport(2590, 3086, 0);
                         Distentor = 0;
                     }
+                    if (Cromperty > 0) {
+                        player.getMovement().teleport(2681, 3325, 0);
+                        Cromperty = 0;
+                    }
             }
                     });
 
@@ -105,6 +112,30 @@ public class MageGuild {
                         player.animate(715);
                 });
             });
+
+        /** Wizard Cromperty **/
+        NPCAction.register(8480, "Teleport", (player, npc) -> {
+            npc.addEvent(e -> {
+                if (!ArdyEasy.isTaskCompleted(player, 1)) {
+                    // Mark Task 1 as completed and notify ArdyMed
+                    ArdyEasy.completeTask(player, 1);
+                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Ardougne area. Your Achievement Diary has been updated.</col>");
+                }
+                npc.face(player);
+                //player.setAubury(false);
+                Cromperty = 1;
+                npc.forceText("Senventior Disthine Molenko");
+                npc.animate(1818);
+                npc.graphics(343);
+                player.graphics(342);
+                player.animate(1816);
+                e.delay(2);
+                npc.faceNone(true);
+                player.getMovement().teleport(2910, 4831, 0);
+                e.delay(2);
+                player.animate(715);
+            });
+        });
 
     }
 }

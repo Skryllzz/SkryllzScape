@@ -2,6 +2,7 @@ package io.ruin.model.map.object.actions.impl;
 
 import io.ruin.Server;
 import io.ruin.cache.ObjectDef;
+import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.StepType;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -629,6 +630,20 @@ public class Door {
                 ObjectAction.register(def.id, "close", Door::handle);
         });
         ObjectAction.register(12657, 2319, 3690, 0, "open", (player, obj) -> player.sendFilteredMessage("The door seems to be stuck."));
+        ObjectAction.register(2039, 2517, 3356, 0, "open", (player, obj) -> {
+            if (!ArdyEasy.isTaskCompleted(player, 5)) {
+                ArdyEasy.completeTask(player, 5);
+                player.sendMessage("<col=800000>Well done! You have completed an easy task in the Ardougne area. Your Achievement Diary has been updated.</col>");
+            }
+            Door.handle(player, obj);
+        });
+        ObjectAction.register(2041, 2518, 3356, 0, "open", (player, obj) -> {
+            if (!ArdyEasy.isTaskCompleted(player, 5)) {
+                ArdyEasy.completeTask(player, 5);
+                player.sendMessage("<col=800000>Well done! You have completed an easy task in the Ardougne area. Your Achievement Diary has been updated.</col>");
+            }
+            Door.handle(player, obj);
+        });
     }
 
     private static void setSound(ObjectDef def, int open, int close) {

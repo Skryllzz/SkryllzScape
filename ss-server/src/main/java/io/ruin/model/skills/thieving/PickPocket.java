@@ -55,7 +55,7 @@ public enum PickPocket {
                     new LootItem(1734, 6, 1), //Coins
                     new LootItem(1733, 1, 1), //Coins
                     new LootItem(1511, 1, 1), //Coins
-                    new LootItem(686, 1, 1), //Coins
+                    new LootItem(686, 1, 1), //Rusty Sword
                     new LootItem(697, 1, 1), //Coins
                     new LootItem(1625, 1, 1), //Coins
                     new LootItem(1627, 1, 1), //Coins

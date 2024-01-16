@@ -81,6 +81,27 @@ import static io.ruin.cache.ItemID.*;
 public class Player extends PlayerAttributes {
 
     public Shop viewingShop;
+    public int ArdyMedTasks;
+
+    private List<Boolean> ardyEasyTasks;
+
+    public List<Boolean> getArdyEasyTasks() {
+        if (ardyEasyTasks == null) {
+            // Initialize tasks, if they haven't been initialized yet
+            // = new ArrayList<>(Collections.nCopies(ArdyEasy.NUM_TASKS, false));
+        }
+        return ardyEasyTasks;
+    }
+
+    public void completeTask(int taskIndex) {
+        // Make sure the tasks have been initialized
+        if (ardyEasyTasks == null) {
+            getArdyEasyTasks();
+        }
+        // Set the task as completed
+        ardyEasyTasks.set(taskIndex, true);
+    }
+    public boolean ArdyEasyTasks;
     /**
      * Session
      */
@@ -1644,5 +1665,15 @@ public class Player extends PlayerAttributes {
             System.out.println("Running onDialogueContinued runnable.");
         }
         onDialogueContinued = null;
+    }
+
+    private final List<Integer> completedTasks;
+
+    public Player(){
+        completedTasks = new ArrayList<>();
+    }
+
+    public List<Integer> getCompletedTasks() {
+        return completedTasks;
     }
 }

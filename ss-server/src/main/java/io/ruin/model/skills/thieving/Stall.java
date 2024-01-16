@@ -3,6 +3,7 @@ package io.ruin.model.skills.thieving;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.ItemID;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -15,6 +16,8 @@ import io.ruin.model.map.object.GameObject;
 import io.ruin.model.map.object.actions.ObjectAction;
 import io.ruin.model.skills.BotPrevention;
 import io.ruin.model.stat.StatType;
+
+import java.util.Objects;
 
 import static io.ruin.cache.ItemID.COINS_995;
 
@@ -318,6 +321,13 @@ public enum Stall {
 
         player.startEvent(event -> {
             player.sendFilteredMessage("You attempt to steal from the " + stall.name + "...");
+            if (Objects.equals(stall.name, "baker's stall")) {
+                if (!ArdyEasy.isTaskCompleted(player, 2)) {
+                    // Mark Task 1 as completed and notify ArdyMed
+                    ArdyEasy.completeTask(player, 2);
+                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Ardougne area. Your Achievement Diary has been updated.</col>");
+                }
+            }
             player.lock();
             player.animate(832);
             event.delay(1);
