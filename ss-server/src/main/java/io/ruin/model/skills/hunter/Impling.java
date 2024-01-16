@@ -8,7 +8,6 @@ import io.ruin.model.entity.Entity;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.ButterflyNet;
 import io.ruin.model.item.actions.impl.ImplingJar;
@@ -101,7 +100,6 @@ public enum Impling {
 
                 despawnImpling(npc);
                 player.getStats().addXp(StatType.Hunter, player.getPosition().inBounds(PURO_PURO) ? impling.puroExp : impling.worldExp, true);
-                PlayerCounter.IMPLINGS_CAUGHT.increment(player, 1);
             }
             player.unlock();
         });

@@ -4,7 +4,6 @@ import io.ruin.Server;
 import io.ruin.api.utils.StringUtils;
 import io.ruin.cache.Color;
 import io.ruin.cache.NPCDef;
-import io.ruin.model.achievements.listeners.intro.TheBestiary;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.XpMode;
 import io.ruin.model.inter.InterfaceHandler;
@@ -79,7 +78,6 @@ public class BestiarySearchResult extends JournalEntry {
         player.getPacketSender().sendClientScript(1179, "s", stats + "|" + aggressiveStats + "|" + defensiveStats + "|" + other);
         //todo - generate this string in the constructor! ^^^ :)
         player.openInterface(InterfaceType.INVENTORY, 522);
-        TheBestiary.complete(player);
     }
 
     private void showDrops(Player player) {

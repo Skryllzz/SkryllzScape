@@ -2,7 +2,6 @@ package io.ruin.model.map.ground;
 
 import io.ruin.cache.ItemDef;
 import io.ruin.model.World;
-import io.ruin.model.achievements.Achievement;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.storage.LootingBag;
@@ -230,7 +229,7 @@ public class GroundItem {
         }
         if (id == 88 && !player.bootsOfLightnessTaken) {
             player.bootsOfLightnessTaken = true;
-            Achievement.LIGHTNESS.update(player);
+            //Achievement.LIGHTNESS.update(player);
         }
     }
 

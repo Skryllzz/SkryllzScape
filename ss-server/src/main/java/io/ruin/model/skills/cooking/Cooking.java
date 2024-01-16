@@ -51,7 +51,6 @@ public class Cooking {
                     rawFood.setId(food.cookedID);
                     player.getStats().addXp(StatType.Cooking, food.experience * bonus(player, fire), true);
                     player.sendFilteredMessage(cookingMessage(food));
-                    PlayerCounter.COOKED_FOOD.increment(player, 1);
                 } else {
                     rawFood.setId(food.burntID);
                     player.sendFilteredMessage("You accidentally burn the " + food.itemName + ".");

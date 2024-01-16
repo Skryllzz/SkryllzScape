@@ -179,8 +179,6 @@ public class KillCounter {
             p.superiorCreatureKills.setName("Superior Creatures");
             p.brutalBlackDragonKills.setName("Brutal Black Dragons");
             p.fossilIslandWyvernsKills.setName("Fossil Island Wyvernss");
-
-            p.jungleDemonKills.setAchievement(Achievement.WELCOME_TO_THE_JUNGLE);
         });
 
         /* Building list that will be used in the boss interface  - Bosses not ingame are commented out*/

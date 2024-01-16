@@ -2,10 +2,8 @@ package io.ruin.model.skills.thieving;
 
 import io.ruin.api.utils.Random;
 import io.ruin.model.World;
-import io.ruin.model.achievements.Achievement;
 import io.ruin.model.combat.Hit;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.loot.LootItem;
 import io.ruin.model.item.loot.LootTable;
@@ -59,9 +57,9 @@ public class WallSafe {
                 player.privateSound(1238);
                 player.getStats().addXp(StatType.Thieving, 70, true);
                 player.getInventory().add(getLoot(player));
-                if (Achievement.QUICK_HANDS.isFinished(player) && Random.rollPercent(10))
-                    player.getInventory().add(getLoot(player));
-                PlayerCounter.WALL_SAFES_CRACKED.increment(player, 1);
+               // if (Achievement.QUICK_HANDS.isFinished(player) && Random.rollPercent(10))
+                 //   player.getInventory().add(getLoot(player));
+               // PlayerCounter.WALL_SAFES_CRACKED.increment(player, 1);
                 openSafe(wallSafe);
             }
         });

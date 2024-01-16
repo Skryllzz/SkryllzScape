@@ -3,7 +3,6 @@ package io.ruin.model.skills.runecrafting;
 import io.ruin.api.utils.Random;
 import io.ruin.model.World;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.LockType;
 import io.ruin.model.entity.shared.listeners.DeathListener;
 import io.ruin.model.entity.shared.listeners.SpawnListener;
@@ -346,9 +345,6 @@ public class Abyss {
         }));
         SpawnListener.register(ABYSS_CREATURES, npc -> {
             npc.deathEndListener = (DeathListener.SimpleKiller) killer -> {
-              if(killer.player != null) {
-                  PlayerCounter.ABYSSAL_CREATURES_KC.increment(killer.player, 1);
-              }
             };
         });
     }

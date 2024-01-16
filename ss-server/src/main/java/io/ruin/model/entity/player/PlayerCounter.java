@@ -8,24 +8,6 @@ import java.util.function.Function;
 public enum PlayerCounter {
 
     /**
-     * Runecrafting
-     */
-    CRAFTED_AIR((p, amt) -> p.craftedAir = amt, p -> p.craftedAir, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_MIND((p, amt) -> p.craftedMind = amt, p -> p.craftedMind, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_WATER((p, amt) -> p.craftedWater = amt, p -> p.craftedWater, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_EARTH((p, amt) -> p.craftedEarth = amt, p -> p.craftedEarth, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_FIRE((p, amt) -> p.craftedFire = amt, p -> p.craftedFire, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_BODY((p, amt) -> p.craftedBody = amt, p -> p.craftedBody, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_COSMIC((p, amt) -> p.craftedCosmic = amt, p -> p.craftedCosmic, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_LAW((p, amt) -> p.craftedLaw = amt, p -> p.craftedLaw, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_NATURE((p, amt) -> p.craftedNature = amt, p -> p.craftedNature, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_CHAOS((p, amt) -> p.craftedChaos = amt, p -> p.craftedChaos, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_DEATH((p, amt) -> p.craftedDeath = amt, p -> p.craftedDeath, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_ASTRAL((p, amt) -> p.craftedAstral = amt, p -> p.craftedAstral, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_BLOOD((p, amt) -> p.craftedBlood = amt, p -> p.craftedBlood, Achievement.EXPERT_RUNECRAFTER),
-    CRAFTED_SOUL((p, amt) -> p.craftedSoul = amt, p -> p.craftedSoul, Achievement.EXPERT_RUNECRAFTER),
-
-    /**
      * Agility
      */
     GNOME_STRONGHOLD_COURSE((p, amt) -> p.gnomeStrongholdLaps = amt, p -> p.gnomeStrongholdLaps),
@@ -67,15 +49,17 @@ public enum PlayerCounter {
     MINED_TIN((p, amt) -> p.minedTin = amt, p -> p.minedTin),
     MINED_IRON((p, amt) -> p.minedIron = amt, p -> p.minedIron),
     MINED_SILVER((p, amt) -> p.minedSilver = amt, p -> p.minedSilver),
+
+    MINED_GOLD((p, amt) -> p.minedGold = amt, p -> p.minedGold),
+    MINED_PURE_ESSENCE((p, amt) -> p.minedPureEssence = amt, p -> p.minedPureEssence),
+
+    MINED_RUNE_ESSENCE((p, amt) -> p.minedRuneEssence = amt, p -> p.minedRuneEssence),
     MINED_COAL((p, amt) -> p.minedCoal = amt, p -> p.minedCoal),
-    MINED_GOLD((p, amt) -> p.minedGold = amt, p -> p.minedGold, Achievement.GOLDEN_TOUCH),
     MINED_MITHRIL((p, amt) -> p.minedMithril = amt, p -> p.minedMithril),
     MINED_LOVAKITE((p, amt) -> p.minedLovakite = amt, p -> p.minedLovakite),
     MINED_ADAMANT((p, amt) -> p.minedAdamant = amt, p -> p.minedAdamant),
     MINED_RUNITE((p, amt) -> p.minedRunite = amt, p -> p.minedRunite),
     MINED_AMETHYST((p, amt) -> p.minedAmethyst = amt, p -> p.minedAmethyst),
-    MINED_RUNE_ESSENCE((p, amt) -> p.minedRuneEssence = amt, p -> p.minedRuneEssence, Achievement.ESSENCE_EXTRACTOR),
-    MINED_PURE_ESSENCE((p, amt) -> p.minedPureEssence = amt, p -> p.minedPureEssence, Achievement.ESSENCE_EXTRACTOR),
     MINED_DARK_ESSENCE((p, amt) -> p.minedDarkEssence = amt, p -> p.minedDarkEssence),
     MINED_GEODE((p, amt) -> p.minedGeode = amt, p -> p.minedGeode),
     MINED_SANDSTONE((p, amt) -> p.minedSandstone = amt, p -> p.minedSandstone),
@@ -91,7 +75,8 @@ public enum PlayerCounter {
     SMELTED_IRON_BARS((p, amt) -> p.smeltedIronBars = amt, p -> p.smeltedIronBars),
     SMELTED_SILVER_BARS((p, amt) -> p.smeltedSilverBars = amt, p -> p.smeltedSilverBars),
     SMELTED_STEEL_BARS((p, amt) -> p.smeltedSteelBars = amt, p -> p.smeltedSteelBars),
-    SMELTED_GOLD_BARS((p, amt) -> p.smeltedGoldBars = amt, p -> p.smeltedGoldBars, Achievement.GOLDEN_TOUCH),
+
+    SMELTED_GOLD_BARS((p, amt) -> p.smeltedGoldBars = amt, p -> p.smeltedGoldBars),
     SMELTED_MITHRIL_BARS((p, amt) -> p.smeltedMithrilBars = amt, p -> p.smeltedMithrilBars),
     SMELTED_ADAMANT_BARS((p, amt) -> p.smeltedAdamantBars = amt, p -> p.smeltedAdamantBars),
     SMELTED_RUNITE_BARS((p, amt) -> p.smeltedRuniteBars = amt, p -> p.smeltedRuniteBars),
@@ -135,7 +120,6 @@ public enum PlayerCounter {
     PICKPOCKETED_HERO((p, amt) -> p.pickpocketHero = amt, p -> p.pickpocketHero),
     PICKPOCKETED_ELF((p, amt) -> p.pickpocketElf = amt, p -> p.pickpocketElf),
     PICKPOCKETED_TZHAAR_HUR((p, amt) -> p.pickpocketTzhaarHur = amt, p -> p.pickpocketTzhaarHur),
-    WALL_SAFES_CRACKED((p, amt) -> p.wallSafesCracked = amt, p -> p.wallSafesCracked, Achievement.QUICK_HANDS),
     ROGUES_CASTLE_CHESTS((p, amt) -> p.rougesCastleChests = amt, p -> p.rougesCastleChests),
     PICKED_LOCKS((p, amt) -> p.pickedLocks = amt, p -> p.pickedLocks),
 
@@ -164,7 +148,6 @@ public enum PlayerCounter {
      * Cooking
      */
     JUGS_OF_WINE_MADE((p, amt) -> p.jugsOfWineMade = amt, p -> p.jugsOfWineMade),
-    COOKED_FOOD((p, amt) -> p.cookedFood = amt, p -> p.cookedFood, Achievement.PRACTICE_MAKES_PERFECT),
     BURNT_FOOD((p, amt) -> p.burntFood = amt, p -> p.burntFood),
     COOKED_ON_FIRE((p, amt) -> p.cookedOnFire = amt, p -> p.cookedOnFire),
 
@@ -228,21 +211,6 @@ public enum PlayerCounter {
     HARVESTED_WOAD((p, amt) -> p.harvestedWoad = amt, p -> p.harvestedWoad),
     HARVESTED_LIMPWURT((p, amt) -> p.harvestedLimpwurt = amt, p -> p.harvestedLimpwurt),
 
-    HARVESTED_GUAM((p, amt) -> p.harvestedGuam = amt, p -> p.harvestedGuam, Achievement.MY_ARMS_PATCH),
-    HARVESTED_MARRENTILL((p, amt) -> p.harvestedMarrentill = amt, p -> p.harvestedMarrentill, Achievement.MY_ARMS_PATCH),
-    HARVESTED_TARROMIN((p, amt) -> p.harvestedTarromin = amt, p -> p.harvestedTarromin, Achievement.MY_ARMS_PATCH),
-    HARVESTED_HARRALANDER((p, amt) -> p.harvestedHarralander = amt, p -> p.harvestedHarralander, Achievement.MY_ARMS_PATCH),
-    HARVESTED_RANARR((p, amt) -> p.harvestedRanarr = amt, p -> p.harvestedRanarr, Achievement.MY_ARMS_PATCH),
-    HARVESTED_TOADFLAX((p, amt) -> p.harvestedToadflax = amt, p -> p.harvestedToadflax, Achievement.MY_ARMS_PATCH),
-    HARVESTED_IRIT((p, amt) -> p.harvestedIrit = amt, p -> p.harvestedIrit, Achievement.MY_ARMS_PATCH),
-    HARVESTED_AVANTOE((p, amt) -> p.harvestedAvantoe = amt, p -> p.harvestedAvantoe, Achievement.MY_ARMS_PATCH),
-    HARVESTED_KWUARM((p, amt) -> p.harvestedKwuarm = amt, p -> p.harvestedKwuarm, Achievement.MY_ARMS_PATCH),
-    HARVESTED_SNAPDRAGON((p, amt) -> p.harvestedSnapdragon = amt, p -> p.harvestedSnapdragon, Achievement.MY_ARMS_PATCH),
-    HARVESTED_CADANTINE((p, amt) -> p.harvestedCadantine = amt, p -> p.harvestedCadantine, Achievement.MY_ARMS_PATCH),
-    HARVESTED_LANTADYME((p, amt) -> p.harvestedLantadyme = amt, p -> p.harvestedLantadyme, Achievement.MY_ARMS_PATCH),
-    HARVESTED_DWARF_WEED((p, amt) -> p.harvestedDwarfWeed = amt, p -> p.harvestedDwarfWeed, Achievement.MY_ARMS_PATCH),
-    HARVESTED_TORSTOL((p, amt) -> p.harvestedTorstol = amt, p -> p.harvestedTorstol, Achievement.MY_ARMS_PATCH),
-
     HARVESTED_BITTERCAP((p, amt) -> p.harvestedBittercap = amt, p -> p.harvestedBittercap),
     GROWN_APPLE((p, amt) -> p.grownApple = amt, p -> p.grownApple),
     GROWN_BANANA((p, amt) -> p.grownBanana = amt, p -> p.grownBanana),
@@ -282,7 +250,6 @@ public enum PlayerCounter {
      * Motherlode mine
      */
     MINED_PAYDIRT((p, amt) -> p.minedPaydirt = amt, p -> p.minedPaydirt),
-    CLEANED_PAYDIRT((p, amt) -> p.cleanedPaydirt = amt, p -> p.cleanedPaydirt, Achievement.DOWN_IN_THE_DIRT),
 
     /**
      * Wintertodt
@@ -309,11 +276,6 @@ public enum PlayerCounter {
     CAUGHT_BLACK_SALAMANDER((p, amt) -> p.caughtBlackSalamander = amt, p -> p.caughtBlackSalamander),
 
     /**
-     * PVM
-     */
-    ABYSSAL_CREATURES_KC((p, amt) -> p.abyssCreaturesKilled = amt, p -> p.abyssCreaturesKilled, Achievement.ABYSSAL_DISTURBANCE),
-
-    /**
      * Loyalty chest
      */
     LOYALTY_CHEST_OPENED((p, amt) -> p.loyaltyChestCount = amt, p -> p.loyaltyChestCount),
@@ -326,8 +288,9 @@ public enum PlayerCounter {
     /**
      * Slayer tasks
      */
-    SLAYER_TASKS_COMPLETED((p, amt) -> p.slayerTasksCompleted = amt, p -> p.slayerTasksCompleted, Achievement.COMMENCE_SLAUGHTER),
-    WILDERNESS_SLAYER_TASKS_COMPLETED((p, amt) -> p.wildernessTasksCompleted = amt, p -> p.wildernessTasksCompleted, Achievement.COMMENCE_SLAUGHTER),
+    SLAYER_TASKS_COMPLETED((p, amt) -> p.slayerTasksCompleted = amt, p -> p.slayerTasksCompleted),
+    //SLAYER_TASKS_COMPLETED((p, amt) -> p.slayerTasksCompleted = amt, p -> p.slayerTasksCompleted, Achievement.COMMENCE_SLAUGHTER),
+    WILDERNESS_SLAYER_TASKS_COMPLETED((p, amt) -> p.wildernessTasksCompleted = amt, p -> p.wildernessTasksCompleted),
 
     /**
      * Presets
@@ -337,12 +300,7 @@ public enum PlayerCounter {
     /**
      * Daily tasks
      */
-    DAILY_TASKS_COMPLETED((p, amt) -> p.dailyTasksCompleted = amt, p -> p.dailyTasksCompleted),
-
-    DEMON_KILLS((p, amt) -> p.demonKills = amt, p -> p.demonKills, Achievement.DEMON_SLAYER),
-
-    IMPLINGS_CAUGHT((p, amt) -> p.implingCaught = amt, p -> p.implingCaught, Achievement.IMPLING_HUNTER),
-    ;
+    DAILY_TASKS_COMPLETED((p, amt) -> p.dailyTasksCompleted = amt, p -> p.dailyTasksCompleted);
 
     private final BiConsumer<Player, Integer> setAction;
 

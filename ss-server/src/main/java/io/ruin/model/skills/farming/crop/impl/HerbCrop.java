@@ -6,20 +6,20 @@ import io.ruin.model.skills.farming.crop.Crop;
 
 
 public enum HerbCrop implements Crop {
-	GUAM(5291, 199, 9, 11.0, 12.5, 4, PlayerCounter.HARVESTED_GUAM),
-	MARRENTILL(5292, 201, 14, 13.5, 15, 4, PlayerCounter.HARVESTED_MARRENTILL),
-	TARROMIN(5293, 203, 19, 16, 18, 4, PlayerCounter.HARVESTED_TARROMIN),
-	HARRALANDER(5294, 205, 26, 21.5, 24, 4, PlayerCounter.HARVESTED_HARRALANDER),
-	RANARR(5295, 207, 32, 27, 30.5, 4, PlayerCounter.HARVESTED_RANARR),
-	TOADFLAX(5296, 3049, 38, 34, 38.5, 4, PlayerCounter.HARVESTED_TOADFLAX),
-	IRIT(5297, 209, 44, 43, 48.5, 4, PlayerCounter.HARVESTED_IRIT),
-	AVANTOE(5298, 211, 50, 54.5, 61.5, 4, PlayerCounter.HARVESTED_AVANTOE),
-	KWUARM(5299, 213, 56, 69, 78, 4, PlayerCounter.HARVESTED_KWUARM),
-	SNAPDRAGON(5300, 3051, 62, 87.5, 98.5, 4, PlayerCounter.HARVESTED_SNAPDRAGON),
-	CADANTINE(5301, 215, 67, 106.5, 120.0, 4, PlayerCounter.HARVESTED_CADANTINE),
-	LANTADYME(5302, 2485, 73, 134.5, 151.5, 4, PlayerCounter.HARVESTED_LANTADYME),
-	DWARF_WEED(5303, 217, 79, 170.5, 192, 4, PlayerCounter.HARVESTED_DWARF_WEED),
-	TORSTOL(5304, 219, 85, 199.5, 224.5, 4, PlayerCounter.HARVESTED_TORSTOL);
+	GUAM(5291, 199, 9, 11.0, 12.5, 4, null),
+	MARRENTILL(5292, 201, 14, 13.5, 15, 4, null),
+	TARROMIN(5293, 203, 19, 16, 18, 4, null),
+	HARRALANDER(5294, 205, 26, 21.5, 24, 4, null),
+	RANARR(5295, 207, 32, 27, 30.5, 4, null),
+	TOADFLAX(5296, 3049, 38, 34, 38.5, 4, null),
+	IRIT(5297, 209, 44, 43, 48.5, 4, null),
+	AVANTOE(5298, 211, 50, 54.5, 61.5, 4, null),
+	KWUARM(5299, 213, 56, 69, 78, 4, null),
+	SNAPDRAGON(5300, 3051, 62, 87.5, 98.5, 4, null),
+	CADANTINE(5301, 215, 67, 106.5, 120.0, 4, null),
+	LANTADYME(5302, 2485, 73, 134.5, 151.5, 4, null),
+	DWARF_WEED(5303, 217, 79, 170.5, 192, 4, null),
+	TORSTOL(5304, 219, 85, 199.5, 224.5, 4, null);
 
 	private HerbCrop(int seed, int herbId, int levelReq, double plantXP, double pickXP, int containerIndex, PlayerCounter counter) {
 		this.seed = seed;
