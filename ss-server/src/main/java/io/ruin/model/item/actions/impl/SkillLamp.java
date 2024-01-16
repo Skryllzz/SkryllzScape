@@ -1,7 +1,6 @@
 package io.ruin.model.item.actions.impl;
 
 import io.ruin.api.utils.NumberUtils;
-import io.ruin.api.utils.Random;
 import io.ruin.api.utils.StringUtils;
 import io.ruin.cache.Color;
 import io.ruin.model.inter.Interface;
@@ -10,6 +9,7 @@ import io.ruin.model.inter.InterfaceType;
 import io.ruin.model.inter.actions.SimpleAction;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
+import io.ruin.model.stat.Stat;
 import io.ruin.model.stat.StatType;
 
 public enum SkillLamp {
@@ -51,9 +51,14 @@ public enum SkillLamp {
     }
 
     public static final int SKILL_CAMP = 2528;
+    public static final int ANTIQUE_LAMP_ITEM_ID = 4447;
 
     static {
         ItemAction.registerInventory(SKILL_CAMP, "rub", (player, item) -> {
+            player.openInterface(InterfaceType.MAIN, Interface.SKILL_LAMP);
+            player.getPacketSender().sendSkillinterface("");
+        });
+        ItemAction.registerInventory(ANTIQUE_LAMP_ITEM_ID, "rub", (player, item) -> {
             player.openInterface(InterfaceType.MAIN, Interface.SKILL_LAMP);
             player.getPacketSender().sendSkillinterface("");
         });
@@ -78,15 +83,33 @@ public enum SkillLamp {
                 };
             }
             h.actions[26] = (SimpleAction) player -> {
-                Item lamp = player.getInventory().findItem(SKILL_CAMP);
-                if (lamp == null)
-                    return;
+                Item skillCampLamp = player.getInventory().findItem(SKILL_CAMP);
+                Item antiqueLamp = player.getInventory().findItem(ANTIQUE_LAMP_ITEM_ID);
 
-                int experience = Random.get(25000, 50000);
+                if (skillCampLamp == null && antiqueLamp == null) {
+                    return;
+                }
+
+                StatType selectedStatType = StatType.valueOf(String.valueOf(player.selectedSkillLampSkill));
+                Stat selectedStat = player.getStats().get(selectedStatType);
+                int experience;
+
+                if (antiqueLamp != null) {
+                    if (selectedStat.currentLevel < 30) {
+                        player.sendMessage(Color.DARK_RED.wrap("You must have a level of at least 30 in " + player.selectedSkillLampSkill.name() + " to use the antique lamp!"));
+                        return;
+                    }
+                    experience = 2500; // Set the experience for the antique lamp
+                    antiqueLamp.remove();
+                } else {
+                    experience = 10 * selectedStat.currentLevel; // Set the experience for the skill camp
+                    skillCampLamp.remove();
+                }
+
+                int exprate = player.xpMode.getSkillRate();
                 player.closeInterface(InterfaceType.MAIN);
-                lamp.remove();
-                player.getStats().addXp(player.selectedSkillLampSkill, experience, false);
-                player.sendMessage(Color.DARK_GREEN.wrap("You have been rewarded " + NumberUtils.formatNumber(experience) + " " + player.selectedSkillLampSkill.name() + " experience."));
+                player.getStats().addXp(player.selectedSkillLampSkill, experience, true);
+                player.sendMessage(Color.DARK_GREEN.wrap("You have been rewarded " + NumberUtils.formatNumber((long) experience * exprate) + " " + player.selectedSkillLampSkill.name() + " experience."));
             };
         });
 
