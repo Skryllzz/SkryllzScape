@@ -56,6 +56,9 @@ public class MageAltars {
                 player.dialogue(new MessageDialogue("You need 53 Thieving, 50 Magic, 50 Firemaking, and 10 slayer to enter here."));
             }
         });
+
+        /** Death Exit Altar**/
+        ObjectAction.register(34758,2208,4829, 0, "use", (player, obj) -> {player.sendMessage("This portal is currently disabled.");});
     }
 
     public static void switchBook(Player player, SpellBook book, boolean altar) {
