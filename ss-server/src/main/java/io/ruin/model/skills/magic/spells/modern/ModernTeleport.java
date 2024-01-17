@@ -1,11 +1,13 @@
 package io.ruin.model.skills.magic.spells.modern;
 
 import io.ruin.model.entity.player.Player;
+import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.item.Item;
 import io.ruin.model.map.Bounds;
 import io.ruin.model.map.Position;
 import io.ruin.model.skills.magic.Spell;
 import io.ruin.model.skills.magic.rune.Rune;
+import io.ruin.model.stat.StatType;
 
 public class ModernTeleport extends Spell {
 
@@ -16,8 +18,9 @@ public class ModernTeleport extends Spell {
     public static final ModernTeleport ARDOUGNE_TELEPORT = new ModernTeleport(51, 61.0, new Bounds(2659, 3304, 2664, 3308, 0), Rune.LAW.toItem(2), Rune.WATER.toItem(2));
     public static final ModernTeleport WATCHTOWER_TELEPORT = new ModernTeleport(58, 68.0, new Bounds[] { new Bounds(2546, 3112, 2547, 3113, 2), new Bounds(2580, 3096, 2584, 3100, 0) }, Rune.LAW.toItem(2), Rune.EARTH.toItem(2));
     public static final ModernTeleport TROLLHEIM_TELEPORT = new ModernTeleport(61, 71.0, new Bounds(2890, 3678, 2893, 3680, 0), Rune.LAW.toItem(2), Rune.FIRE.toItem(2));
-    public static final ModernTeleport APE_ATOLL_TELEPORT = new ModernTeleport(64, 74.0, new Bounds(2784, 2785, 2785, 2786, 0), Rune.LAW.toItem(2), Rune.FIRE.toItem(2), Rune.WATER.toItem(2));
+    public static final ModernTeleport APE_ATOLL_TELEPORT = new ModernTeleport(1,64, 74.0, new Bounds(2784, 2785, 2785, 2786, 0), Rune.LAW.toItem(2), Rune.FIRE.toItem(2), Rune.WATER.toItem(2));
     public static final ModernTeleport KOUREND_TELEPORT = new ModernTeleport(69, 82.0, new Bounds(1644, 3672, 1642, 3674, 0), Rune.LAW.toItem(2), Rune.SOUL.toItem(2), Rune.WATER.toItem(4), Rune.FIRE.toItem(5));
+
 
 
     public int getLvlReq() {
@@ -31,6 +34,8 @@ public class ModernTeleport extends Spell {
     public Item[] getRunes() {
         return runes;
     }
+
+    public int ape;
 
     public ModernTeleport(int lvlReq, double xp, Bounds bounds, Item... runes) {
         this.lvlReq = lvlReq;
@@ -51,6 +56,21 @@ public class ModernTeleport extends Spell {
         this.xp = xp;
         this.runes = runes;
         registerClick(lvlReq, xp, true, runes, (p, i) -> teleport(p, x, y, z));
+    }
+
+    public ModernTeleport(int ape, int lvlReq, double xp, Bounds bounds, Item... runes) {
+        this.ape = ape;
+        this.lvlReq = lvlReq;
+        this.xp = xp;
+        this.runes = runes;
+        registerClick(lvlReq, xp, true, runes, (p, i) -> {
+            if (p.getStats().check(StatType.Agility, 25) && p.getStats().totalLevel >= 50) {
+                teleport(p, bounds);
+            } else {
+                p.dialogue(new MessageDialogue("You need to be 25 agility and 50 combat to teleport to Ape Atoll."));
+            }
+            return false;
+        });
     }
 
     private final int lvlReq;
