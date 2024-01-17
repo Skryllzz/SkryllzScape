@@ -261,6 +261,6 @@ public class GameObject extends AttributesHolder {
     }
 
     static{ //Server Sided Objects
-        spawn(12309, 3219, 9623, 0, 10, 1).skipReachCheck = player -> true; // Cili Chest
+        spawn(12309, 3219, 9623, 0, 10, 1).skipReachCheck = player -> true; // Culimancers Chest
     }
 }
