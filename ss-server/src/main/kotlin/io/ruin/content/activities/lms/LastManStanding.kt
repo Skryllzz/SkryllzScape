@@ -47,13 +47,13 @@ object LastManStanding {
                         if (player.options("Leave queue.", "Stay in queue.") == 1) {
                             if (player.lmsQueue != null) {
                                 player.lmsQueue.remove(player)
-                                player.teleport(3410, 3184, 0)
+                                player.teleport(3403, 3182, 0)
                             }
                         }
                     }
                 } else {
                     if (player.lmsSession == null) {
-                        player.teleport(3410, 3184, 0)
+                        player.teleport(3403, 3182, 0)
                     }
                 }
             }
