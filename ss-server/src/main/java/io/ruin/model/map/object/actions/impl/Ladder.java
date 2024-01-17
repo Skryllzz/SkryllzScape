@@ -109,6 +109,10 @@ public class Ladder {
         //Pyramid to Ancient Alar
         ObjectAction.register(6497, 3233, 2897, 0, "climb-down", ((player, obj) -> climb(player, 3235, 9312, 0, false, true, false)));
 
+        //Wizards Tower Ladder
+        ObjectAction.register(2147, 3104, 3162, 0, "climb-down", ((player, obj) -> climb(player, 3104, 9576, 0, false, true, false)));
+        ObjectAction.register(2148, 3103, 9576, 0, "climb-up", ((player, obj) -> climb(player, 3105, 3162, 0, true, true, false)));
+
         /**
          * Stairs
          */
@@ -123,6 +127,12 @@ public class Ladder {
         //ChampionsGuild
         ObjectAction.register(11797, 3188, 3355, 0, "climb-up", (player, obj) -> player.getMovement().teleport(3189, 3354, 1));
         ObjectAction.register(11799, 3188, 3355, 1, "climb-down", (player, obj) -> player.getMovement().teleport(3189, 3358, 0));
+
+        //Draynor Manor
+        ObjectAction.register(11498, 3108, 3362, 0, "climb-up", (player, obj) -> player.getMovement().teleport(3108, 3366, 1));
+        ObjectAction.register(11499, 3108, 3364, 1, "climb-down", (player, obj) -> player.getMovement().teleport(3108, 3361, 0));
+
+
         /**
          * Ladders we don't want to work!
          */
