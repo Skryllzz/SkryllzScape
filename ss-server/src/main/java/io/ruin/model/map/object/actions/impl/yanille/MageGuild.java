@@ -15,6 +15,8 @@ public class MageGuild {
 
     public static int Cromperty = 0;
 
+    public static int Sedridor = 0;
+
     public static final int[] MAGEDOOR = {1732, 1733 };
     public static final int[] ESSNPC = {3248, 2886 };
 
@@ -91,6 +93,10 @@ public class MageGuild {
                         player.getMovement().teleport(2681, 3325, 0);
                         Cromperty = 0;
                     }
+                    if (Sedridor > 0) {
+                        player.getMovement().teleport(2681, 3325, 0);
+                        Sedridor = 0;
+                    }
             }
                     });
 
@@ -112,6 +118,24 @@ public class MageGuild {
                         player.animate(715);
                 });
             });
+
+        /** Sedridor **/
+        NPCAction.register(5034, "Teleport", (player, npc) -> {
+            npc.addEvent(e -> {
+                npc.face(player);
+                Sedridor = 1;
+                npc.forceText("Senventior Disthine Molenko");
+                npc.animate(1818);
+                npc.graphics(343);
+                player.graphics(342);
+                player.animate(1816);
+                e.delay(2);
+                npc.faceNone(true);
+                player.getMovement().teleport(2910, 4831, 0);
+                e.delay(2);
+                player.animate(715);
+            });
+        });
 
         /** Wizard Cromperty **/
         NPCAction.register(8480, "Teleport", (player, npc) -> {
