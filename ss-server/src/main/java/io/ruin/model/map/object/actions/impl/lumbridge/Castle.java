@@ -52,7 +52,28 @@ public class Castle {
                 }
             });
 
+        ObjectAction.register(2882, 3268, 3227, 0, "pay-toll(10gp)", (player, obj) -> {
+            if (player.isAt(3267, 3227) || player.isAt(3267, 3228)) {
+                player.getMovement().teleport(player.getAbsX() + 1, player.getAbsY(), 0);
+                player.sendMessage("The guards let you pass for free as you are a friend of Al-Kharid.");
+            }
+            if (player.isAt(3268, 3227) || player.isAt(3268, 3228)) {
+                player.getMovement().teleport(player.getAbsX() -1, player.getAbsY(), 0);
+                player.sendMessage("The guards let you pass for free as you are a friend of Al-Kharid.");
+            }
+        });
+
         ObjectAction.register(2883, 3268, 3228, 0, "open", (player, obj) -> {
+            if (player.isAt(3267, 3227) || player.isAt(3267, 3228)) {
+                player.getMovement().teleport(player.getAbsX() + 1, player.getAbsY(), 0);
+                player.sendMessage("The guards let you pass for free as you are a friend of Al-Kharid.");
+            }
+            if (player.isAt(3268, 3227) || player.isAt(3268, 3228)) {
+                player.getMovement().teleport(player.getAbsX() -1, player.getAbsY(), 0);
+                player.sendMessage("The guards let you pass for free as you are a friend of Al-Kharid.");
+            }
+        });
+        ObjectAction.register(2883, 3268, 3228, 0, "pay-toll(10gp)", (player, obj) -> {
             if (player.isAt(3267, 3227) || player.isAt(3267, 3228)) {
                 player.getMovement().teleport(player.getAbsX() + 1, player.getAbsY(), 0);
                 player.sendMessage("The guards let you pass for free as you are a friend of Al-Kharid.");
