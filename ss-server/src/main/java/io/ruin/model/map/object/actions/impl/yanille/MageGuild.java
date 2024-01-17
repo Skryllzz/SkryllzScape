@@ -94,7 +94,7 @@ public class MageGuild {
                         Cromperty = 0;
                     }
                     if (Sedridor > 0) {
-                        player.getMovement().teleport(2681, 3325, 0);
+                        player.getMovement().teleport(3105, 9572, 0);
                         Sedridor = 0;
                     }
             }
