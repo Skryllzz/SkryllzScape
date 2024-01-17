@@ -2,6 +2,7 @@ package io.ruin.model.combat;
 
 import io.ruin.cache.ItemDef;
 import io.ruin.model.entity.Entity;
+import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.handlers.EquipmentStats;
 import io.ruin.model.inter.utils.Config;
@@ -69,13 +70,16 @@ public class CombatUtils {
     public static double getAttackBonus(Entity entity, AttackStyle attackStyle, AttackType attackType) {
         double effectiveAttack, bonus = 0;
         if(attackStyle == AttackStyle.MAGIC) {
-            effectiveAttack = getEffectiveAttack(entity, StatType.Magic, attackType);
+            //effectiveAttack = getEffectiveAttack(entity, StatType.Magic, attackType);
+            effectiveAttack = (entity instanceof Player) ? getEffectiveAttack(entity.asPlayer(), StatType.Magic, attackType) : entity.npc.getCombat().getBonus(8);
             bonus = entity.getCombat().getBonus(EquipmentStats.MAGIC_ATTACK);
         } else if(attackStyle == AttackStyle.RANGED || attackStyle == AttackStyle.MAGICAL_RANGED) {
-            effectiveAttack = getEffectiveAttack(entity, StatType.Ranged, attackType);
+            //effectiveAttack = getEffectiveAttack(entity, StatType.Ranged, attackType);
+            effectiveAttack = (entity instanceof Player) ? getEffectiveAttack(entity.asPlayer(), StatType.Ranged, attackType) : entity.npc.getCombat().getBonus(9);
             bonus = entity.getCombat().getBonus(EquipmentStats.RANGE_ATTACK);
         } else {
-            effectiveAttack = getEffectiveAttack(entity, StatType.Attack, attackType);
+            //effectiveAttack = getEffectiveAttack(entity, StatType.Attack, attackType);
+            effectiveAttack = (entity instanceof Player) ? getEffectiveAttack(entity.asPlayer(), StatType.Attack, attackType) : entity.npc.getCombat().getBonus(0);
             if(attackStyle == AttackStyle.STAB)
                 bonus = entity.getCombat().getBonus(EquipmentStats.STAB_ATTACK);
             else if(attackStyle == AttackStyle.SLASH)
@@ -107,10 +111,23 @@ public class CombatUtils {
         return effectiveDefence;
     }
 
-    private static double getEffectiveMagicDefence(Entity entity) {
+    /*private static double getEffectiveMagicDefence(Entity entity) {
         double effectiveDefence = entity.getCombat().getLevel(StatType.Magic);
         if(entity.player != null)
             effectiveDefence *= (1D + entity.player.getPrayer().magicBoost);
+        return effectiveDefence;
+    }*/
+
+    static double getEffectiveMagicDefence(Entity entity) {
+        double effectiveDefence = 0;
+        if (entity instanceof Player) {
+            effectiveDefence = ((Player) entity).getCombat().getLevel(StatType.Magic);
+            if (entity.player != null) {
+                effectiveDefence *= (1D + entity.player.getPrayer().magicBoost);
+            }
+        } else if (entity instanceof NPC) {
+            effectiveDefence = ((NPC) entity).getCombat().getBonus(EquipmentStats.MAGIC_ATTACK);
+        }
         return effectiveDefence;
     }
 
@@ -120,16 +137,21 @@ public class CombatUtils {
         if(attackStyle == AttackStyle.MAGIC || attackStyle == AttackStyle.MAGICAL_RANGED || attackStyle == AttackStyle.MAGICAL_MELEE) {
             effectiveDefence *= 0.30;
             effectiveDefence += getEffectiveMagicDefence(entity) * 0.70;
-            bonus = entity.getCombat().getBonus(EquipmentStats.MAGIC_DEFENCE);
+            //bonus = entity.getCombat().getBonus(EquipmentStats.MAGIC_DEFENCE);
+            bonus = entity.player != null ? entity.getCombat().getBonus(EquipmentStats.MAGIC_DEFENCE) : entity.npc.getCombat().getBonus(8);
         } else {
             if(attackStyle == AttackStyle.STAB)
-                bonus = entity.getCombat().getBonus(EquipmentStats.STAB_DEFENCE);
+               // bonus = entity.getCombat().getBonus(EquipmentStats.STAB_DEFENCE);
+                bonus = entity.player != null ? entity.getCombat().getBonus(EquipmentStats.STAB_DEFENCE) : entity.npc.getCombat().getBonus(5);
             else if(attackStyle == AttackStyle.SLASH)
-                bonus = entity.getCombat().getBonus(EquipmentStats.SLASH_DEFENCE);
+                //bonus = entity.getCombat().getBonus(EquipmentStats.SLASH_DEFENCE);
+                bonus = entity.player != null ? entity.getCombat().getBonus(EquipmentStats.SLASH_DEFENCE) : entity.npc.getCombat().getBonus(6);
             else if(attackStyle == AttackStyle.CRUSH)
-                bonus = entity.getCombat().getBonus(EquipmentStats.CRUSH_DEFENCE);
+                //bonus = entity.getCombat().getBonus(EquipmentStats.CRUSH_DEFENCE);
+                bonus = entity.player != null ? entity.getCombat().getBonus(EquipmentStats.CRUSH_DEFENCE) : entity.npc.getCombat().getBonus(7);
             else if(attackStyle == AttackStyle.RANGED)
-                bonus = entity.getCombat().getBonus(EquipmentStats.RANGE_DEFENCE);
+               // bonus = entity.getCombat().getBonus(EquipmentStats.RANGE_DEFENCE);
+            bonus = entity.player != null ? entity.getCombat().getBonus(EquipmentStats.RANGE_DEFENCE) : entity.npc.getCombat().getBonus(9);
         }
         return effectiveDefence * (bonus + 64D);
     }
