@@ -28,5 +28,14 @@ public class Rellekka {
                         new MessageDialogue("Skulgrimen doesn't speak to anyone lower than 40 combat."));
             }
         }));
+        NPCAction.register(3935, "trade", ((player, npc) -> {
+            if (player.getCombat().getLevel() >= 40) {
+                ShopManager.openIfExists(player, "b6a18dd0-d4c8-4eb7-bd3f-d875cae4cff3");
+            } else {
+                player.dialogue(
+                        new NPCDialogue(npc, "You are far to weak to trade with me"),
+                        new MessageDialogue("Skulgrimen doesn't trade to anyone lower than 40 combat."));
+            }
+        }));
     }
 }
