@@ -13,7 +13,7 @@ public class MonkeyMadness {
     static {
         /** Daero **/
         NPCAction.register(1444, "talk-to", (player, npc) -> {
-            if (player.getStats().check(StatType.Agility, 25) && (player.getStats().totalLevel >= 50)) {
+            if (player.getStats().check(StatType.Agility, 25) && player.getCombat().getLevel() >= 50) {
                 player.dialogue(
                         new PlayerDialogue("I need to return to Crash Island."),
                         new NPCDialogue(npc, "You know the routine..."),

@@ -35,7 +35,7 @@ public class GnomeGlider {
         options.add(new Option("Kar-Hewo (Al Kharid)", () -> teleport(player, 3284, 3213, 0)));
         options.add(new Option("Lemantolly Undri (Feldip Hills)", () -> teleport(player, 2539, 2971, 0)));
         options.add(new Option("Ookookolly Undri (Ape Atoll)", () -> {
-            if (player.getStats().check(StatType.Agility, 25) && (player.getStats().totalLevel >= 50)) {
+            if (player.getStats().check(StatType.Agility, 25) && (player.getCombat().getLevel() >= 50)) {
                 teleport(player, 2716, 2804, 0);
             } else {
                 for (int GG : GNOMEGLIDERS) {

@@ -64,7 +64,7 @@ public class ModernTeleport extends Spell {
         this.xp = xp;
         this.runes = runes;
         registerClick(lvlReq, xp, true, runes, (p, i) -> {
-            if (p.getStats().check(StatType.Agility, 25) && p.getStats().totalLevel >= 50) {
+            if (p.getStats().check(StatType.Agility, 25) && p.getCombat().getLevel() >= 50) {
                 teleport(p, bounds);
             } else {
                 p.dialogue(new MessageDialogue("You need to be 25 agility and 50 combat to teleport to Ape Atoll."));
