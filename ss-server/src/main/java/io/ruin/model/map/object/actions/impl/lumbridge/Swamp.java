@@ -23,6 +23,11 @@ public class Swamp {
             }
         });
 
+        /** Enter Coffin to get back to deaths office **/
+        ObjectAction.register(2145, 3249, 3192, 0, "open", (player, obj) -> {
+            player.getMovement().teleport(1867, 4243, 0);
+        });
+
         /** Climb Up from Swamp Dungeon **/
         ObjectAction.register(5946, 3169, 9572, 0, "climb", (player, obj) -> {
                     player.animate(828);

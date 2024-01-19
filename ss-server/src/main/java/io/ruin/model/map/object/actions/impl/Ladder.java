@@ -113,6 +113,9 @@ public class Ladder {
         ObjectAction.register(2147, 3104, 3162, 0, "climb-down", ((player, obj) -> climb(player, 3104, 9576, 0, false, true, false)));
         ObjectAction.register(2148, 3103, 9576, 0, "climb-up", ((player, obj) -> climb(player, 3105, 3162, 0, true, true, false)));
 
+        //Deaths Office
+        ObjectAction.register(25844, 1867, 4244, 0, "climb-up", ((player, obj) -> climb(player, 3248, 3193, 0, true, true, false)));
+
         /**
          * Stairs
          */

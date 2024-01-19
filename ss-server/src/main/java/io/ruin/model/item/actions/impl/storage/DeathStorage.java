@@ -186,9 +186,9 @@ public class DeathStorage extends ItemContainer {
         IKOD.forLostItem(player, killer, this::add);
         if (!isEmpty()) {
             if (!player.edgeHome) {
-                player.getPacketSender().sendHintIcon(2013, 3580);
+                player.getPacketSender().sendHintIcon(1867, 4233);
             } else {
-                player.getPacketSender().sendHintIcon(3090, 3492);
+                player.getPacketSender().sendHintIcon(1867, 4233);
             }
         }
     }
