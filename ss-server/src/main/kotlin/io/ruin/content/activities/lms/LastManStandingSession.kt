@@ -395,6 +395,7 @@ class LastManStandingSession(private val queue: LastManStandingQueue) {
         teleportListener = null
         logoutListener = null
         deathEndListener = null
+        SpellBook.MODERN.setActive(this)
         setAction(1, null)
         combat.restore()
         combat.resetKillers()
