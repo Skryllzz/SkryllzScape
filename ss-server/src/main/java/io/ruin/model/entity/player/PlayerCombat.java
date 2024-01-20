@@ -1041,7 +1041,9 @@ public class PlayerCombat extends Combat {
                 } else {
                     player.getMovement().teleport(2017, 3577, 0);
                 }**/
-                player.getMovement().teleport(3222, 3219, 0);
+                player.getMovement().teleport(1867, 4238, 0);
+                player.sendMessage(Color.RED.wrap("Your lost items have been moved to your death storage."));
+                player.sendMessage(Color.BLUE.wrap("To leave the area go up the ladder to the north."));
 
 
                 /**
