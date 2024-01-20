@@ -50,13 +50,27 @@ public class TabCombat {
     }
 
     public static void updateAutocast(Player player, boolean login) {
-        if(login) {
+        if (login) {
             int index = Config.AUTOCAST.get(player);
             player.getCombat().autocastSpell = TargetSpell.AUTOCASTS[index];
         } else {
-            if(player.isVisibleInterface(Interface.AUTOCAST_SELECTION))
+            if (player.isVisibleInterface(Interface.AUTOCAST_SELECTION)) {
                 open(player, Interface.COMBAT_OPTIONS);
-            resetAutocast(player);
+            } else {
+                if (player.getEquipment().get(Equipment.SLOT_WEAPON) != null && player.getEquipment().getId(Equipment.SLOT_WEAPON) == 1409) {
+                    // Skip resetting autocast for Iban's Staff
+                    return;
+                }
+                if (player.getEquipment().get(Equipment.SLOT_WEAPON) != null && player.getEquipment().getId(Equipment.SLOT_WEAPON) == 12658) {
+                    // Skip resetting autocast for Iban's Staff
+                    return;
+                }
+                if (player.getEquipment().get(Equipment.SLOT_WEAPON) != null && player.getEquipment().getId(Equipment.SLOT_WEAPON) == 22555) {
+                    // Skip resetting autocast for Iban's Staff
+                    return;
+                }
+                resetAutocast(player);
+            }
         }
     }
 
@@ -65,6 +79,12 @@ public class TabCombat {
             player.getCombat().autocastSpell = null;
             Config.AUTOCAST.set(player, 0);
             player.getCombat().updateCombatLevel();
+        }
+        if(player.getEquipment().get(Equipment.SLOT_WEAPON) != null && player.getEquipment().getId(Equipment.SLOT_WEAPON) == 1409) {
+            int autocastSet = Config.AUTOCAST_SET.get(player);
+            if (autocastSet != 0) {
+                Config.AUTOCAST_SET.set(player, autocastSet);
+            }
         }
     }
 

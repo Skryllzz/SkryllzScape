@@ -1,5 +1,7 @@
 package io.ruin.model.skills.magic.spells;
 
+import io.ruin.cache.Color;
+import io.ruin.cache.ItemID;
 import io.ruin.model.activities.duelarena.DuelRule;
 import io.ruin.model.combat.AttackStyle;
 import io.ruin.model.combat.AttackType;
@@ -9,6 +11,7 @@ import io.ruin.model.entity.Entity;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.Widget;
+import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.handlers.EquipmentStats;
 import io.ruin.model.item.Item;
 import io.ruin.model.map.Projectile;
@@ -146,6 +149,18 @@ public class TargetSpell extends Spell {
                     return false;
                 if(DuelRule.NO_MAGIC.isToggled(entity.player)) {
                     entity.player.sendMessage("Magic has been disabled for this duel!");
+                    return false;
+                }
+                if (entity.player.getEquipment().hasItem(ItemID.IBANS_STAFF, 1)) {
+                        entity.player.sendMessage(Color.RED.wrap("Your Ibans Staff ran out of charges!"));
+                        return false;
+                }
+                if (entity.player.getEquipment().hasItem(ItemID.IBANS_STAFF_U, 1)) {
+                    entity.player.sendMessage(Color.RED.wrap("Your Ibans Staff ran out of charges!"));
+                    return false;
+                }
+                if (entity.player.getEquipment().hasItem(ItemID.THAMMARONS_SCEPTRE_U, 1)) {
+                    entity.player.dialogue(new MessageDialogue("Recharge your staff before trying to attack!"));
                     return false;
                 }
                 if(runeItems != null && (r = RuneRemoval.get(entity.player, runeItems)) == null) {
