@@ -8,6 +8,7 @@ import io.ruin.model.item.loot.LootItem;
 import io.ruin.model.item.loot.LootTable;
 
 import static io.ruin.cache.ItemID.COINS_995;
+import static io.ruin.cache.ItemID.PYROMANCER_GARB;
 
 public class WintertodtCrate {
 
@@ -35,12 +36,20 @@ public class WintertodtCrate {
             new LootItem(20718, 5, 20, 1)         //Burnt pages
     );
 
-    private static final int[] RARE_ITEMS = {20704, 20706, 20708, 20710, 20712, 20716, 20720};
+    private static final int[] RARE_ITEMS = {PYROMANCER_GARB, 20706, 20708, 20710, 20712, 20716, 20720, 6739};
+
+    private static final int[] VRARE_ITEMS = {20704, 20706, 20708, 20710, 20712, 20716, 20720};
 
     static {
         ItemAction.registerInventory(20703, "open", (player, item) -> {
             if(Random.rollDie(64, 1))
                 player.getInventory().addOrDrop(RARE_ITEMS[Random.get(RARE_ITEMS.length - 1)], 1);
+            if(Random.rollDie(64, 1))
+                player.getInventory().addOrDrop(VRARE_ITEMS[Random.get(VRARE_ITEMS.length - 1)], 1);
+            if (Random.rollDie(1000, 1))
+                Pet.PHOENIX.unlock(player);
+            if (Random.rollDie(1000, 1))
+                player.getInventory().addOrDrop(6739, 1);
             item.remove();
             Item firstReward = table.rollItem();
             Item secondReward = table.rollItem();
