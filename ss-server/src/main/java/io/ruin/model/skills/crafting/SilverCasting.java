@@ -11,100 +11,112 @@ import io.ruin.model.stat.StatType;
 
 public enum SilverCasting {
 
-    /**
-     * Right side
-     */
-    HOLY(16, -1, 50.0, 1714, 1),
-    UNHOLY(17, -1, 50.0, 1720, 1),
-    SILVER_SICKLE(18, -1, 50.0, 2961, 1),
-    SILVER_CROSSBOW_BOLT(21, -1, 50.0, 9382, 10),
-    TIARA(23, -1, 52.5, 5525, 1),
+    /** TOPAZ **/
+    TOPAZ_AMULET(1595, 21105, 1613, 45, 80.0, 17),
+    TOPAZ_BRACELET(11065, 21123, 1613, 38, 75.0, 21),
+    TOPAZ_NECKLACE(1597, 21096, 1613, 32, 70.0, 13),
+    TOPAZ_RING(1592, 21087, 1613, 16, 35.0, 9),
 
-    /**
-     * Left side
-     */
-    OPAL_RING(1, 1609, 10.0, 21081, 1),
-    JADE_RING(13, 1611, 32.0, 21084, 1),
-    TOPAZ_RING(16, 1613, 35.0, 21087, 1),
+    /** OPAL **/
+    OPAL_AMULET(1595, 21108, 1609, 27, 55.0, 15),
+    OPAL_BRACELET(11065, 21117, 1609, 22, 45.0, 19),
+    OPAL_NECKLACE(1597, 21090, 1609, 16, 35.0, 11),
+    OPAL_RING(1592, 21081, 1609, 1, 10.0, 7),
 
-    OPAL_NECKLACE(16, 1609, 35.0, 21090, 1),
-    JADE_NECKLACE(25, 1611, 54.0, 21093, 1),
-    TOPAZ_NECKLACE(32, 1613, 75.0, 21096, 1),
+    /** JADE **/
+    JADE_AMULET(1595, 21111, 1611, 34, 70.0, 16),
+    JADE_BRACELET(11065, 21120, 1611, 29, 60.0, 20),
+    JADE_NECKLACE(1597, 21093, 1611, 25, 54.0, 12),
+    JADE_RING(1592, 21084, 1611, 13, 32.0, 8),
 
-    OPAL_AMULET(27, 1609, 55.0, 21099, 1),
-    JADE_AMULET(34, 1611, 70.0, 21102, 1),
-    TOPAZ_AMULET(45, 1613, 80.0, 21105, 1),
+    /** SILVER **/
+    HOLY_SYMBOL(1599, 1718, -1, 32, 70.0, 23),
+    SILVER_SICKLE(2976, 2961, -1, 18, 50.0, 25),
+    SILVER_BOLT(9434, 9382, -1, 21, 50.0, 27),
+    UNHOLY_SYMBOL(1594, 1720, -1, 16, 50.0, 24),
+    SILVER_TIARA(5523, 5525, 1615, 23, 52.5, 28),
+    DEMONIC_SIGIL(6747, 6748, -1, 30, 50.0, 30);
 
-    OPAL_BRACELET(22, 1609, 45.0, 21117, 1),
-    JADE_BRACELET(29, 1611, 60.0, 21120, 1),
-    TOPAZ_BRACELET(38, 1613, 70.0, 21123, 1);
-
-    public final int levelReq, gem, result, amount;
+    public final int mould, jewellery, gem, levelReq, child;
     public final double exp;
 
-    SilverCasting(int levelReq, int gem, double exp, int result, int amount) {
-        this.levelReq = levelReq;
+    SilverCasting(int mould, int jewellery, int gem, int levelReq, double exp, int child) {
+        this.mould = mould;
+        this.jewellery = jewellery;
         this.gem = gem;
+        this.levelReq = levelReq;
         this.exp = exp;
-        this.result = result;
-        this.amount = amount;
+        this.child = child;
     }
 
     private static final int SILVER_BAR = 2355;
 
-    private static void craft(Player player, SilverCasting silverCasting, int amount, boolean rightSide) {
+    private static void craft(Player player, SilverCasting mould, int amount) {
         player.closeInterfaces();
-        if (!player.getStats().check(StatType.Crafting, silverCasting.levelReq, "make this"))
+        if(!player.getStats().check(StatType.Crafting, mould.levelReq, "make this"))
             return;
-        if(rightSide) {
-            player.startEvent(event -> {
-                int amt = amount;
-                while (amt-- > 0) {
-                    Item silverBar = player.getInventory().findItem(SILVER_BAR);
-                    if (silverBar == null)
-                        return;
-                    player.animate(899);
-                    event.delay(3);
-                    silverBar.remove();
-                    player.getInventory().add(silverCasting.result, silverCasting.amount);
-                    player.getStats().addXp(StatType.Crafting, silverCasting.exp, true);
-                    event.delay(1);
-                }
-            });
-        } else {
-            player.startEvent(event -> {
-                int amt = amount;
-                while (amt-- > 0) {
-                    Item gem = player.getInventory().findItem(silverCasting.gem);
-                    if (gem == null)
-                        return;
-                    Item silverBar = player.getInventory().findItem(SILVER_BAR);
-                    if (silverBar == null)
-                        return;
-                    player.animate(899);
-                    event.delay(3);
+        player.startEvent(event -> {
+            int amt = amount;
+            while(amt --> 0) {
+                Item gem = player.getInventory().findItem(mould.gem);
+                if(mould.gem != -1 && gem == null)
+                    return;
+                Item silverBar = player.getInventory().findItem(SILVER_BAR);
+                if(silverBar == null)
+                    return;
+                Item mouldItem = player.getInventory().findItem(mould.mould);
+                if(mouldItem == null)
+                    return;
+                player.animate(899);
+                event.delay(3);
+                if(gem != null)
                     gem.remove();
-                    silverBar.remove();
-                    player.getInventory().add(silverCasting.result, 1);
-                    player.getStats().addXp(StatType.Crafting, silverCasting.exp, true);
-                    event.delay(1);
-                }
-            });
-        }
+                silverBar.remove();
+                player.getInventory().add(mould.jewellery, 1);
+                player.getStats().addXp(StatType.Crafting, mould.exp, true);
+                event.delay(1);
+            }
+        });
     }
 
+    private static void multiplecraft(Player player, SilverCasting mould, int amount) {
+        player.closeInterfaces();
+        if(!player.getStats().check(StatType.Crafting, mould.levelReq, "make this"))
+            return;
+        player.startEvent(event -> {
+            int amt = amount;
+            while(amt --> 0) {
+                Item gem = player.getInventory().findItem(mould.gem);
+                if(mould.gem != -1 && gem == null)
+                    return;
+                Item silverBar = player.getInventory().findItem(SILVER_BAR);
+                if(silverBar == null)
+                    return;
+                Item mouldItem = player.getInventory().findItem(mould.mould);
+                if(mouldItem == null)
+                    return;
+                player.animate(899);
+                event.delay(3);
+                if(gem != null)
+                    gem.remove();
+                silverBar.remove();
+                player.getInventory().add(mould.jewellery, 10);
+                player.getStats().addXp(StatType.Crafting, mould.exp, true);
+                event.delay(1);
+            }
+        });
+    }
 
-    private static void option(Player player, SilverCasting silverCasting, int option, boolean rightSide) {
-        if (option == 1)
-            craft(player, silverCasting, 1, rightSide);
-        if (option == 2)
-            craft(player, silverCasting, 5, rightSide);
-        if (option == 3)
-            craft(player, silverCasting, 10, rightSide);
-        if (option == 4)
-            player.integerInput("Enter amount:", amt -> craft(player, silverCasting, amt, rightSide));
-        if (option == 5)
-            craft(player, silverCasting, Integer.MAX_VALUE, rightSide);
+    private static void option(Player player, SilverCasting mould) {
+        craft(player, mould, Integer.MAX_VALUE);
+        //TODO:: Come back later when need to fix it
+        //player.integerInput("Enter amount:", amt -> craft(player, mould, amt));
+    }
+
+    private static void multioption(Player player, SilverCasting mould) {
+        multiplecraft(player, mould, Integer.MAX_VALUE);
+        //TODO:: Come back later when need to fix it
+        //player.integerInput("Enter amount:", amt -> craft(player, mould, amt));
     }
 
 
@@ -116,66 +128,28 @@ public enum SilverCasting {
         });
 
         InterfaceHandler.register(Interface.SILVER_CASTING, h -> {
-            /**
-             * Left side
+            /*
+             * test
              */
-            h.actions[4] = (DefaultAction) (player, option, slot, itemId) -> {
-                /**
-                 * Rings
-                 */
-                if (slot == 0)
-                    option(player, OPAL_RING, option, false);
-                if (slot == 1)
-                    option(player, JADE_RING, option, false);
-                if (slot == 2)
-                    option(player, TOPAZ_RING, option, false);
-
-                /**
-                 * Necklaces
-                 */
-                if (slot == 3)
-                    option(player, OPAL_NECKLACE, option, false);
-                if (slot == 4)
-                    option(player, JADE_NECKLACE, option, false);
-                if (slot == 5)
-                    option(player, TOPAZ_NECKLACE, option, false);
-
-                /**
-                 * Amulet (u)
-                 */
-                if (slot == 6)
-                    option(player, OPAL_AMULET, option, false);
-                if (slot == 7)
-                    option(player, JADE_AMULET, option, false);
-                if (slot == 8)
-                    option(player, TOPAZ_AMULET, option, false);
-
-                /**
-                 * Bracelets
-                 */
-                if (slot == 9)
-                    option(player, OPAL_BRACELET, option, false);
-                if (slot == 10)
-                    option(player, JADE_BRACELET, option, false);
-                if (slot == 11)
-                    option(player, TOPAZ_BRACELET, option, false);
-            };
-
-            /**
-             * Right side
-             */
-            h.actions[6] = (DefaultAction) (player, option, slot, itemId) -> {
-                if (slot == 0)
-                    option(player, HOLY, option, true);
-                if (slot == 1)
-                    option(player, UNHOLY, option, true);
-                if (slot == 2)
-                    option(player, SILVER_SICKLE, option, true);
-                if (slot == 4)
-                    option(player, SILVER_CROSSBOW_BOLT, option, true);
-                if (slot == 5)
-                    option(player, TIARA, option, true);
-            };
+            h.actions[TOPAZ_AMULET.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, TOPAZ_AMULET);
+            h.actions[TOPAZ_BRACELET.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, TOPAZ_BRACELET);
+            h.actions[TOPAZ_NECKLACE.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, TOPAZ_NECKLACE);
+            h.actions[TOPAZ_RING.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, TOPAZ_RING);
+            h.actions[JADE_AMULET.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, JADE_AMULET);
+            h.actions[JADE_BRACELET.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, JADE_BRACELET);
+            h.actions[JADE_NECKLACE.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, JADE_NECKLACE);
+            h.actions[JADE_RING.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, JADE_RING);
+            h.actions[OPAL_AMULET.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, OPAL_AMULET);
+            h.actions[OPAL_BRACELET.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, OPAL_BRACELET);
+            h.actions[OPAL_NECKLACE.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, OPAL_NECKLACE);
+            h.actions[OPAL_RING.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, OPAL_RING);
+            h.actions[UNHOLY_SYMBOL.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, UNHOLY_SYMBOL);
+            h.actions[SILVER_TIARA.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, SILVER_TIARA);
+            h.actions[SILVER_SICKLE.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, SILVER_SICKLE);
+            h.actions[HOLY_SYMBOL.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, HOLY_SYMBOL);
+            h.actions[DEMONIC_SIGIL.child] = (DefaultAction) (p, option, slot, itemId) -> option(p, DEMONIC_SIGIL);
+            h.actions[SILVER_BOLT.child] = (DefaultAction) (p, option, slot, itemId) -> multioption(p, SILVER_BOLT);
         });
+
     }
 }

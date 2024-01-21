@@ -165,6 +165,10 @@ public enum Mould {
             SkillDialogue.make(player, moltenGlass);
         });
 
+        ItemObjectAction.register(GOLD_BAR, "furnace", (player, item, object) -> {
+            player.openInterface(InterfaceType.MAIN, Interface.MOULD);
+        });
+
         /*
          * Mould interface options
          */
