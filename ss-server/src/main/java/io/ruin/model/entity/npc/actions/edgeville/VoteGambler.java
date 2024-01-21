@@ -20,7 +20,7 @@ import java.util.*;
  */
 public class VoteGambler {
 
-    private static boolean enabled = true;
+    private static boolean enabled = false;
 
     private static final int VOTE_TICKET_ID = 1464;
 
