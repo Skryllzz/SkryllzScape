@@ -1,18 +1,12 @@
 package io.ruin.model.map.object.actions.impl.dungeons;
 
-import io.ruin.api.utils.Random;
-import io.ruin.cache.Color;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.LockType;
 import io.ruin.model.entity.shared.Renders;
 import io.ruin.model.entity.shared.StepType;
-import io.ruin.model.entity.shared.listeners.DeathListener;
-import io.ruin.model.entity.shared.listeners.SpawnListener;
-import io.ruin.model.map.Bounds;
 import io.ruin.model.map.Direction;
 import io.ruin.model.map.Position;
 import io.ruin.model.map.Tile;
-import io.ruin.model.map.ground.GroundItem;
 import io.ruin.model.map.object.GameObject;
 import io.ruin.model.map.object.actions.ObjectAction;
 import io.ruin.model.map.object.actions.impl.Ladder;
@@ -33,30 +27,7 @@ public class Edgeville {
         });
     }
 
-    private static Bounds EDGEVILLEDUNG = new Bounds(3072, 9924, 3153, 10002, -1);
-
-    private static Bounds WILDERNESS = new Bounds(2949, 3525, 3380, 3958, -1);
-    private static final int[] LOOTING_BAG_NPCS = {7995, 2844, 6593, 260, 6604, 6608, 77, 85, 2834, 515, 45, 47, 60, 3021, 6597, 2854, 6598, 6596, 2028, 2029, 2027, 2026, 2101, 291, 104, 108, 2841, 2087, 81, 3022, 2006, 2008, 2849, 6603, 2090, 80, 3049, 474, 472, 6594, 2838, 3024, 3023, 70, 71, 72};
-
     static {
-        /**
-         * Looting bag drop
-         */
-        SpawnListener.register(LOOTING_BAG_NPCS, npc -> {
-            if (npc.getPosition().inBounds(EDGEVILLEDUNG) || npc.getPosition().inBounds(WILDERNESS)) {
-                npc.deathEndListener = (DeathListener.SimpleKiller) killer -> {
-                    if (killer == null)
-                        return;
-                    if (Random.rollDie(15, 1)) {
-                        if(killer.player.getInventory().hasId(11941) || killer.player.getBank().hasId(11941)) {
-                            return;
-                        }
-                        new GroundItem(11941, 1).owner(killer.player).position(npc.getPosition()).spawn();
-                        killer.player.sendMessage(Color.PURPLE.wrap("You found a looting bag!!"));
-                    }
-                };
-            }
-        });
 
         /**
          * Monkeybars
