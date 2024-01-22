@@ -5,6 +5,7 @@ import io.ruin.api.utils.Random;
 import io.ruin.cache.Color;
 import io.ruin.cache.NPCDef;
 import io.ruin.data.impl.npcs.npc_combat;
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.World;
 import io.ruin.model.activities.summerevent.SummerTokens;
 import io.ruin.model.activities.tasks.DailyTask;
@@ -493,6 +494,7 @@ public abstract class NPCCombat extends Combat {
             Broadcast.GLOBAL.sendNews(pKiller, message + " from " + npc.getDef().descriptiveName + "!");
         }
         RareDropEmbedMessage.sendDiscordMessage(message, npc.getDef().descriptiveName, item.getId());
+        DiscordMessager.sendBroadcastMessage(message + " from " + npc.getDef().descriptiveName + "!");
     }
 
     private void getLocalAnnounce(Player pKiller, Item item) {

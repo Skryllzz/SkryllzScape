@@ -15,7 +15,7 @@ public class RareDropEmbedMessage {
             return;
         }
         try {
-            Webhook webhook = new Webhook("https://discordapp.com/api/webhooks/723479940929945640/QTeEH1MFFp7nR-WrSoMr3mt1gxaNUAiCzU8CM96j4sssDycDvbk69DCSD9dOtBf7Kz8S");
+            Webhook webhook = new Webhook("https://discord.com/api/webhooks/1198744350964850759/6FnOFGrqmFVgEDbECCDZvvETlNvip6tQ69dVXtDLEqMIdJB4vnj8usF68nvT3rua0Xyy");
             Message message = new Message();
 
             Embed embedMessage = new Embed();

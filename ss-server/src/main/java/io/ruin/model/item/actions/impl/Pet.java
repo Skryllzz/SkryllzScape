@@ -3,6 +3,7 @@ package io.ruin.model.item.actions.impl;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.ItemDef;
 import io.ruin.cache.NPCDef;
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.World;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
@@ -285,6 +286,7 @@ public enum Pet {
 
     private void unlockBroadcast(Player player) {
         Broadcast.WORLD.sendNews(player.getName() + " just unlocked the following pet: " + ItemDef.get(itemId).name);
+        DiscordMessager.sendBroadcastMessage(player.getName() + " just unlocked the following pet: " + ItemDef.get(itemId).name);
     }
 
     static {

@@ -4,6 +4,7 @@ import io.ruin.api.utils.NumberUtils;
 import io.ruin.api.utils.XenPost;
 import io.ruin.cache.Color;
 import io.ruin.cache.Icon;
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.combat.Hit;
 import io.ruin.model.combat.HitType;
 import io.ruin.model.inter.InterfaceHandler;
@@ -52,19 +53,25 @@ public enum GameMode {
             String overall = NumberUtils.formatNumber(player.getStats().totalLevel);
             if (killHit == null) {
                 Broadcast.GLOBAL.sendPlain(Color.RED.wrap(Icon.HCIM_DEATH.tag() + player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + "!"));
+                DiscordMessager.sendBroadcastMessage(player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + "!");
             } else if (killHit.attacker != null) {
                 if (killHit.attacker instanceof Player) {
                         Broadcast.GLOBAL.sendPlain(Color.RED.wrap(Icon.HCIM_DEATH.tag() + player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + ", losing a fight to " + killHit.attacker.player.getName() +"!"));
+                        DiscordMessager.sendBroadcastMessage(player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + ", losing a fight to " + killHit.attacker.player.getName() + "!");
                 } else {
                     Broadcast.GLOBAL.sendPlain(Color.RED.wrap(Icon.HCIM_DEATH.tag() + player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + ", brutally executed by " + killHit.attacker.npc.getDef().descriptiveName +"!"));
+                    DiscordMessager.sendBroadcastMessage(player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + ", brutally executed by " + killHit.attacker.npc.getDef().descriptiveName + "!");
                 }
             } else {
                 if (killHit.type == HitType.POISON) {
                     Broadcast.GLOBAL.sendPlain(Color.RED.wrap(Icon.HCIM_DEATH.tag() + player.getName() + " has been poisoned to death as a Hardcore Ironman with a total level of " + overall + "!"));
+                    DiscordMessager.sendBroadcastMessage(player.getName() + " has been poisoned to death as a Hardcore Ironman with a total level of " + overall + "!");
                 } else if (killHit.type == HitType.VENOM) {
                     Broadcast.GLOBAL.sendPlain(Color.RED.wrap(Icon.HCIM_DEATH.tag() + player.getName() + " has succumbed to venom as a Hardcore Ironman with a total level of " + overall + "!"));
+                    DiscordMessager.sendBroadcastMessage(player.getName() + " has succumbed to venom as a Hardcore Ironman with a total level of " + overall + "!");
                 } else { // not sure if this can happen? can't think of anything
                     Broadcast.GLOBAL.sendPlain(Color.RED.wrap(Icon.HCIM_DEATH.tag() + player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + "!"));
+                    DiscordMessager.sendBroadcastMessage(player.getName() + " has died as a Hardcore Ironman with a total level of " + overall + "!");
                 }
             }
         }

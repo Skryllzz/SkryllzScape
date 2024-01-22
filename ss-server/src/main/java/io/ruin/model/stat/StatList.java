@@ -2,6 +2,7 @@ package io.ruin.model.stat;
 
 import com.google.gson.annotations.Expose;
 import io.ruin.cache.Color;
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.World;
 import io.ruin.model.activities.summerevent.SummerTokens;
 import io.ruin.model.activities.wilderness.Wilderness;
@@ -11,7 +12,6 @@ import io.ruin.model.inter.dialogue.ItemDialogue;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.skillcapes.HitpointsSkillCape;
 import io.ruin.model.item.attributes.AttributeExtensions;
-import io.ruin.model.skills.CapePerks;
 import io.ruin.model.skills.prayer.Prayer;
 import io.ruin.utility.Broadcast;
 
@@ -232,6 +232,7 @@ public class StatList {
             player.sendMessage(Color.ORANGE_RED.tag() + "You may now purchase a skillcape from Mac who can be found at home.");
             Broadcast broadcast = type.defaultXpMultiplier == -1 ? Broadcast.FRIENDS : Broadcast.GLOBAL;
             broadcast.sendNews(player, player.getName() + " has just achieved level 99 in " + type.name() + "!");
+            DiscordMessager.sendBroadcastMessage(player.getName() + " has just achieved level 99 in " + type.name() + "!");
         }
         if(statId <= 6)
             player.getCombat().updateLevel();

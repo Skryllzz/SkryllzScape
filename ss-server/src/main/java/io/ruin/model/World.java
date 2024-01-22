@@ -12,6 +12,7 @@ import io.ruin.api.utils.IPAddress;
 import io.ruin.cache.Color;
 import io.ruin.cache.Icon;
 import io.ruin.content.activities.event.TimedEventManager;
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.activities.pvminstances.PVMInstance;
 import io.ruin.model.combat.Killer;
 import io.ruin.model.entity.EntityList;
@@ -83,6 +84,8 @@ public class World extends EventWorker {
 
     public static final Position HOME = Position.of(3222, 3219, 0);
     public static final Position EDGEHOME = Position.of(3085, 3492, 0);
+
+    public static boolean enableHiscores = true;
 
     /**
      * Players
@@ -333,6 +336,7 @@ public class World extends EventWorker {
             player.getPacketSender().sendSystemUpdate(minutes * 60);
         startEvent(e -> {
             int ticks = minutes * 100;
+            DiscordMessager.sendOnlineStatus("Beta World has gone down for an update. Will update soon!");
             while(updating) {
                 if(--ticks <= 0 && removeBots() && removePlayers())
                     return;

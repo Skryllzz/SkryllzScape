@@ -1,5 +1,6 @@
 package io.ruin.model.entity.npc.actions;
 
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.World;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
@@ -82,10 +83,7 @@ public class TutIslandGuide {
                             player.sendMessage("Reach out in the discord or in the clan chat using / to other players.");
                             player.sendMessage("Enjoy playing SkryllzScape!");
                             Broadcast.WORLD.sendNews(player.getName() + " has just joined " + World.type.getWorldName() + "!");
-                           // LootAlert alert = new LootAlert(("SSBroadcastDiscord"), "New Player Joined");
-                            //alert.setItemName("test");
-                            //alert.setDescription("test");
-                           // new RuneAlertClient().withToken(("runiverse_web_access_token")).sendAlert(alert);
+                            DiscordMessager.sendBroadcastMessage( player.getName() + " has just joined " + World.type.getWorldName() + " and is playing on the " + player.getGameMode().name() + " game mode.");
                             player.inTutorial = false;
                             player.logoutListener = null;
                             player.setTutorialStage(0);

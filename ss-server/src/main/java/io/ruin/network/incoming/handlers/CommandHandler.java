@@ -27,6 +27,7 @@ import io.ruin.data.impl.objects.object_spawns;
 import io.ruin.data.impl.teleports;
 import io.ruin.data.yaml.YamlLoader;
 import io.ruin.data.yaml.impl.ShopLoader;
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.World;
 import io.ruin.model.activities.inferno.Inferno;
 import io.ruin.model.activities.pvp.leaderboard.DeepWildernessPker;
@@ -712,6 +713,12 @@ public class CommandHandler implements Incoming {
                     player.sendMessage("Could not find player: " + name);
                 else
                     p2.diceHost = false;
+                return true;
+            }
+            case "distext": {
+                Loggers.logCommand(player.getUserId(), player.getName(), player.getIp(), query);
+                DiscordMessager.sendBroadcastMessage(query);
+                System.out.println(query);
                 return true;
             }
             case "teleto": {

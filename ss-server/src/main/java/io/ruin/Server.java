@@ -14,6 +14,7 @@ import io.ruin.cache.*;
 import io.ruin.data.DataFile;
 import io.ruin.data.impl.login_set;
 import io.ruin.data.yaml.YamlLoader;
+import io.ruin.discord.DiscordMessager;
 import io.ruin.model.World;
 import io.ruin.model.achievements.Achievement;
 import io.ruin.model.combat.special.Special;
@@ -248,6 +249,12 @@ public class Server extends ServerWrapper {
 
         //log.info("Data path = {}", Server.dataFolder.getAbsolutePath());
         ServerWrapper.println("Started server in " + (System.currentTimeMillis() - startTime) + "ms.");
+        if (World.isBeta()) {
+            DiscordMessager.sendOnlineStatus(World.type.getWorldName()+" World 1 (Beta) is back online!");
+        }
+        if (World.isDev()) {
+            DiscordMessager.sendOnlineStatus(World.type.getWorldName()+" World 2 (Dev) is back online!");
+        }
 
         /*
          * Shutdown hook
