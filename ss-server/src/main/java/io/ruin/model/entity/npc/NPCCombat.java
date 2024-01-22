@@ -453,7 +453,7 @@ public abstract class NPCCombat extends Combat {
             if (pKiller.wildernessLevel > 0) {
                 double chance = Random.get(); // 1.00 & 0.00
                 if (chance < 0.075) {
-                    if (!pKiller.getInventory().contains(ItemID.LOOTING_BAG) && !pKiller.getBank().contains(ItemID.LOOTING_BAG)) {
+                    if (!pKiller.getInventory().contains(ItemID.LOOTING_BAG) && !pKiller.getBank().contains(ItemID.LOOTING_BAG) && !pKiller.getInventory().contains(ItemID.LOOTING_BAG_22586)) {
                         new GroundItem(new Item(ItemID.LOOTING_BAG))
                                 .owner(pKiller.getUserId())
                                 .position(npc.getPosition())
