@@ -3,6 +3,7 @@ package io.ruin.model.inter.handlers;
 import io.ruin.api.utils.NumberUtils;
 import io.ruin.cache.EnumMap;
 import io.ruin.cache.ItemDef;
+import io.ruin.cache.ItemID;
 import io.ruin.model.combat.Killer;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.Interface;
@@ -481,6 +482,6 @@ public class IKOD {
     }
 
     private static boolean isLootingBag(Item item) {
-        return item.getId() == 11941 || item.getId() == 22586;
+        return item.getId() == ItemID.LOOTING_BAG || item.getId() == ItemID.LOOTING_BAG_22586;
     }
 }
