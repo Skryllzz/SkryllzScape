@@ -3,6 +3,7 @@ package io.ruin.model.entity.npc;
 import io.ruin.api.utils.NumberUtils;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.Color;
+import io.ruin.cache.ItemID;
 import io.ruin.cache.NPCDef;
 import io.ruin.data.impl.npcs.npc_combat;
 import io.ruin.discord.DiscordMessager;
@@ -166,6 +167,9 @@ public abstract class NPCCombat extends Combat {
             return false;
         if (!multiCheck(target))
             return false;
+        if(target.player.getAppearance().getNpcId() != -1) {
+            return false;
+        }
         if(npc.targetPlayer == null) {
             if(!npc.getPosition().isWithinDistance(target.getPosition()))
                 return false;
@@ -442,6 +446,20 @@ public abstract class NPCCombat extends Combat {
                 if (pKiller.isDiamond() && pKiller.wildernessLevel > 0) {
                     if (item.getDef().notedId > -1)
                         item.setId(item.getDef().notedId);
+                }
+            }
+
+            /** Looting Bag **/
+            if (pKiller.wildernessLevel > 0) {
+                double chance = Random.get(); // 1.00 & 0.00
+                if (chance < 0.075) {
+                    if (!pKiller.getInventory().contains(ItemID.LOOTING_BAG) && !pKiller.getBank().contains(ItemID.LOOTING_BAG)) {
+                        new GroundItem(new Item(ItemID.LOOTING_BAG))
+                                .owner(pKiller.getUserId())
+                                .position(npc.getPosition())
+                                .spawn();
+                        killer.player.sendMessage(Color.PURPLE.wrap("You found a looting bag!!"));
+                    }
                 }
             }
 

@@ -61,14 +61,12 @@ public enum MonkeyGreeGree {
             player.getAppearance().setNpcId(npcId);
             player.getCombat().canAttack(npc, false);
             player.addEvent(e -> {
-                player.setHidden(true);
                 while(true) {
                     Item item = player.getEquipment().get(Equipment.SLOT_WEAPON);
                     if(item == null || item.getId() != greegreeId)
                         break;
                     if(!player.getPosition().inBounds(ZOO_BOUNDS) && (!player.getPosition().inBounds(APE_ATOLL) && (!player.getPosition().inBounds(APE_ATOLL_DUNG)))) {
                         item.remove();
-                        player.setHidden(false);
                         player.getInventory().addOrDrop(item.getId(), 1);
                         player.dialogue(new MessageDialogue("The Monkey Greegree wrenches itself from your hand as its power begins to fade...").lineHeight(24));
                         break;
