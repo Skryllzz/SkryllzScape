@@ -52,6 +52,12 @@ public enum FishingArea {
             new Position(3110, 3434, 0),
             new Position(3110, 3432, 0)
     ),
+    SHILO_VILLAGE(
+            new Position(2860, 2972, 0),
+            new Position(2845, 2971, 0),
+            new Position(2835, 2974, 0),
+            new Position(2854, 2977, 0)
+    ),
     CATHERBY(
             new Position(2836, 3431, 0),
             new Position(2837, 3431, 0),
@@ -268,6 +274,7 @@ public enum FishingArea {
         LUMBRIDGE_RIVER.add(FishingSpot.LURE_BAIT, 2);
         DRAYNOR.add(FishingSpot.NET_BAIT, 2);
         BARBARIAN_VILLAGE.add(FishingSpot.LURE_BAIT, 2);
+        SHILO_VILLAGE.add(FishingSpot.LURE_BAIT, 2);
         CATHERBY.add(FishingSpot.NET_BAIT, 2);
         CATHERBY.add(FishingSpot.BIG_NET_HARPOON, 3);
         CATHERBY.add(FishingSpot.CAGE_HARPOON, 2);
