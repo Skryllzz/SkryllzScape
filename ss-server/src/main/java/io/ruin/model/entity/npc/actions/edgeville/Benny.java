@@ -36,7 +36,7 @@ public class Benny {
         });
 
         ItemAction.registerInventory(11169, "view-updates", (player, item) -> player.dialogue(new OptionsDialogue("View the updates section on our forums?",
-                new Option("Yes", () -> player.openUrl(World.type.getWorldName() + " Updates", "https://community.kronos.rip/index.php?forums/news-updates.2/")),
+                new Option("Yes", () -> player.openUrl(World.type.getWorldName() + " Updates", "https://discord.com/channels/1155916268700979270/1155916583928082492")),
                 new Option("No", player::closeDialogue))));
 
         SpawnListener.register(ArrayUtils.of("benny"), npc -> npc.addEvent(e -> {
