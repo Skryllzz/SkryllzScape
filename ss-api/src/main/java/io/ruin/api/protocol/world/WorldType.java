@@ -2,7 +2,7 @@ package io.ruin.api.protocol.world;
 
 public enum WorldType {
     ECO("SkryllzScape", "http://127.0.0.1"),
-    BETA("SkryllzScape", "http://127.0.0.1"),
+    BETA("SkryllzScape", "https://skryllzscape.everythingrs.com/services"),
     PVP("SkryllzScape", "http://127.0.0.1"),
     DEV("SkryllzScape", "http://127.0.0.1");
 

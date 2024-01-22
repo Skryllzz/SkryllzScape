@@ -20,7 +20,7 @@ public class TabAccountManagement {
     private static final int OSPVP_CREDITS = 13190;
     private static final String FORUM_INBOX_URL = "https://community.kronos.rip/index.php?conversations/";
     private static final String VOTE_URL = World.type.getWebsiteUrl() + "/voting";
-    private static final String HISCORES = World.type.getWebsiteUrl() + "/highscores";
+    private static final String HISCORES = World.type.getWebsiteUrl() + "/hiscores";
 
     static {
         /**
