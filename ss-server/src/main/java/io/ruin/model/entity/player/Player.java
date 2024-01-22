@@ -58,6 +58,7 @@ import io.ruin.model.skills.construction.House;
 import io.ruin.model.skills.construction.room.Room;
 import io.ruin.model.skills.farming.Farming;
 import io.ruin.model.skills.hunter.Hunter;
+import io.ruin.model.stat.Stat;
 import io.ruin.model.stat.StatList;
 import io.ruin.model.stat.StatType;
 import io.ruin.network.PacketSender;
@@ -68,6 +69,7 @@ import io.ruin.services.Loggers;
 import io.ruin.services.XenGroup;
 import io.ruin.utility.CS2Script;
 import io.ruin.utility.TickDelay;
+import lombok.var;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -135,6 +137,11 @@ public class Player extends PlayerAttributes {
     public String getUUID() {
         return uuid;
     }
+
+
+    /** Highscores **/
+
+    public boolean debugMessage = false;
 
     /**
      * Info
@@ -1439,6 +1446,26 @@ public class Player extends PlayerAttributes {
         Loggers.logPlayer(this);
         Loggers.updateItems(this);
         Loggers.removeOnlinePlayer(userId, World.id);
+        try {
+            if (!player.getPrimaryGroup().equals(PlayerGroup.OWNER)) {
+                Server.log("Updating Database...");
+                var gameMode = "Normal Mode";
+                if (player.getGameMode() == GameMode.IRONMAN)
+                    gameMode = "Ironman";
+                else if (player.getGameMode() == GameMode.ULTIMATE_IRONMAN)
+                    gameMode = "Ultimate Ironman";
+                else if (player.getGameMode() == GameMode.HARDCORE_IRONMAN)
+                    gameMode = "Hardcore Ironman";
+
+                int[] skillExps = Stat.getSkillExps(this);
+                com.everythingrs.hiscores.Hiscores.update("iCdsTtDpu9MX7pg71M43sNNDDjrDuszyUkrOkOLLmLcDXwLjTYYiTs1ObCXhqJ5IlTYw57zv", gameMode, player.getName(), player.getPrimaryGroup().equals(PlayerGroup.MODERATOR) ? 1 : 0, skillExps, false);
+                Server.log("Highscore saved for " + player.getName());
+            } else {
+                Server.log("No highscore for " + player.getName());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**

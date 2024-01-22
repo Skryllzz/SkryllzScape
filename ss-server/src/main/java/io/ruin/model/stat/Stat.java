@@ -2,11 +2,15 @@ package io.ruin.model.stat;
 
 import com.google.gson.annotations.Expose;
 import io.ruin.Server;
+import io.ruin.model.entity.player.Player;
+
+import java.util.stream.IntStream;
 
 public class Stat {
 
     public static final double MAX_XP = 200000000D;
 
+    public static double[] skillExperiences; // Array to store experience values for each skill
     public static final int[] LEVEL_EXPERIENCES = new int[127];
 
     /**
@@ -22,6 +26,20 @@ public class Stat {
     public int fixedLevel;
 
     @Expose public double experience;
+
+
+    public double experienceToArray() {
+        return experience;
+    }
+
+    public Stat() {
+        this.skillExperiences = new double[25];
+        // Initialize the skillExperiences array with appropriate values
+    }
+
+    public void setSkillExperiences(double[] skillExperiences) {
+        this.skillExperiences = skillExperiences;
+    }
 
     public Stat(int level) {
         /* only used for npcs! */
@@ -150,7 +168,8 @@ public class Stat {
     public static int levelForXp(double xp) {
         int level = 1;
         for(int i = 0; i < 98; i++) {
-            if(xp >= LEVEL_EXPERIENCES[i])
+            if(xp >=
+                    LEVEL_EXPERIENCES[i])
                 level = i + 2;
         }
         return level;
@@ -158,6 +177,11 @@ public class Stat {
 
     public static int xpForLevel(int level) {
         return level <= 1 ? 0 : LEVEL_EXPERIENCES[level - 2];
+    }
+
+    public static int[] getSkillExps(Player player) {
+        StatType[] types = StatType.values();
+        return IntStream.range(0, types.length).map(i -> (int) player.getStats().get(i).experience).toArray();
     }
 
 }
