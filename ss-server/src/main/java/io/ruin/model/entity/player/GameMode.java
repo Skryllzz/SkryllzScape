@@ -1,7 +1,6 @@
 package io.ruin.model.entity.player;
 
 import io.ruin.api.utils.NumberUtils;
-import io.ruin.api.utils.XenPost;
 import io.ruin.cache.Color;
 import io.ruin.cache.Icon;
 import io.ruin.discord.DiscordMessager;
@@ -99,7 +98,7 @@ public enum GameMode {
             map.put("userId", player.getUserId());
             map.put("type", "ironman_mode");
             map.put("groupId", mode);
-            XenPost.post("add_group", map);
+            //XenPost.post("add_group", map);
         });
     }
 
