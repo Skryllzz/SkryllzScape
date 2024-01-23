@@ -12,6 +12,28 @@ public class Rellekka {
 
     static {
         registerPrayAction();
+
+        /** Rellekka Slayer Cave**/
+        ObjectAction.register(2141, 2809, 10001, 0, "Enter", (player, obj) -> {
+            player.startEvent(event -> {
+            player.lock();
+            player.animate(2796);
+            event.delay(2);
+            player.resetAnimation();
+            player.getMovement().teleport(2797, 3615, 0);
+            player.unlock();
+            });
+        });
+        ObjectAction.register(2123, 2797, 3614, 0, "Enter", (player, obj) -> {
+            player.startEvent(event -> {
+                player.lock();
+                player.animate(2796);
+                event.delay(2);
+                player.resetAnimation();
+                player.getMovement().teleport(2808, 10002, 0);
+                player.unlock();
+            });
+        });
     }
     public static void registerPrayAction() {
         ObjectAction.register(34771, "pray", (player, obj) -> {
