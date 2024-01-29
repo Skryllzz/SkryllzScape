@@ -12,6 +12,11 @@ public class HighestKillStreak extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Highest Kill Streak", "81", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
     }
 

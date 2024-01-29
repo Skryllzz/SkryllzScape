@@ -15,6 +15,14 @@ public class BroadcastActiveVolcano extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.broadcastActiveVolcano)
+            send(player, "Active Volcano", "Disabled", Color.RED);
+        else
+            send(player, "Active Volcano", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.broadcastActiveVolcano = !player.broadcastActiveVolcano;
         if(player.broadcastActiveVolcano)

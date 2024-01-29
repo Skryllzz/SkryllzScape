@@ -21,6 +21,11 @@ public class SwapRangePrayers extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
+    @Override
     public void select(Player player) {
         player.swapRangePrayerPosition = !player.swapRangePrayerPosition;
         send(player);

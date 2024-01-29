@@ -7,7 +7,6 @@ import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.ItemDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.handlers.IKOD;
-import io.ruin.model.inter.journal.Journal;
 import io.ruin.model.inter.journal.JournalEntry;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
@@ -29,6 +28,11 @@ public class RiskProtection extends JournalEntry {
     public void send(Player player) {
         int tier = player.riskProtectionTier;
         send(player, "Risk Protection", protectionState(player), tier == 0 ? Color.RED : Color.GREEN);
+    }
+
+    @Override
+    public void asend(Player player) {
+        send(player);
     }
 
     @Override

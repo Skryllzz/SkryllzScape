@@ -14,6 +14,11 @@ public class RefundedCredits extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Refunded Credits", player.refundedCredits, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.sendMessage("Speak to the Credits Manager to claim credits. You currently have "
                 + player.refundedCredits + " credits.");

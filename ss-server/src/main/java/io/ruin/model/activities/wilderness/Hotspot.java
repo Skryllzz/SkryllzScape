@@ -90,6 +90,11 @@ public class Hotspot {
         }
 
         @Override
+        public void asend(Player player) {
+            send(player, "Hotspot", ACTIVE.name, Color.RED);
+        }
+
+        @Override
         public void select(Player player) {
             Help.open(player, "hotspots");
         }

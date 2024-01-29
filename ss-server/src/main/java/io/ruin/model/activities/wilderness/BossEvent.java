@@ -20,10 +20,6 @@ import io.ruin.model.item.loot.LootTable;
 import io.ruin.model.map.Position;
 import io.ruin.utility.Broadcast;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoField;
-
 import static io.ruin.cache.ItemID.BLOOD_MONEY;
 import static io.ruin.cache.ItemID.COINS_995;
 
@@ -146,6 +142,22 @@ public class BossEvent extends JournalEntry {
 
     @Override
     public void send(Player player) {
+        int minsLeft = (int) ((nextSpawn - Server.currentTick()) / 100) + getExtra();
+        if (minsLeft == 0)
+            send(player, bossName, "Active!", Color.ORANGE_RED);
+        else if (minsLeft == 1)
+            send(player, bossName, "1 minute", Color.YELLOW);
+        else if (minsLeft == 60)
+            send(player, bossName, "1 hour", Color.RED);
+        else if (minsLeft > 60) {
+            int mins = minsLeft - 60;
+            send(player, bossName, "1 hour " + mins + " minute" + (mins > 1 ? "s" : ""), Color.RED);
+        } else
+            send(player, bossName, minsLeft + " minutes", Color.RED);
+    }
+
+    @Override
+    public void asend(Player player) {
         int minsLeft = (int) ((nextSpawn - Server.currentTick()) / 100) + getExtra();
         if (minsLeft == 0)
             send(player, bossName, "Active!", Color.ORANGE_RED);

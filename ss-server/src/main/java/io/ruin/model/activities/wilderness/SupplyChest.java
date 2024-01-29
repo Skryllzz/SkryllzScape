@@ -9,9 +9,7 @@ import io.ruin.model.World;
 import io.ruin.model.combat.Hit;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.Widget;
-import io.ruin.model.inter.journal.Journal;
 import io.ruin.model.inter.journal.JournalEntry;
-import io.ruin.model.inter.journal.toggles.RiskProtection;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.loot.LootItem;
 import io.ruin.model.item.loot.LootTable;
@@ -233,6 +231,38 @@ public class SupplyChest {
 
         @Override
         public void send(Player player) {
+            if(looted) {
+                send(player, "PvP Supply Chest", "Looted", Color.RED);
+                return;
+            }
+
+            long ms = timeUntilUnlocked - System.currentTimeMillis();
+            long lockedMinutesLeft = TimeUnit.MILLISECONDS.toMinutes(ms);
+            if(lockedMinutesLeft >= 0) {
+                send(player, "PvP Supply Chest", "Active ", Color.YELLOW);
+                return;
+            }
+
+            int minsLeft = (int) ((spawnTicks - Server.currentTick()) / 100);
+            if(minsLeft < 0) {
+                send(player, "PvP Supply Chest", "Active", Color.GREEN);
+                return;
+            }
+            if (minsLeft == 0)
+                send(player, "PvP Supply Chest", "Right away!", Color.GREEN);
+            else if (minsLeft == 1)
+                send(player, "PvP Supply Chest", "1 minute", Color.YELLOW);
+            else if (minsLeft == 60)
+                send(player, "PvP Supply Chest", "1 hour", Color.RED);
+            else if (minsLeft > 60) {
+                int hours = minsLeft / 60;
+                send(player, "PvP Supply Chest", hours + " hour" + (hours > 1 ? "s" : ""), Color.RED);
+            } else
+                send(player, "PvP Supply Chest", minsLeft + " minutes", Color.RED);
+        }
+
+        @Override
+        public void asend(Player player) {
             if(looted) {
                 send(player, "PvP Supply Chest", "Looted", Color.RED);
                 return;

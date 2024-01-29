@@ -16,6 +16,12 @@ public class BountyHunterTargeting extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        BountyHunter.Targeting targeting = player.getBountyHunter().targeting;
+        send(player, "Targeting", targeting.name, targeting == BountyHunter.Targeting.DISABLED ? Color.RED : Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         if(player.wildernessLevel > 0) {
             player.sendMessage("You can't toggle bounty hunter targeting inside the wilderness.");

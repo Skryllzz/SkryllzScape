@@ -8,7 +8,6 @@ import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.listeners.DailyResetListener;
 import io.ruin.model.inter.dialogue.MessageDialogue;
-import io.ruin.model.inter.journal.Journal;
 import io.ruin.model.inter.journal.JournalEntry;
 
 import java.util.Arrays;
@@ -230,6 +229,17 @@ public enum DailyTask {
         }
 
         @Override
+        public void asend(Player player) {
+            DailyTask t = player.dailyTasks[taskIndex];
+            int progress = player.dailyTaskProgress[taskIndex];
+            if (t == null) {
+                send(player, "N/A");
+            } else {
+                send(player, t.shortDescription(), progress + " / " + t.amountToKill, progress == 0 ? Color.RED : (progress < t.amountToKill ? Color.YELLOW : Color.GREEN));
+            }
+        }
+
+        @Override
         public void select(Player player) {
             DailyTask t = player.dailyTasks[taskIndex];
             if (t == null) {
@@ -246,6 +256,11 @@ public enum DailyTask {
 
         @Override
         public void send(Player player) {
+            send(player, "Task Points", player.dailyTaskPoints, player.dailyTaskPoints < 1 ? Color.RED : Color.GREEN);
+        }
+
+        @Override
+        public void asend(Player player) {
             send(player, "Task Points", player.dailyTaskPoints, player.dailyTaskPoints < 1 ? Color.RED : Color.GREEN);
         }
 

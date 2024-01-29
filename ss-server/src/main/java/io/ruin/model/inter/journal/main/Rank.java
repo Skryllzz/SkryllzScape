@@ -12,6 +12,11 @@ public class Rank extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Rank", "<img=1>Administrator", Color.YELLOW);
+    }
+
+    @Override
     public void select(Player player) {
     }
 

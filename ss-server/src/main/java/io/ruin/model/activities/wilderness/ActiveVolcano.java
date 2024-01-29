@@ -260,6 +260,22 @@ public class ActiveVolcano {
         }
 
         @Override
+        public void asend(Player player) {
+            int minsLeft = (int) ((spawnTicks - Server.currentTick()) / 100);
+            if (minsLeft == 0)
+                send(player, "Active Volcano", "Active!", Color.GREEN);
+            else if (minsLeft == 1)
+                send(player, "Active Volcano", "1 minute", Color.YELLOW);
+            else if (minsLeft == 60)
+                send(player, "Active Volcano", "1 hour", Color.RED);
+            else if (minsLeft > 60) {
+                int mins = minsLeft - 60;
+                send(player, "Active Volcano", "1 hour " + mins + " minute" + (mins > 1 ? "s" : ""), Color.RED);
+            } else
+                send(player, "Active Volcano", minsLeft + " minutes", Color.RED);
+        }
+
+        @Override
         public void select(Player player) {
             Help.open(player, "active_volcano");
         }

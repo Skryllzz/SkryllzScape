@@ -22,6 +22,15 @@ public class SwitchGrading extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(player.switchGrading == 0)
+            send(player, "Switch Grading", "Disabled", Color.RED);
+        else
+            send(player, "Switch Grading", player.switchGrading + " Items", Color.GREEN);
+        update(player);
+    }
+
+    @Override
     public void select(Player player) {
         if(player.switchGrading == 0) {
             player.dialogue(

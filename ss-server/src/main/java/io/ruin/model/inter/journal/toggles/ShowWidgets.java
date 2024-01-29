@@ -20,6 +20,11 @@ public class ShowWidgets extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
+    @Override
     public void select(Player player) {
         player.showTimers = !player.showTimers;
         send(player);

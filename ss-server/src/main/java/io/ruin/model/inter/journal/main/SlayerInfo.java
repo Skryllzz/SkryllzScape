@@ -12,6 +12,11 @@ public class SlayerInfo extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Slayer Info", "[ ? ]", Color.TOMATO);
+    }
+
+    @Override
     public void select(Player player) {
         //todo - send task name
         //todo - send task remaining

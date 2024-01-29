@@ -11,6 +11,11 @@ public class ExpCounter extends JournalEntry {
         send(player, player.showHitAsExperience);
     }
 
+    @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
     private void send(Player player, boolean enabled) {
         if(enabled)
             send(player, "Exp Counter", "Damage", Color.GREEN);

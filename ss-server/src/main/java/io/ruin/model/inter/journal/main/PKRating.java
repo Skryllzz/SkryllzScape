@@ -14,6 +14,11 @@ public class PKRating extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "PK Rating", player.pkRating, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.forceText("!" + Color.ORANGE_RED.wrap("PK RATING:") + " " + player.pkRating);
     }

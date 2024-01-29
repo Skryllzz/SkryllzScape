@@ -15,6 +15,11 @@ public class HideIcon extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
+    @Override
     public void select(Player player) {
         if(player.isModerator() || player.isSupport() || player.isAdmin()) {
             player.sendFilteredMessage("You're unable to use this feature as a staff member.");

@@ -14,6 +14,11 @@ public class AppreciationPoints extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Appreciation Points", player.appreciationPoints, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.sendMessage("You get between 5-15 points every minute of playtime! You can spend your points on a variety of items. You currently have "
                 + player.appreciationPoints + " appreciate points.");

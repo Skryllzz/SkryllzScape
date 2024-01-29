@@ -3,6 +3,7 @@ package io.ruin.model.item.actions.impl.boxes.mystery;
 import io.ruin.api.utils.NumberUtils;
 import io.ruin.cache.Icon;
 import io.ruin.cache.ItemDef;
+import io.ruin.cache.ItemID;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.Interface;
 import io.ruin.model.inter.InterfaceHandler;
@@ -51,7 +52,7 @@ public class VoteMysteryBox {
             new LootItem(6585, 1, 40),                              // Amulet of fury
             new LootItem(12397, 1, 40),                            // Royal Crown
             new LootItem(12791, 1, 5).broadcast(Broadcast.GLOBAL), // Rune Pouch
-            new LootItem(11941, 1, 5).broadcast(Broadcast.GLOBAL), // Royal Sceptre
+            new LootItem(ItemID.LOOTING_BAG, 1, 5).broadcast(Broadcast.GLOBAL), // Royal Sceptre
             new LootItem(12846, 1, 5).broadcast(Broadcast.GLOBAL), // Bounty hunter teleport
             new LootItem(1505, 1, 5).broadcast(Broadcast.GLOBAL),  // Obelisk Teleport
             new LootItem(1038, 1, 1).broadcast(Broadcast.GLOBAL),  // Red party hat

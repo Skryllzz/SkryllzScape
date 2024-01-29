@@ -12,6 +12,11 @@ public class KDOverlay extends JournalEntry {
         send(player, Config.PVP_KD_OVERLAY.get(player) == 1);
     }
 
+    @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
     private void send(Player player, boolean enabled) {
         if(enabled)
             send(player, ("Wilderness") + " K/D Overlay", "On", Color.GREEN);

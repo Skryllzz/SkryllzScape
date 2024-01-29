@@ -15,6 +15,11 @@ public class WildernessCount extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Players in Wilderness", Wilderness.players.size(), Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.sendMessage("There are currently " + Wilderness.players.size() + " players in the wilderness.");
     }

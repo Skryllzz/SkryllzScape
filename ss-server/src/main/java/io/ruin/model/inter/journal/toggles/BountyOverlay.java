@@ -15,6 +15,14 @@ public class BountyOverlay extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.bountyHunterOverlay)
+            send(player, "Bounty Hunter Overlay", "Disabled", Color.RED);
+        else
+            send(player, "Bounty Hunter Overlay", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.bountyHunterOverlay = !player.bountyHunterOverlay;
         if(player.bountyHunterOverlay)

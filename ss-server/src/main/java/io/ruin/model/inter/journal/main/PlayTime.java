@@ -16,6 +16,11 @@ public class PlayTime extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Play Time", toTime(player), Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.forceText("!" + Color.BABY_BLUE.wrap("PLAY TIME:") + " " + toTime(player));
     }

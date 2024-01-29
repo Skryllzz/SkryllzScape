@@ -57,6 +57,15 @@ public class EdgevilleBlacklist extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        EdgevilleBlacklist blacklistedUser = player.edgevilleBlacklistedUsers[id - 1];
+        if(blacklistedUser == null)
+            sendEmpty(player);
+        else
+            sendCustom(player, blacklistedUser);
+    }
+
+    @Override
     public void select(Player player) {
         EdgevilleBlacklist blacklist = player.edgevilleBlacklistedUsers[id - 1];
         if(player.wildernessLevel > 0) {

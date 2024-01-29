@@ -12,6 +12,11 @@ public class BountyHunterStreaks extends JournalEntry {
         send(player, Config.BOUNTY_HUNTER_RECORD_OVERLAY.get(player) == 0);
     }
 
+    @Override
+    public void asend(Player player) {
+        send(player, Config.BOUNTY_HUNTER_RECORD_OVERLAY.get(player) == 0);
+    }
+
     private void send(Player player, boolean enabled) {
         if(enabled)
             send(player, "Streaks Overlay", "On", Color.GREEN);

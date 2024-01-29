@@ -18,6 +18,11 @@ public class ExperienceLock extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
+    @Override
     public void select(Player player) {
         player.experienceLock = !player.experienceLock;
         player.sendMessage("Your experience has been " + (player.experienceLock ? "locked" : "unlocked") + ".");

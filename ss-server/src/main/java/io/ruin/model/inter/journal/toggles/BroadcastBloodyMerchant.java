@@ -15,6 +15,14 @@ public class BroadcastBloodyMerchant extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.broadcastActiveVolcano)
+            send(player, "Bloody Merchant", "Disabled", Color.RED);
+        else
+            send(player, "Bloody Merchant", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.broadcastBloodyMechant = !player.broadcastBloodyMechant;
         if(player.broadcastBloodyMechant)

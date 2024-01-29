@@ -15,6 +15,11 @@ public class BlankEntry extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+
+    }
+
+    @Override
     public void select(Player player) {
 
     }

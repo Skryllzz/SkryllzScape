@@ -30,6 +30,11 @@ public class WildernessPoints extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Wilderness Points", player.wildernessPoints, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.forceText("!" + Color.ORANGE_RED.wrap("WILDERNESS POINTS:") + " " + player.wildernessPoints);
     }

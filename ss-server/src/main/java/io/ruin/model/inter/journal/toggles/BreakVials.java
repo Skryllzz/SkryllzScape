@@ -15,6 +15,14 @@ public class BreakVials extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(player.breakVials)
+            send(player, "Break Vials", "Enabled", Color.GREEN);
+        else
+            send(player, "Break Vials", "Disabled", Color.RED);
+    }
+
+    @Override
     public void select(Player player) {
         player.breakVials = !player.breakVials;
         send(player);

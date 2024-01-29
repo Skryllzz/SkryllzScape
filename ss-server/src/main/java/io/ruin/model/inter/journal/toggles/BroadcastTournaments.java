@@ -15,6 +15,14 @@ public class BroadcastTournaments extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.broadcastTournaments)
+            send(player, "Tournaments", "Disabled", Color.RED);
+        else
+            send(player, "Tournaments", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.broadcastTournaments = !player.broadcastTournaments;
         if(player.broadcastTournaments)

@@ -20,6 +20,15 @@ public class ColorValuedItems extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.colorValuedGroundItems)
+            send(player, "Color Valued Items", "Disabled", Color.RED);
+        else
+            send(player, "Color Valued Items", "Enabled", Color.GREEN);
+        update(player);
+    }
+
+    @Override
     public void select(Player player) {
         player.colorValuedGroundItems = !player.colorValuedGroundItems;
         if(player.colorValuedGroundItems)

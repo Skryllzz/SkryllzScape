@@ -12,6 +12,11 @@ public class CombatXP extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Combat XP", player.combatXpRate == 0 ? "Locked" : ("x" + player.combatXpRate), Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         /*
             player.dialogue(

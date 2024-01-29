@@ -15,6 +15,14 @@ public class BroadcastHotspot extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.broadcastHotspot)
+            send(player, "Hotspot", "Disabled", Color.RED);
+        else
+            send(player, "Hotspot", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.broadcastHotspot = !player.broadcastHotspot;
         if(player.broadcastHotspot)

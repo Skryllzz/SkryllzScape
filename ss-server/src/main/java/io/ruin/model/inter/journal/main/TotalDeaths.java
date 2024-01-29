@@ -13,6 +13,11 @@ public class TotalDeaths extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Total Deaths", Config.PVP_DEATHS.get(player), Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         KillDeathRatio.shout(player);
     }

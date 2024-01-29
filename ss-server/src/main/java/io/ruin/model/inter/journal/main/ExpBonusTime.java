@@ -22,6 +22,11 @@ public class ExpBonusTime extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+
+    }
+
+    @Override
     public void select(Player player) {
         if(player.expBonus.isDelayed()) {
             player.sendMessage("You have a 100% experience boost activated.");

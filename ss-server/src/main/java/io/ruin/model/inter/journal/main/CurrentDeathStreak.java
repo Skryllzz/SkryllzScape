@@ -12,6 +12,11 @@ public class CurrentDeathStreak extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Current Death Streak", "0", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
     }
 

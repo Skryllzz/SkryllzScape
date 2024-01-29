@@ -18,6 +18,11 @@ public class PlayersOnline extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Players Online", World.players.count(), Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         List<String> playersOnline = new ArrayList<>();
         if (player.isAdmin()) {

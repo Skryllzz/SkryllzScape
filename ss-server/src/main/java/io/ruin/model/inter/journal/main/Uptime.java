@@ -28,6 +28,11 @@ public class Uptime extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Uptime", TimeUtils.fromMs(Server.currentTick() * Server.tickMs(), false), Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         if(player.isAdmin()) {
             player.sendMessage("Loading server information...");

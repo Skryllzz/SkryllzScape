@@ -18,6 +18,11 @@ public class Category extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, key);
+    }
+
+    @Override
     public void select(Player player) {
     }
 

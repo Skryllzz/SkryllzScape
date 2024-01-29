@@ -14,6 +14,11 @@ public class BestiarySearchDrop extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "<img=33> Search for Drop", Color.ORANGE);
+    }
+
+    @Override
     public void select(Player player) {
         player.stringInput("<img=33> Enter drop name to search for:", name -> Bestiary.search(player, name, false));
     }

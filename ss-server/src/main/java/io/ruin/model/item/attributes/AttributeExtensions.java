@@ -4,7 +4,6 @@ import com.google.api.client.util.Lists;
 import com.google.common.collect.Maps;
 import io.ruin.api.utils.StringUtils;
 import io.ruin.model.content.upgrade.ItemEffect;
-import io.ruin.model.content.upgrade.ItemUpgrade;
 import io.ruin.model.item.Item;
 import io.ruin.utility.AttributePair;
 
@@ -12,7 +11,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static io.ruin.model.item.attributes.AttributeTypes.CHARGES;
 

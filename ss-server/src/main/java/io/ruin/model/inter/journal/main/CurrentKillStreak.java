@@ -12,6 +12,11 @@ public class CurrentKillStreak extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Current Kill Streak", "32", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
     }
 

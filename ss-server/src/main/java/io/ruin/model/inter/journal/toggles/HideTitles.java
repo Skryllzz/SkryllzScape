@@ -20,6 +20,11 @@ public class HideTitles extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
+    @Override
     public void select(Player player) {
         player.hideTitles = !player.hideTitles;
         send(player);

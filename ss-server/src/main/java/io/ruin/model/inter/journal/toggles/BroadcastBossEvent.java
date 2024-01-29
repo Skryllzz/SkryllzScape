@@ -15,6 +15,14 @@ public class BroadcastBossEvent extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.broadcastBossEvent)
+            send(player, "Boss Events", "Disabled", Color.RED);
+        else
+            send(player, "Boss Events", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.broadcastBossEvent = !player.broadcastBossEvent;
         if(player.broadcastBossEvent)

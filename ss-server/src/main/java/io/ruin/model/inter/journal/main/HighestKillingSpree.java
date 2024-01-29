@@ -12,6 +12,11 @@ public class HighestKillingSpree extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Highest Killing Spree", player.highestKillSpree, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.forceText("!" + Color.ORANGE_RED.wrap("HIGHEST KILLING SPREE:") + " " + player.highestKillSpree );
     }

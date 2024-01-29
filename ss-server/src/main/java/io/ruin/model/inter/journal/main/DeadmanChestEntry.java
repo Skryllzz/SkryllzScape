@@ -17,6 +17,11 @@ public class DeadmanChestEntry extends JournalEntry {
 	}
 
 	@Override
+	public void asend(Player player) {
+		send(player, "DMM Chest", DeadmanChestEvent.INSTANCE.timeRemaining(), Color.RED);
+	}
+
+	@Override
 	public void select(Player player) {
 		DeadmanChest chest = DeadmanChestEvent.INSTANCE.getCurrentChest();
 		if (chest != null) {

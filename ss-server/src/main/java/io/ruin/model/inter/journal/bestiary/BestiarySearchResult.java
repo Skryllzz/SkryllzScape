@@ -149,6 +149,11 @@ public class BestiarySearchResult extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "<img=109> " + name, Color.BRONZE);
+    }
+
+    @Override
     public void select(Player player) {
         showInfo(player);
         showDrops(player);

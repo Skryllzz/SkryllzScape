@@ -68,6 +68,10 @@ public class GameObject extends AttributesHolder {
         return Position.of(x, y, z);
     }
 
+    public Position getPosition2(){
+        return Position.of(x, y, z);
+    }
+
     public GameObject skipClipping(boolean skipClipping) {
         this.skipClipping = skipClipping;
         return this;

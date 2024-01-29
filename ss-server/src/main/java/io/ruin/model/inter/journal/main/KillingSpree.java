@@ -12,6 +12,11 @@ public class KillingSpree extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Killing Spree", player.currentKillSpree, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.forceText("!" + Color.ORANGE_RED.wrap("CURRENT KILLING SPREE:") + " " + player.currentKillSpree );
     }

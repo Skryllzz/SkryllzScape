@@ -15,6 +15,11 @@ public class HideFreeItems extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player);
+    }
+
+    @Override
     public void select(Player player) {
         player.hideFreeItems = !player.hideFreeItems;
         if(player.hideFreeItems)

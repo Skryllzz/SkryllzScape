@@ -15,6 +15,14 @@ public class BroadcastSupplyChest extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.broadcastSupplyChest)
+            send(player, "Supply Chest", "Disabled", Color.RED);
+        else
+            send(player, "Supply Chest", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.broadcastSupplyChest = !player.broadcastSupplyChest;
         if(player.broadcastSupplyChest)

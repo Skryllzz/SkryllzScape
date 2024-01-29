@@ -46,6 +46,11 @@ public class Preset extends JournalEntry {
         send(player, name, Color.BRONZE);
     }
 
+    @Override
+    public void asend(Player player) {
+        send(player, name, Color.BRONZE);
+    }
+
     /**
      * Selecting
      */

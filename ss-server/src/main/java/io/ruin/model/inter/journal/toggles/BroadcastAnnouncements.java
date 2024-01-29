@@ -15,6 +15,14 @@ public class BroadcastAnnouncements extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(!player.broadcastAnnouncements)
+            send(player, "Announcements", "Disabled", Color.RED);
+        else
+            send(player, "Announcements", "Enabled", Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.broadcastAnnouncements = !player.broadcastAnnouncements;
         if(player.broadcastAnnouncements)

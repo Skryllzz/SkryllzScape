@@ -16,6 +16,13 @@ public class KillDeathRatio extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        int kills = Config.PVP_KILLS.get(player);
+        int deaths = Config.PVP_DEATHS.get(player);
+        send(player, "Kill/Death Ratio", toRatio(kills, deaths), kills < 1 ? Color.RED : Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         shout(player);
     }

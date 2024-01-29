@@ -14,6 +14,11 @@ public class SnowballPoints extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        send(player, "Snowball Points", player.snowballPoints, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         player.sendMessage("You can get snowball points by creating snowballs and throwing them at people!");
     }

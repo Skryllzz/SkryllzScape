@@ -19,6 +19,12 @@ public class TotalSpent extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        double spentDollars = player.storeAmountSpent;
+        send(player, "Total Spent", "$" + spentDollars, Color.GREEN);
+    }
+
+    @Override
     public void select(Player player) {
         double spentDollars = player.storeAmountSpent;
         player.dialogue(

@@ -24,6 +24,17 @@ public class DragSetting extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(player.dragSetting == 5)
+            send(player, "Drag Setting", "5 (OSRS)", Color.GREEN);
+        else if(player.dragSetting == 10)
+            send(player, "Drag Setting", "10 (Pre-EoC)", Color.GREEN);
+        else
+            send(player, "Drag Setting", player.dragSetting + " (Custom)", Color.GREEN);
+        update(player);
+    }
+
+    @Override
     public void select(Player player) {
         player.dialogue(
                 new OptionsDialogue(
