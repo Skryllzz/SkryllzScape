@@ -23,6 +23,18 @@ public class TargetOverlay extends JournalEntry {
     }
 
     @Override
+    public void asend(Player player) {
+        if(player.targetOverlaySetting == 3)
+            send(player, "Target Overlay", "PvP & PvM", Color.GREEN);
+        else if(player.targetOverlaySetting == 2)
+            send(player, "Target Overlay", "PvM", Color.GREEN);
+        else if(player.targetOverlaySetting == 1)
+            send(player, "Target Overlay", "PvP", Color.GREEN);
+        else
+            send(player, "Target Overlay", "Disabled", Color.RED);
+    }
+
+    @Override
     public void select(Player player) {
         if(++player.targetOverlaySetting > 3)
             player.targetOverlaySetting = 0;
