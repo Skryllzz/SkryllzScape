@@ -175,6 +175,8 @@ public class NPCDef {
             options[2] = "Sell-items";
             options[3] = "Sets";
             options[4] = null;
+        } else if(id == 2538) {
+            options[2] = "Pickpocket";
         } else if (id == 5523) {
             /* Gambling man */
             name = "Gambler";

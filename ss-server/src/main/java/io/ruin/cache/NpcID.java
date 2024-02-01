@@ -2368,7 +2368,7 @@ public final class NpcID
 	public static final int JOHANHUS_ULSBRECHT = 2535;
 	public static final int HAM_GUARD = 2536;
 	public static final int HAM_GUARD_2537 = 2537;
-	public static final int HAM_GUARD_2538 = 2538;
+	public static final int HAM_LOOKOUT = 2538;
 	public static final int HAM_DEACON = 2539;
 	public static final int HAM_MEMBER = 2540;
 	public static final int HAM_MEMBER_2541 = 2541;

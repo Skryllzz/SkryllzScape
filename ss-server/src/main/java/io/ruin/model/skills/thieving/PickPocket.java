@@ -14,7 +14,7 @@ import io.ruin.model.item.loot.LootTable;
 import io.ruin.model.skills.BotPrevention;
 import io.ruin.model.stat.StatType;
 
-import static io.ruin.cache.ItemID.COINS_995;
+import static io.ruin.cache.ItemID.*;
 
 public enum PickPocket {
 
@@ -29,39 +29,79 @@ public enum PickPocket {
             )),
     HAM(15, 18.5, 433, 4, 1, "H.A.M member's", PlayerCounter.PICKPOCKETED_HAM_MEMBER,
             new LootTable().addTable(1,
-                    new LootItem(882, 16, 60), //Coins
-                    new LootItem(1351, 1, 1), //Coins
-                    new LootItem(1265, 1, 1), //Coins
-                    new LootItem(1349, 1, 1), //Coins
-                    new LootItem(1267, 1, 1), //Coins
-                    new LootItem(886, 20, 1), //Coins
-                    new LootItem(1353, 1, 1), //Coins
-                    new LootItem(1207, 1, 1), //Coins
-                    new LootItem(1129, 1, 1), //Coins
-                    new LootItem(4302, 1, 1), //Coins
-                    new LootItem(4298, 1, 1), //Coins
-                    new LootItem(4300, 1, 1), //Coins
-                    new LootItem(4304, 1, 1), //Coins
-                    new LootItem(4306, 1, 1), //Coins
-                    new LootItem(4308, 1, 1), //Coins
-                    new LootItem(4310, 1, 1), //Coins
-                    new LootItem(COINS_995, 20, 1), //Coins
-                    new LootItem(319, 1, 1), //Coins
-                    new LootItem(2138, 1, 1), //Coins
-                    new LootItem(453, 1, 1), //Coins
-                    new LootItem(440, 1, 1), //Coins
-                    new LootItem(1739, 1, 1), //Coins
-                    new LootItem(314, 5, 1), //Coins
-                    new LootItem(1734, 6, 1), //Coins
-                    new LootItem(1733, 1, 1), //Coins
-                    new LootItem(1511, 1, 1), //Coins
-                    new LootItem(686, 1, 1), //Rusty Sword
-                    new LootItem(697, 1, 1), //Coins
-                    new LootItem(1625, 1, 1), //Coins
-                    new LootItem(1627, 1, 1), //Coins
-                    new LootItem(199, 5, 1), //Coins
-                    new LootItem(201, 6, 1), //Coins
-                    new LootItem(203, 1, 1) //Coins
+                    new LootItem(BRONZE_ARROW, 16, 60),
+                    new LootItem(BRONZE_AXE, 1, 1),
+                    new LootItem(BRONZE_PICKAXE, 1, 1),
+                    new LootItem(IRON_AXE, 1, 1),
+                    new LootItem(IRON_PICKAXE, 1, 1),
+                    new LootItem(STEEL_ARROW, 20, 1),
+                    new LootItem(STEEL_AXE, 1, 1),
+                    new LootItem(STEEL_DAGGER, 1, 1),
+                    new LootItem(LEATHER_BODY, 1, 1),
+                    new LootItem(HAM_HOOD, 1, 1),
+                    new LootItem(HAM_SHIRT, 1, 1),
+                    new LootItem(HAM_ROBE, 1, 1),
+                    new LootItem(HAM_CLOAK, 1, 1),
+                    new LootItem(HAM_LOGO, 1, 1),
+                    new LootItem(HAM_GLOVES, 1, 1),
+                    new LootItem(HAM_BOOTS, 1, 1),
+                    new LootItem(COINS_995, 20, 1),
+                    new LootItem(RAW_ANCHOVIES, 1, 1),
+                    new LootItem(RAW_CHICKEN, 1, 1),
+                    new LootItem(COAL, 1, 1),
+                    new LootItem(IRON_ORE, 1, 1),
+                    new LootItem(COWHIDE, 1, 1),
+                    new LootItem(FEATHER, 5, 1),
+                    new LootItem(THREAD, 6, 1),
+                    new LootItem(NEEDLE, 1, 1),
+                    new LootItem(LOGS, 1, 1),
+                    new LootItem(RUSTY_SWORD, 1, 1),
+                    new LootItem(DAMAGED_ARMOUR, 1, 1),
+                    new LootItem(UNCUT_OPAL, 1, 1),
+                    new LootItem(UNCUT_JADE, 1, 1),
+                    new LootItem(GRIMY_GUAM_LEAF, 5, 1),
+                    new LootItem(GRIMY_MARRENTILL, 6, 1),
+                    new LootItem(GRIMY_TARROMIN, 1, 1)
+            )),
+    HAMLOOKOUT(20, 22.2, 433, 4, 1, "lookout's", PlayerCounter.PICKPOCKETED_HAM_MEMBER,
+            new LootTable().addTable(1,
+                    new LootItem(BRONZE_ARROW, 16, 20),
+                    new LootItem(BRONZE_AXE, 1, 20),
+                    new LootItem(BRONZE_PICKAXE, 1, 20),
+                    new LootItem(IRON_AXE, 1, 20),
+                    new LootItem(IRON_PICKAXE, 1, 20),
+                    new LootItem(STEEL_ARROW, 20, 20),
+                    new LootItem(STEEL_AXE, 1, 20),
+                    new LootItem(STEEL_DAGGER, 1, 20),
+                    new LootItem(LEATHER_BODY, 1, 20),
+                    new LootItem(HAM_HOOD, 1, 5),
+                    new LootItem(HAM_SHIRT, 1, 5),
+                    new LootItem(HAM_ROBE, 1, 5),
+                    new LootItem(HAM_CLOAK, 1, 5),
+                    new LootItem(HAM_LOGO, 1, 5),
+                    new LootItem(HAM_GLOVES, 1, 5),
+                    new LootItem(HAM_BOOTS, 1, 5),
+                    new LootItem(COINS_995, 20, 55),
+                    new LootItem(RAW_ANCHOVIES, 1, 55),
+                    new LootItem(RAW_CHICKEN, 1, 20),
+                    new LootItem(COAL, 1, 20),
+                    new LootItem(IRON_ORE, 1, 20),
+                    new LootItem(COWHIDE, 1, 20),
+                    new LootItem(FEATHER, 5, 20),
+                    new LootItem(THREAD, 6, 20),
+                    new LootItem(NEEDLE, 1, 20),
+                    new LootItem(LOGS, 1, 20),
+                    new LootItem(RUSTY_SWORD, 1, 20),
+                    new LootItem(DAMAGED_ARMOUR, 1, 20),
+                    new LootItem(UNCUT_OPAL, 1, 20),
+                    new LootItem(UNCUT_JADE, 1, 20),
+                    new LootItem(GRIMY_GUAM_LEAF, 5, 20),
+                    new LootItem(GRIMY_MARRENTILL, 6, 20),
+                    new LootItem(GRIMY_TARROMIN, 1, 20),
+                    new LootItem(BRONZE_KEY_8867, 1, 30),
+                    new LootItem(STEEL_KEY, 1, 30),
+                    new LootItem(IRON_KEY_8869, 1, 30),
+                    new LootItem(SILVER_KEY, 1, 30)
             )),
     WARRIOR(25, 26.0, 386, 5, 2, "warrior's", PlayerCounter.PICKPOCKETED_WARRIOR,
             new LootTable().addTable(1,
@@ -289,6 +329,7 @@ public enum PickPocket {
                     final int[] HAM_MEMBERS = {2540, 2541};
                     for (int hamMember : HAM_MEMBERS)
                         NPCAction.register(hamMember, pickpocketOption, (player, npc) -> pickpocket(player, npc, HAM));
+                    NPCAction.register(2538, pickpocketOption, (player, npc) -> pickpocket(player, npc, HAMLOOKOUT));
                 }
             }
         });
