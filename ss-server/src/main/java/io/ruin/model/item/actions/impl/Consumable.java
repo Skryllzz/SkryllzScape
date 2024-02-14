@@ -17,6 +17,8 @@ import io.ruin.model.stat.StatType;
 
 import java.util.function.Consumer;
 
+import static io.ruin.cache.ItemID.*;
+
 public class Consumable {
 
     /**
@@ -55,6 +57,15 @@ public class Consumable {
         registerPie(7208, 7210, 22, "wild pie", p -> {
             p.getStats().get(StatType.Ranged).boost(4, 0.0);
             p.getStats().get(StatType.Slayer).boost(5, 0.0);
+        });
+        registerPie(BOTANICAL_PIE, HALF_A_BOTANICAL_PIE, 14, "botanical pie", p -> {
+            p.getStats().get(StatType.Herblore).boost(4, 0.0);
+        });
+        registerPie(MUSHROOM_PIE, HALF_A_MUSHROOM_PIE, 16, "mushroom pie", p -> {
+            p.getStats().get(StatType.Crafting).boost(4, 0.0);
+        });
+        registerPie(DRAGONFRUIT_PIE, HALF_A_DRAGONFRUIT_PIE, 20, "dragonfruit pie", p -> {
+            p.getStats().get(StatType.Fletching).boost(4, 0.0);
         });
 
         registerEat(7082, 1923, 5, "fried mushrooms");

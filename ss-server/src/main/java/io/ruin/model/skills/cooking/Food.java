@@ -1,6 +1,9 @@
 package io.ruin.model.skills.cooking;
 
 import io.ruin.cache.ItemDef;
+import io.ruin.cache.ItemID;
+
+import static io.ruin.cache.ItemID.*;
 
 public enum Food {
     //Raw Fish
@@ -40,15 +43,21 @@ public enum Food {
     SINEW(1, 3.0, 2132, 9436, 9436, "sinew", "sinews", 3, 1, 1, 1),
 
     //Pies
-    REDBERRY_PIE(10, 78.0, 2321, 2325, 2329, "a redberry pie", "", 3, 10, 10, 10),
-    PIE_MEAT(20, 104.0, 2317, 2327, 2329, "a meat pie", "", 3, 20, 20, 20),
-    MUD_PIE(29, 128.0, 2319, 7170, 2329, "a mud pie", "", 3, 29, 29, 29),
-    APPLE_PIE(30, 130.0, 7168, 2323, 2329, "an apple pie", "", 3, 30, 30, 30),
-    GARDEN_PIE(34, 128.0, 7186, 7188, 2329, "a garden pie", "", 3, 34, 34, 34),
-    FISH_PIE(47, 164.0, 7186, 7188, 2329, "a fish pie", "", 3, 47, 47, 47),
-    ADMIRAL_PIE(70, 210.0, 7196, 7198, 2329, "an admiral pie", "", 3, 70, 70, 70),
-    WILD_PIE(85, 240.0, 7206, 7208, 2329, "a wild pie", "", 3, 85, 85, 85),
-    SUMMER_PIE(95, 260.0, 7216, 7218, 2329, "a summer pie", "", 3, 95, 95, 95),
+    REDBERRY_PIE(10, 78.0, UNCOOKED_BERRY_PIE, ItemID.REDBERRY_PIE, BURNT_PIE, "a redberry pie", "", 3, 10, 10, 10),
+    PIE_MEAT(20, 104.0, UNCOOKED_MEAT_PIE, MEAT_PIE, BURNT_PIE, "a meat pie", "", 3, 20, 20, 20),
+    MUD_PIE(29, 128.0, RAW_MUD_PIE, ItemID.MUD_PIE, BURNT_PIE, "a mud pie", "", 3, 29, 29, 29),
+    APPLE_PIE(30, 130.0, UNCOOKED_APPLE_PIE, ItemID.APPLE_PIE, BURNT_PIE, "an apple pie", "", 3, 30, 30, 30),
+    GARDEN_PIE(34, 138.0, RAW_GARDEN_PIE, ItemID.GARDEN_PIE, BURNT_PIE, "a garden pie", "", 3, 34, 34, 34),
+    FISH_PIE(47, 164.0, RAW_FISH_PIE, ItemID.FISH_PIE, BURNT_PIE, "a fish pie", "", 3, 47, 47, 47),
+    BOT_PIE(52, 180.0, UNCOOKED_BOTANICAL_PIE, BOTANICAL_PIE, BURNT_PIE, "a botanical pie", "", 3, 1, 1, 1),
+    MUSHROOM_PIE(60, 200.0, UNCOOKED_MUSHROOM_PIE, ItemID.MUSHROOM_PIE, BURNT_PIE, "an mushroom pie", "", 3, 70, 70, 70),
+    ADMIRAL_PIE(70, 210.0, RAW_ADMIRAL_PIE, ItemID.ADMIRAL_PIE, BURNT_PIE, "an admiral pie", "", 3, 70, 70, 70),
+    DRAGONFRUIT_PIE(73, 220.0, UNCOOKED_DRAGONFRUIT_PIE, ItemID.DRAGONFRUIT_PIE, BURNT_PIE, "an dragonfruit pie", "", 3, 72, 73, 74),
+    WILD_PIE(85, 240.0, RAW_WILD_PIE, ItemID.WILD_PIE, BURNT_PIE, "a wild pie", "", 3, 85, 85, 85),
+    SUMMER_PIE(95, 260.0, RAW_SUMMER_PIE, ItemID.SUMMER_PIE, BURNT_PIE, "a summer pie", "", 3, 95, 95, 95),
+
+    //BREAD
+    BREAD(1, 40.0, ItemID.BREAD_DOUGH, ItemID.BREAD, ItemID.BURNT_BREAD, "a piece of bread", "", 3, 37, 37, 37),
 
     //Pizza
     PLAIN_PIZZA(35, 143.0, 2287, 2289, 2305, "a plain pizza", "", 3, 35, 35, 35),

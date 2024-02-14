@@ -3,12 +3,14 @@ package io.ruin.model.skills.firemaking;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.ItemDef;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.activities.raids.xeric.ChambersOfXeric;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.item.containers.Equipment;
+import io.ruin.model.map.Bounds;
 import io.ruin.model.map.Tile;
 import io.ruin.model.map.ground.GroundItem;
 import io.ruin.model.map.ground.GroundItemAction;
@@ -163,6 +165,14 @@ public enum Burning {
             } else {
                 groundLog.remove();
                 player.sendFilteredMessage("The fire catches and the logs begin to burn.");
+                if (player.getPosition().inBounds(Bounds.LUMBRIDGE)) {
+                    if (burning == OAK) {
+                        if (!LumbEasy.isTaskCompleted(player, 7)) {
+                            LumbEasy.completeTask(player, 7);
+                            player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                        }
+                    }
+                }
                 player.getStats().addXp(StatType.Firemaking, burning.exp * pyromancerBonus(player), true);
                 burning.counter.increment(player, 1);
                 createFire(burning, fire);

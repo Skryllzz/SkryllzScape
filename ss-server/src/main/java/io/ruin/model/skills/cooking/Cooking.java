@@ -1,6 +1,8 @@
 package io.ruin.model.skills.cooking;
 
 import io.ruin.api.utils.Random;
+import io.ruin.cache.ItemID;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
@@ -8,6 +10,7 @@ import io.ruin.model.inter.dialogue.skill.SkillItem;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemObjectAction;
 import io.ruin.model.item.containers.Equipment;
+import io.ruin.model.map.Bounds;
 import io.ruin.model.map.object.GameObject;
 import io.ruin.model.skills.CapePerks;
 import io.ruin.model.stat.StatType;
@@ -51,6 +54,14 @@ public class Cooking {
                     rawFood.setId(food.cookedID);
                     player.getStats().addXp(StatType.Cooking, food.experience * bonus(player, fire), true);
                     player.sendFilteredMessage(cookingMessage(food));
+                    if (player.getPosition().inBounds(Bounds.LUMBRIDGE)) {
+                        if (food.cookedID == ItemID.BREAD) {
+                            if (!LumbEasy.isTaskCompleted(player, 10)) {
+                                LumbEasy.completeTask(player, 10);
+                                player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                            }
+                        }
+                    }
                 } else {
                     rawFood.setId(food.burntID);
                     player.sendFilteredMessage("You accidentally burn the " + food.itemName + ".");
