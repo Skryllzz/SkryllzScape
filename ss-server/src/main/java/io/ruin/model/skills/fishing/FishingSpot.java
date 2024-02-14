@@ -3,6 +3,7 @@ package io.ruin.model.skills.fishing;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.ItemDef;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
@@ -11,6 +12,7 @@ import io.ruin.model.entity.shared.StepType;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.Pet;
 import io.ruin.model.item.containers.Equipment;
+import io.ruin.model.map.Bounds;
 import io.ruin.model.stat.Stat;
 import io.ruin.model.stat.StatType;
 
@@ -177,6 +179,15 @@ public class FishingSpot {
                         }
 
                         player.getInventory().add(c.id, amount);
+
+                        if (player.getPosition().inBounds(Bounds.ALKHARID)) {
+                            if (c.id == 321) {
+                                if (!LumbEasy.isTaskCompleted(player, 9)) {
+                                    LumbEasy.completeTask(player, 9);
+                                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                                }
+                            }
+                        }
 
                         if(npc.getId() != MINNOWS)
                             PlayerCounter.TOTAL_FISH.increment(player, 1);

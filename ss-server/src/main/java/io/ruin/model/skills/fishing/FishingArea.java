@@ -39,6 +39,10 @@ public enum FishingArea {
             new Position(3239, 3244, 0),
             new Position(3239, 3241, 0)
     ),
+    ALKHARID(
+            new Position(3275, 3140, 0),
+            new Position(3267, 3148, 0)
+            ),
     DRAYNOR(
             new Position(3086, 3227, 0),
             new Position(3086, 3228, 0),
@@ -272,6 +276,7 @@ public enum FishingArea {
         KARAMBWAN_RIVER.add(FishingSpot.KARAMBWAN_SPOT, 1);
         LUMBRIDGE_TUTORIAL.add(FishingSpot.NET_BAIT, 3);
         LUMBRIDGE_RIVER.add(FishingSpot.LURE_BAIT, 2);
+        ALKHARID.add(FishingSpot.NET_BAIT, 2);
         DRAYNOR.add(FishingSpot.NET_BAIT, 2);
         BARBARIAN_VILLAGE.add(FishingSpot.LURE_BAIT, 2);
         SHILO_VILLAGE.add(FishingSpot.LURE_BAIT, 2);

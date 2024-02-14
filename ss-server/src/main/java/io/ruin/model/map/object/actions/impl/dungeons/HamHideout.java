@@ -2,6 +2,7 @@ package io.ruin.model.map.object.actions.impl.dungeons;
 
 import io.ruin.api.utils.Random;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.StepType;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -25,6 +26,10 @@ public class HamHideout {
                 player.sendFilteredMessage("You climb down through the trapdoor...");
                 player.sendFilteredMessage("... and enter a dimly lit cavern area.");
                 player.getMovement().teleport(3149, 9652, 0);
+                        if (!LumbEasy.isTaskCompleted(player, 12)) {
+                            LumbEasy.completeTask(player, 12);
+                            player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                        }
             } else {
                 player.sendFilteredMessage("This trapdoor seems totally locked.");
             }

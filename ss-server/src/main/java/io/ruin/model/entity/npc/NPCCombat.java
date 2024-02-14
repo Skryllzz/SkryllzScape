@@ -8,6 +8,7 @@ import io.ruin.cache.NPCDef;
 import io.ruin.data.impl.npcs.npc_combat;
 import io.ruin.discord.DiscordMessager;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.activities.summerevent.SummerTokens;
 import io.ruin.model.activities.tasks.DailyTask;
 import io.ruin.model.activities.wilderness.Wilderness;
@@ -274,6 +275,7 @@ public abstract class NPCCombat extends Combat {
                 if(info.pet != null && Random.rollDie(info.pet.dropAverage))
                     info.pet.unlock(killer.player);
                 DailyTask.checkNPCKill(killer.player, npc);
+                AchievementCheck(killer.player, npc);
                 //DemonSlayer.check(killer.player, npc);
             }
 
@@ -294,6 +296,28 @@ public abstract class NPCCombat extends Combat {
             event.delay(info.respawn_ticks);
             respawn();
         });
+    }
+
+    public static void AchievementCheck(Player player, NPC npc) {
+        /** Diary **/
+        //Lumbridge Easy - Cave Bugs
+        if (npc.getDef().name.toLowerCase().contains("cave") && npc.getDef().name.toLowerCase().contains("bug")) {
+            if (player.getPosition().inBounds(Bounds.LUMBRDIGE_SEWER)) {
+                if (!LumbEasy.isTaskCompleted(player, 2)) {
+                    LumbEasy.completeTask(player, 2);
+                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                }
+            }
+        }
+        // Lumbridge Easy - Draynor Sewer Zombies
+        if (npc.getDef().name.toLowerCase().contains("zombie")) {
+            if (player.getPosition().inBounds(Bounds.DRAYNOR_SEWER)) {
+                if (!LumbEasy.isTaskCompleted(player, 8)) {
+                    LumbEasy.completeTask(player, 8);
+                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                }
+            }
+        }
     }
 
     public final void respawn() {
@@ -462,6 +486,18 @@ public abstract class NPCCombat extends Combat {
                     }
                 }
             }
+
+                double chance = Random.get(); // 1.00 & 0.00
+                if (chance < 0.075) {
+                    if (!pKiller.getInventory().contains(ItemID.LOOTING_BAG) && !pKiller.getBank().contains(ItemID.LOOTING_BAG) && !pKiller.getInventory().contains(ItemID.LOOTING_BAG_22586)) {
+                        new GroundItem(new Item(ItemID.LOOTING_BAG))
+                                .owner(pKiller.getUserId())
+                                .position(npc.getPosition())
+                                .spawn();
+                        killer.player.sendMessage(Color.PURPLE.wrap("You found a looting bag!!"));
+                    }
+                }
+
 
             if (item.getDef().name.toLowerCase().contains("statius") ||
                     item.getDef().name.toLowerCase().contains("vesta") ||

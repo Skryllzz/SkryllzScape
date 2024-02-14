@@ -3,6 +3,7 @@ package io.ruin.model.entity.npc.actions;
 import io.ruin.Server;
 import io.ruin.api.utils.TimeUtils;
 import io.ruin.cache.ItemID;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.inter.dialogue.*;
 import io.ruin.model.inter.utils.Option;
@@ -29,7 +30,10 @@ public class Lumbridge {
                                             new NPCDialogue(npc, "Ahh, I see all the newcomers arriving in Lumbridge, fresh-faced and eager for adventure. I remember you..."),
                                             new NPCDialogue(npc, "You've spent "+ (TimeUtils.fromMs(player.playTime * Server.tickMs(), false)) +"ins in the world since you arrived.")
                                     );
-
+                                    if (!LumbEasy.isTaskCompleted(player, 5)) {
+                                        LumbEasy.completeTask(player, 5);
+                                        player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                                    }
                                 })
                         ));
 
@@ -41,6 +45,10 @@ public class Lumbridge {
                         new NPCDialogue(npc, "Ahh, I see all the newcomers arriving in Lumbridge, fresh-faced and eager for adventure. I remember you..."),
                         new NPCDialogue(npc, "You've spent "+ (TimeUtils.fromMs(player.playTime * Server.tickMs(), false)) +"ins in the world since you arrived.")
                 );
+                if (!LumbEasy.isTaskCompleted(player, 5)) {
+                    LumbEasy.completeTask(player, 5);
+                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                }
             }));
 
         /** Duke **/

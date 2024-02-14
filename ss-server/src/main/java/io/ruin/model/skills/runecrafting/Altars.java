@@ -3,6 +3,7 @@ package io.ruin.model.skills.runecrafting;
 import io.ruin.api.utils.Random;
 import io.ruin.cache.ItemDef;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.LockType;
@@ -155,6 +156,12 @@ public enum Altars {
             e.delay(4);
             int amount = essenceCount * runesPerEssence;
             player.getInventory().add(altar.runeID, amount);
+            if (runeID == 555) {
+                if (!LumbEasy.isTaskCompleted(player, 4)) {
+                    LumbEasy.completeTask(player, 4);
+                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                    }
+                }
             player.getStats().addXp(StatType.Runecrafting, essenceCount * altar.experience, true);
             //counter.increment(player, amount);
             player.unlock();

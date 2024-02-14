@@ -2,7 +2,9 @@ package io.ruin.model.skills.mining;
 
 import io.ruin.api.utils.Random;
 import io.ruin.cache.ItemDef;
+import io.ruin.cache.ItemID;
 import io.ruin.model.World;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -10,6 +12,7 @@ import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.Geode;
 import io.ruin.model.item.actions.impl.skillcapes.MiningSkillCape;
 import io.ruin.model.item.containers.Equipment;
+import io.ruin.model.map.Bounds;
 import io.ruin.model.map.object.GameObject;
 import io.ruin.model.map.object.actions.ObjectAction;
 import io.ruin.model.stat.Stat;
@@ -87,6 +90,14 @@ public class Mining {
                         int id = rockyOutcrop || gemRock ? itemId : rockData.ore;
                         player.collectResource(new Item(id, 1));
                         player.getInventory().add(id, 1);
+                        if (player.getPosition().inBounds(Bounds.ALKHARID)) {
+                            if (rockData.ore == ItemID.IRON_ORE) {
+                                if (!LumbEasy.isTaskCompleted(player, 11)) {
+                                    LumbEasy.completeTask(player, 11);
+                                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                                }
+                            }
+                        }
 
                         if (player.dragonPickaxeSpecial > 0 && Random.rollPercent(50)) {
                             player.getInventory().add(id, 1);

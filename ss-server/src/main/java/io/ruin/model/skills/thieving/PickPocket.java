@@ -2,6 +2,7 @@ package io.ruin.model.skills.thieving;
 
 import io.ruin.api.utils.Random;
 import io.ruin.cache.NPCDef;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.combat.Hit;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
@@ -11,6 +12,7 @@ import io.ruin.model.entity.shared.LockType;
 import io.ruin.model.item.actions.impl.skillcapes.ThievingSkillCape;
 import io.ruin.model.item.loot.LootItem;
 import io.ruin.model.item.loot.LootTable;
+import io.ruin.model.map.Bounds;
 import io.ruin.model.skills.BotPrevention;
 import io.ruin.model.stat.StatType;
 
@@ -272,6 +274,14 @@ public enum PickPocket {
             player.lock(LockType.FULL_REGULAR_DAMAGE);
             player.sendFilteredMessage("You attempt to pick the " + pickpocket.identifier + " pocket.");
             if (successful(player, pickpocket)) {
+            if (player.getPosition().inBounds(Bounds.LUMBRIDGE)) {
+                if (pickpocket == PickPocket.MAN) {
+                    if (!LumbEasy.isTaskCompleted(player, 6)) {
+                        LumbEasy.completeTask(player, 6);
+                        player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                    }
+                }
+            }
                 player.animate(881);
                 player.privateSound(2581);
                 event.delay(1);

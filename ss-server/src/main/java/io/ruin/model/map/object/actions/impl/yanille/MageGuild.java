@@ -1,6 +1,7 @@
 package io.ruin.model.map.object.actions.impl.yanille;
 
 import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.shared.StepType;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -122,6 +123,11 @@ public class MageGuild {
         /** Sedridor **/
         NPCAction.register(5034, "Teleport", (player, npc) -> {
             npc.addEvent(e -> {
+                if (!LumbEasy.isTaskCompleted(player, 3)) {
+                    // Mark Task 1 as completed and notify ArdyMed
+                    LumbEasy.completeTask(player, 3);
+                    player.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+                }
                 npc.face(player);
                 Sedridor = 1;
                 npc.forceText("Senventior Disthine Molenko");
