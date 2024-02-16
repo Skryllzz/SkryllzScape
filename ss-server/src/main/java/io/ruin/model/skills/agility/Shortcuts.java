@@ -25,6 +25,9 @@ public class Shortcuts {
         // Falador Agility Shortcut
         ObjectAction.register(24222, "climb-over", (p, obj) -> CrumblingWall.shortcut(p, obj, 5));
 
+        // Morytainia Bridge Agility Shortcut
+        ObjectAction.register(3522, "jump", Bridge::shortcut);
+
         // Camelot loose railing
         ObjectAction.register(51, 2662, 3500, 0, "squeeze-through", (p, obj) -> LooseRailing.shortcut(p, obj, 1));
 
