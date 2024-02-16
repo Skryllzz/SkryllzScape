@@ -700,11 +700,6 @@ public class NPCDefinition extends DualNode implements RSNPCDefinition {
          actions[2] = "Sell-items";
          actions[3] = "Sets";
          actions[4] = null;
-      } else if (id == 5523) {
-         /* Gambling man */
-         name = CustomMain.worldType.getName() + " Gambler";
-         actions[0] = null;
-         actions[2] = "Trade";
       } else if (id == 4398) {
          /* ECO Wizard */
          name = CustomMain.worldType.getName() + " Wizard";
