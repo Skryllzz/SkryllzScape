@@ -2,7 +2,6 @@ package io.ruin.model.map;
 
 import io.ruin.api.utils.Random;
 
-import java.awt.*;
 import java.util.function.Consumer;
 
 public class Bounds {
@@ -116,4 +115,9 @@ public class Bounds {
         return new Bounds(sw.swX, sw.swY, ne.neX, ne.neY, -1);
     }
 
+    /** Bounds List **/
+    public static Bounds LUMBRDIGE_SEWER = new Bounds(3146,9539, 3229, 9593, 0);
+    public static Bounds LUMBRIDGE = new Bounds(3173,3208, 3240, 3309, 0);
+    public static Bounds DRAYNOR_SEWER = new Bounds(3081,9670, 3130, 9700, 0);
+    public static Bounds ALKHARID = new Bounds(3255,3148, 3334, 3316, 0);
 }
