@@ -3,10 +3,13 @@ package io.ruin.model.entity.npc.actions;
 import io.ruin.Server;
 import io.ruin.api.utils.TimeUtils;
 import io.ruin.cache.ItemID;
+import io.ruin.cache.NpcID;
 import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.inter.dialogue.*;
 import io.ruin.model.inter.utils.Option;
+
+import static io.ruin.cache.ItemID.*;
 
 public class Lumbridge {
 
@@ -176,5 +179,21 @@ public class Lumbridge {
                             player.dialogue(new NPCDialogue(npc, "Ahahahaha!"));
                         }))
         ));
+
+        /** Hatius Cosaintus **/
+        NPCAction.register(NpcID.HATIUS_COSAINTUS, "talk-to", (player, npc) -> {
+            if (player.LumbEasyComplete && !player.LumbEasyClaimed) {
+                player.dialogue(new PlayerDialogue("I've completed all of the easy tasks in my Lumbridge achievement diary!"),
+                        new NPCDialogue(npc, "Quite... You'll be wanting a reward then!"),
+                        new PlayerDialogue("Yes please!"),
+                        new ItemDialogue().one(EXPLORERS_RING_1, "You are handed an explorer's ring."),
+                        new NPCDialogue(npc, "This ring is a symbol of your exploration of Lumbridge and Draynor. It can recharge half of your run energy twice per day and cast low level alchemy without runes 30 times per day."),
+                        new PlayerDialogue("Thanks!"));
+                player.getInventory().add(EXPLORERS_RING_1, 1);
+                player.LumbEasyClaimed = true;
+            } else {
+                player.dialogue(new NPCDialogue(npc, "I have more chat options coming soon."));
+            }
+        });
     }
 }
