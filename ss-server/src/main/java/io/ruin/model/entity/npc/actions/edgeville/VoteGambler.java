@@ -1,16 +1,12 @@
 package io.ruin.model.entity.npc.actions.edgeville;
 
-import io.ruin.Server;
 import io.ruin.api.utils.StringUtils;
 import io.ruin.cache.Color;
 import io.ruin.model.World;
 import io.ruin.model.entity.npc.NPC;
-import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.entity.shared.listeners.LoginListener;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.item.Item;
-import io.ruin.model.item.actions.ItemNPCAction;
 import io.ruin.utility.Broadcast;
 
 import java.util.*;
@@ -33,15 +29,15 @@ public class VoteGambler {
     private static List<Winner> unclaimedRewards = new ArrayList<>();
 
     static {
-        ItemNPCAction.register(VOTE_TICKET_ID, NPC_ID, VoteGambler::handleEntry);
+       /* ItemNPCAction.register(VOTE_TICKET_ID, NPC_ID, VoteGambler::handleEntry);
         NPCAction.register(NPC_ID, "Lottery-info", VoteGambler::lotteryInfo);
 
-        /**
+        *
          * Starts event every 12 hours
          * 432 * 100 = 43200 seconds
          * Once it starts, it will...
          * check the entries -> Find a random entry -> Award the player associated -> Reset
-         */
+
         World.startEvent(event -> {
             while (true) {
                 event.delay(Server.toTicks(432 * 100));
@@ -59,7 +55,7 @@ public class VoteGambler {
                             unclaimedRewards.remove(winner);
                         });
             }
-        });
+       */ //});
     }
 
 
