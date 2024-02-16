@@ -15,8 +15,15 @@ import io.ruin.model.inter.actions.SimpleAction;
 import io.ruin.model.inter.journal.Journal;
 import lombok.Getter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+
+import static io.ruin.Server.currentTick;
 
 /**
  *
@@ -36,7 +43,7 @@ public class TabQuest {
         COMPONENT_9(9, player -> "Online Staff: " + Color.GREEN.wrap(String.valueOf(getStaffOnlineCount())), (SimpleAction) TabQuest::sendStaffOnline),
         COMPONENT_10(10, player -> "Players in Wild: " + Color.GREEN.wrap(String.valueOf(Wilderness.players.size()))),
         //COMPONENT_11(11, player -> "Players in Tournament: " + Color.GREEN.wrap(String.valueOf(PVPInstance.players.size()))),
-        COMPONENT_11(11, player -> "Server Uptime: " + Color.GREEN.wrap(TimeUtils.fromMs(Server.currentTick() * Server.tickMs(), false))),
+        COMPONENT_11(11, player -> "Server Uptime: " + Color.GREEN.wrap(TimeUtils.fromMs(currentTick() * Server.tickMs(), false))),
         COMPONENT_12(12, player -> "Time Played: " + Color.GREEN.wrap(TimeUtils.fromMs(player.playTime * Server.tickMs(), false))),
         //COMPONENT_43(43, player -> "XP Bonus: " + Color.GREEN.wrap(String.valueOf(World.xpMultiplier))),
         //COMPONENT(43, player -> "Online Players List", (SimpleAction) TabQuest::sendOnlinePlayers),
@@ -75,25 +82,61 @@ public class TabQuest {
         COMPONENT_21(21, player -> "Discord", (SimpleAction) player -> player.openUrl("https://discord.com/invite/VgJjr7nEmz")),
         COMPONENT_22(22, player -> "Store", (SimpleAction) player -> player.openUrl("https://skryllzscape.everythingrs.com/services/store"));
 
-        private int componentId;
-        private TextField text;
-        private InterfaceAction action;
+        final int componentId;
+        final TextField text;
+        final InterfaceAction action;
 
-        //use for blank components
+        static String getTime() {
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            Date date = new Date();
+            return dateFormat.format(date);
+        }
+
         NoticeboardComponent(int componentId) {
             this(componentId, player -> "", null);
         }
 
-        //use for components without a click option
         NoticeboardComponent(int componentId, TextField text) {
             this(componentId, text, null);
         }
 
-        //use for components with a click option
         NoticeboardComponent(int componentId, TextField text, InterfaceAction action) {
             this.componentId = componentId;
             this.text = text;
             this.action = action;
+        }
+    }
+
+    @Getter
+    private enum AchievementComponent {
+        COMPONENT_8(8, player -> "Players Online: " + Color.GREEN.wrap(String.valueOf(getOnlineCount())), (SimpleAction) TabQuest::sendOnlinePlayers);
+        @Getter
+        final int componentId;
+        final TextField text;
+        final InterfaceAction action;
+
+        static String getTime() {
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            Date date = new Date();
+            return dateFormat.format(date);
+        }
+
+        AchievementComponent(int componentId) {
+            this(componentId, player -> "", null);
+        }
+
+        AchievementComponent(int componentId, TextField text) {
+            this(componentId, text, null);
+        }
+
+        AchievementComponent(int componentId, TextField text, InterfaceAction action) {
+            this.componentId = componentId;
+            this.text = text;
+            this.action = action;
+        }
+
+        public int getComopnentId() {
+            return componentId;
         }
     }
 
@@ -102,11 +145,8 @@ public class TabQuest {
      * @param player    The player.
      */
     public static void send(Player player) {
-        for (NoticeboardComponent component : NoticeboardComponent.values()) {
-            player.getPacketSender().sendString(Interface.NOTICEBOARD, component.getComponentId(), component.getText().send(player));
-        }
+        Arrays.stream(NoticeboardComponent.values()).forEach(component -> player.getPacketSender().sendString(720, component.getComponentId(), component.getText().send(player)));
     }
-
     /**
      * Sends an interface filtered with staff that are currently online.
      * @param player    The player.
@@ -135,6 +175,7 @@ public class TabQuest {
     public static void sendBestiary(Player player) {
         Journal.BESTIARY.send(player);
     }
+
     private static void sendAchievements(Player player) {
         Journal.ACHIEVEMENTS.send(player);
     }
@@ -199,18 +240,37 @@ public class TabQuest {
         return xp;
     }
 
+   /** static void swapTabInnerInterface(Player, int newId) {
+        player.getPacketSender().sendInterface(newId, Interface.QUEST_TAB, 2, 1);
+    }**/
+
+   static void swapTabInnerInterface(Player player, int newId) {
+       player.getPacketSender().sendInterface(newId, Interface.QUEST_TAB, 2, 1);
+   }
+
     static {
-        InterfaceHandler.register(Interface.NOTICEBOARD, (h) -> {
+        InterfaceHandler.register(Interface.QUEST_TAB, (h) -> {
+            h.actions[3] = (SimpleAction) p -> swapTabInnerInterface(p, Interface.NOTICEBOARD);
+            h.actions[4] = (SimpleAction) TabQuest::sendAchievements;
+            h.actions[5] = (SimpleAction) p -> swapTabInnerInterface(p, Interface.MINIGAMES);
+            h.actions[6] = (SimpleAction) p -> swapTabInnerInterface(p, Interface.FAVOUR);
+        });
+        AtomicReference<Short> actionPointer = new AtomicReference<>((short) 1);
+        /**InterfaceHandler.register(Interface.NOTICEBOARD, (h) -> {
             for (NoticeboardComponent component : NoticeboardComponent.values()) {
                 h.actions[component.getComponentId()] = component.getAction();
             }
-        });
+        });**/
+        InterfaceHandler.register(Interface.NOTICEBOARD, (h) -> Arrays.stream(NoticeboardComponent.values()).forEach(component -> h.actions[component.getComponentId()] = component.getAction()));
+        //InterfaceHandler.register(Interface.ACHIEVEMENT, (h) -> Arrays.stream(AchievementComponent.values()).forEach(component -> h.actions[component.getComopnentId()] = component.getAction()));
+
         LoginListener.register(player -> {
             send(player);
             player.addEvent(event -> {
                 while(true) {
                     send(player);
-                    event.delay(10);
+                    event.delay(1);
+                    if (player.isVisibleInterface(Interface.QUEST_TAB) && currentTick() == 0) send(player);
                 }
             });
         });
