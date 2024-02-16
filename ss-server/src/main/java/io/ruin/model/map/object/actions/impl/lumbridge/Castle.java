@@ -1,5 +1,6 @@
 package io.ruin.model.map.object.actions.impl.lumbridge;
 
+import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.map.object.actions.ObjectAction;
@@ -88,36 +89,34 @@ public class Castle {
         //Tile.getObject(6905, 3221, 9618, 0).skipReachCheck = p -> p.equals(3221, 9618) || p.equals(3220, 9618) || p.equals(3219, 9618);
 
 
-       /** ObjectAction.register(6905, 1, (player, obj) -> {
+       ObjectAction.register(6898, 1, (player, obj) -> {
             for (int LS : LIGHTSOURCE) {
-                if (player.getAbsX()== 3221) {
-                    player.animate(746);
-                    player.getMovement().teleport(3219, 9618, 0);
-                } else if (player.getAbsX()== 3219) {
-                    if (player.getInventory().hasItem(LS, 1)) {
-                        player.animate(746);
-                        player.getMovement().teleport(3221, 9618, 0);
-                    } else {
-                        player.sendMessage("Best to have a light source before entering.");
-                    }
+                if (player.getInventory().hasAnyOf(LS)) {
+                    player.dialogue(new MessageDialogue("You need a light source before entering."));
+                    return;
                 }
-            }
-        });**/
-        /**ObjectAction.register(6905, 3219, 9618, 0, "Squeeze-through", (player, obj) -> {
-            for (int LS : LIGHTSOURCE) {
-                if (player.getInventory().hasItem(LS, 1)) {
-                    player.animate(746);
-                    player.getMovement().teleport(3221, 9618, 0);
-                } else {
-                    player.sendMessage("Best to have a light source before entering.");
+                if (player.getInventory().hasAtLeastOneOf(LS)) {
+                    player.startEvent(event -> {
+                        player.lock();
+                        player.animate(746);
+                        event.delay(1);
+                        player.resetAnimation();
+                        player.getMovement().teleport(3221, 9618, 0);
+                        player.unlock();
+                    });
                 }
             }
         });
-
-        ObjectAction.register(6905, 3221, 9618, 0, "squeeze-through", (player, obj) -> {
-                    player.animate(746);
-                    player.getMovement().teleport(3219, 9618, 0);
-        });**/
+        ObjectAction.register(6899, 1, (player, obj) -> {
+                    player.startEvent(event -> {
+                        player.lock();
+                        player.animate(746);
+                        event.delay(1);
+                        player.resetAnimation();
+                        player.getMovement().teleport(3219, 9618, 0);
+                        player.unlock();
+                    });
+        });
 
         /** Cellar Cave into The Lumbridge Swamp **/
         ObjectAction.register(6912, 3224, 9601, 0, "squeeze-through", (player, obj) -> {
@@ -128,6 +127,30 @@ public class Castle {
                         player.animate(746);
                         player.getMovement().teleport(3224, 9604, 0);
                     }
+        });
+
+        /** Sheep Pen Stile **/
+        ObjectAction.register(12982, 1, (player, obj) -> {
+            if (player.isAt(3197, 3275)) {
+                player.startEvent(event -> {
+                    player.lock();
+                    player.animate(839);
+                    event.delay(2);
+                    player.resetAnimation();
+                    player.getMovement().teleport(3197, 3278, 0);
+                    player.unlock();
+                });
+            }
+            if (player.isAt(3197, 3278)) {
+                player.startEvent(event -> {
+                    player.lock();
+                    player.animate(839);
+                    event.delay(2);
+                    player.resetAnimation();
+                    player.getMovement().teleport(3197, 3275, 0);
+                    player.unlock();
+                });
+            }
         });
     }
 }
