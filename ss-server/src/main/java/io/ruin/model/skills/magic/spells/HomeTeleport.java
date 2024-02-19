@@ -13,14 +13,10 @@ import java.util.function.Predicate;
 
 public class HomeTeleport extends Spell {
 
-    //public static final HomeTeleport MODERN = new HomeTeleport(p -> ModernTeleport.teleport(p, World.HOME));
     public static final HomeTeleport MODERN = new HomeTeleport(p -> p.getMovement().teleport(World.HOME));
-
-    public static final HomeTeleport ANCIENT = new HomeTeleport(p -> ModernTeleport.teleport(p, World.HOME));
-
-    public static final HomeTeleport LUNAR = new HomeTeleport(p -> ModernTeleport.teleport(p, World.HOME));
-
-    public static final HomeTeleport ARCEUUS = new HomeTeleport(p -> ModernTeleport.teleport(p, World.HOME));
+    public static final HomeTeleport ANCIENT = new HomeTeleport(p -> p.getMovement().teleport(World.EDGE));
+    public static final HomeTeleport LUNAR = new HomeTeleport(p -> p.getMovement().teleport(World.LUNAR));
+    public static final HomeTeleport ARCEUUS = new HomeTeleport(p -> p.getMovement().teleport(World.ARCEUUS));
 
     private static final List<HomeTeleportOverride> OVERRIDES = new LinkedList<>();
 

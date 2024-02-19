@@ -83,7 +83,11 @@ public class World extends EventWorker {
     public static final int spawnableOffset = 100000;
 
     public static final Position HOME = Position.of(3222, 3219, 0);
-    public static final Position EDGEHOME = Position.of(3085, 3492, 0);
+    public static final Position EDGE = Position.of(3085, 3492, 0);
+
+    public static final Position LUNAR = Position.of(2100, 3913, 0);
+
+    public static final Position ARCEUUS = Position.of(1630, 3756, 0);
 
     public static boolean enableHiscores = true;
 

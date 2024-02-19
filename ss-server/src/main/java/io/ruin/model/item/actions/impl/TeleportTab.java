@@ -76,7 +76,7 @@ public enum TeleportTab {
                     if (!player.edgeHome) {
                         player.getMovement().teleport(x, y, z);
                     } else {
-                        player.getMovement().teleport(World.EDGEHOME);
+                        player.getMovement().teleport(World.EDGE);
                     }
                 }
             } else
