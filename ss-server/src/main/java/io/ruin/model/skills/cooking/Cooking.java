@@ -26,14 +26,19 @@ public class Cooking {
                 addAction((p, amount, event) -> startCooking(p, food, obj, amount, anim, fire));
         System.out.println(food.name());
         if (food.equals(Food.RAW_MEAT) || food.equals(Food.SINEW)) {
-            SkillItem sinew = new SkillItem(Food.SINEW.cookedID).name(Food.SINEW.itemName).
-                    addAction((p, amount, event) -> startCooking(p, Food.SINEW, obj, amount, anim, fire));
-            SkillDialogue.make(player, i, sinew);
+            SkillDialogue.make(player,
+                    new SkillItem(Food.RAW_MEAT.cookedID).name(Food.RAW_MEAT.itemName).
+                            addAction((p, amount, event) -> startCooking(p, Food.RAW_MEAT, obj, amount, anim, fire)),
+                    new SkillItem(Food.SINEW.cookedID).name(Food.SINEW.itemName).
+                            addAction((p, amount, event) -> startCooking(p, Food.SINEW, obj, amount, anim, fire)));
         } else {
-            if (player.getInventory().hasMultiple(food.rawID))
-                SkillDialogue.cook(player, i);
-            else
+            if (player.getInventory().hasMultiple(food.rawID)) {
+                if (food.rawID != 2132) {
+                    SkillDialogue.cook(player, i);
+                }
+            } else {
                 startCooking(player, food, obj, 1, anim, fire);
+                }
         }
     }
 
