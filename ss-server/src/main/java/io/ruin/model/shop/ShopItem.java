@@ -39,6 +39,7 @@ public class ShopItem extends Item {
 
     public ShopItem(int id, int amount, int price, Map<String, String> attributes) {
         super(id, amount, attributes);
+        this.amount -= amount;
         this.price = price;
     }
 
@@ -69,7 +70,7 @@ public class ShopItem extends Item {
         }
     }
 
-    @Builder
+    /**@Builder
     public ShopItem(int id, int amount, boolean defaultStockItem, Map<String, String> attributes, PlaceHolderRule placeHolderRule, int price, int placeholderId, List<Achievement> requiredAchievements, List<StatRequirement> requiredLevels, List<Item> additionalItems, Function<Player, String> additionalRequirements, Consumer<Player> onBuy, RequirementCheckType requirementCheckType) {
         super(id, amount, attributes);
         this.defaultStockItem = defaultStockItem;
@@ -78,6 +79,21 @@ public class ShopItem extends Item {
 //        if(price == 0){
 //            log.warn("ShopItem {} {} has no price!", id, amount);
 //        }
+        this.placeholderId = placeholderId;
+        this.requiredAchievements = requiredAchievements;
+        this.requiredLevels = requiredLevels;
+        this.additionalItems = additionalItems;
+        this.additionalRequirements = additionalRequirements;
+        this.onBuy = onBuy;
+        this.requirementCheckType = requirementCheckType != null ? requirementCheckType : RequirementCheckType.NONE;
+    }**/
+
+    @Builder
+    public ShopItem(int id, int amount, boolean defaultStockItem, Map<String, String> attributes, PlaceHolderRule placeHolderRule, int price, int placeholderId, List<Achievement> requiredAchievements, List<StatRequirement> requiredLevels, List<Item> additionalItems, Function<Player, String> additionalRequirements, Consumer<Player> onBuy, RequirementCheckType requirementCheckType) {
+        super(id, amount, attributes);
+        this.defaultStockItem = defaultStockItem;
+        this.placeholderRule = placeHolderRule != null ? placeHolderRule : PlaceHolderRule.SHOW_ON_EMPTY;
+        this.price = price;
         this.placeholderId = placeholderId;
         this.requiredAchievements = requiredAchievements;
         this.requiredLevels = requiredLevels;

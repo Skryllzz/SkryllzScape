@@ -3,7 +3,6 @@ package io.ruin.model.item.containers;
 import io.ruin.cache.ItemDef;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.item.Item;
-import io.ruin.model.item.ItemContainer;
 import io.ruin.model.item.ItemContainerG;
 import io.ruin.model.item.attributes.AttributeExtensions;
 import io.ruin.model.shop.ShopItem;
@@ -42,10 +41,10 @@ public class ShopItemContainer extends ItemContainerG<ShopItem> {
 
     public int add(int id, int amount, int price, Map<String, String> attributes) {
 
-        if (amount <= 0) {
+        /**if (amount <= 0) {
             System.err.println("Invalid add amount: " + amount + " | " + new Throwable().getStackTrace()[1].toString());
             return 0;
-        }
+        }**/
         ItemDef def = ItemDef.get(id);
         if (def == null) {
             System.err.println("Failed to add non-existing item: " + id + " | " + new Throwable().getStackTrace()[1].toString());
@@ -117,10 +116,10 @@ public class ShopItemContainer extends ItemContainerG<ShopItem> {
 
 
 
-        if (amount <= 0) {
+        /**if (amount <= 0) {
             System.err.println("Invalid add amount: " + amount + " | " + new Throwable().getStackTrace()[1].toString());
             return 0;
-        }
+        }**/
         ItemDef def = ItemDef.get(id);
         if (def == null) {
             System.err.println("Failed to add non-existing item: " + id + " | " + new Throwable().getStackTrace()[1].toString());
