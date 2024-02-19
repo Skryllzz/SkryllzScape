@@ -1,6 +1,7 @@
 package io.ruin.model.skills.agility.courses.rooftop;
 
 import io.ruin.api.utils.Random;
+import io.ruin.model.achievements.listeners.lumbridgedraynor.LumbEasy;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.LockType;
 import io.ruin.model.entity.shared.Renders;
@@ -152,6 +153,10 @@ public class DraynorCourse {
             p.getStats().addXp(StatType.Agility, 79.0, true);
             p.getMovement().restoreEnergy(Random.get(1, 2));
             PlayerCounter.DRAYNOR_ROOFTOP.increment(p, 1);
+            if (!LumbEasy.isTaskCompleted(p, 1)) {
+                LumbEasy.completeTask(p, 1);
+                p.sendMessage("<col=800000>Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.</col>");
+            }
             AgilityPet.rollForPet(p, 16000);
             MarkOfGrace.rollMark(p, 10, MARK_SPAWNS);
             p.unlock();
