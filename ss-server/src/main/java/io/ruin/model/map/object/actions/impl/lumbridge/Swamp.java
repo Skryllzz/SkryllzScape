@@ -1,5 +1,8 @@
 package io.ruin.model.map.object.actions.impl.lumbridge;
 
+import io.ruin.cache.ItemID;
+import io.ruin.model.inter.dialogue.OptionsDialogue;
+import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.map.object.actions.ObjectAction;
@@ -26,6 +29,16 @@ public class Swamp {
         /** Enter Coffin to get back to deaths office **/
         ObjectAction.register(2145, 3249, 3192, 0, "open", (player, obj) -> {
             player.getMovement().teleport(1867, 4243, 0);
+        });
+
+        /** Tools in Shed **/
+        ObjectAction.register(10375, 3203, 3170, 0, "take", (player, obj) -> {
+            player.dialogue(new OptionsDialogue("Which tool would you like to take?",
+                    new Option("Rake", () -> player.getInventory().add(ItemID.RAKE, 1)),
+                    new Option("Spade", () -> player.getInventory().add(ItemID.SPADE, 1)),
+                    new Option("Trowel", () -> player.getInventory().add(ItemID.TROWEL, 1)),
+                    new Option("Seed Dibber", () -> player.getInventory().add(ItemID.SEED_DIBBER, 1)),
+                    new Option("Watering Can", () -> player.getInventory().add(ItemID.WATERING_CAN, 1))));
         });
 
         /** Climb Up from Swamp Dungeon **/

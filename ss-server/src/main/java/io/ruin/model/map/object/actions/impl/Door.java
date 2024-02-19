@@ -1,6 +1,7 @@
 package io.ruin.model.map.object.actions.impl;
 
 import io.ruin.Server;
+import io.ruin.cache.ItemID;
 import io.ruin.cache.ObjectDef;
 import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
 import io.ruin.model.entity.player.Player;
@@ -118,6 +119,24 @@ public class Door {
             } else {
                 player.dialogue(new NPCDialogue(814, "You are not worthy of entering the guild of a Champion."), new MessageDialogue("You need a total level of at least 400 to enter."));
                 return;
+            }
+        }
+        if (def.id == 2406 && obj.x == 3202 && obj.y == 3169) { //Lumby Swamp Zannris Entrance
+            if (player.getEquipment().hasId(ItemID.DRAMEN_STAFF) && player.getAbsX() == 3201) {
+                player.startEvent(event -> {
+                    player.stepAbs(3202, 3169, StepType.FORCE_WALK);
+                    player.graphics(569);
+                    event.delay(3);
+                    player.getMovement().teleport(2452, 4473, 0);
+                });
+            } else {
+                if (player.getAbsX() == 3201) {
+                    player.stepAbs(3202, 3169, StepType.FORCE_WALK);
+                    return;
+                } else if (player.getAbsX() == 3202) {
+                    player.stepAbs(3201, 3169, StepType.FORCE_WALK);
+                    return;
+                }
             }
         }
         if (player.getAbsX() == 3098 && player.getAbsY() == 3107 && def.id == 9398) {

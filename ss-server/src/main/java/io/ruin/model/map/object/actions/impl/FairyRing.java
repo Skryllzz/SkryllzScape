@@ -231,6 +231,14 @@ public enum FairyRing { //todo add favorite option
                 };
             }
         });
+
+        ObjectAction.register(12094, 1, (player, obj) -> {
+            if(player.getEquipment().findItem(772) == null) {
+                player.sendFilteredMessage("The fairy ring only works for those who wield fairy magic.");
+                return;
+            }
+            player.getMovement().teleport(3202, 3169, 0);
+        });
     }
 
 }
