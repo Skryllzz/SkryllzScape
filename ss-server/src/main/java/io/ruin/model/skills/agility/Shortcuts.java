@@ -25,6 +25,10 @@ public class Shortcuts {
         // Falador Agility Shortcut
         ObjectAction.register(24222, "climb-over", (p, obj) -> CrumblingWall.shortcut(p, obj, 5));
 
+        // Zanaris Agility Shortcut
+        ObjectAction.register(17002, 2400, 4403, 0, "squeeze-past", (p, obj) -> JuttingWall.shortcut(p, obj, 46));
+        ObjectAction.register(17002, 2409, 4401, 0, "squeeze-past", (p, obj) -> JuttingWall.shortcut(p, obj, 66));
+
         // Morytainia Bridge Agility Shortcut
         ObjectAction.register(3522, "jump", Bridge::shortcut);
 
