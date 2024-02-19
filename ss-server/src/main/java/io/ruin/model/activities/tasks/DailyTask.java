@@ -6,7 +6,6 @@ import io.ruin.model.World;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
-import io.ruin.model.entity.shared.listeners.DailyResetListener;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.journal.JournalEntry;
 
@@ -201,7 +200,7 @@ public enum DailyTask {
 //    }
 
     static {
-        DailyResetListener.register(DailyTask::assignTasks);
+        //DailyResetListener.register(DailyTask::assignTasks);
     }
 
     public static class TaskEntry extends JournalEntry {
