@@ -39,7 +39,7 @@ public class ShopItem extends Item {
 
     public ShopItem(int id, int amount, int price, Map<String, String> attributes) {
         super(id, amount, attributes);
-        this.amount -= amount;
+        //this.amount -= amount;
         this.price = price;
     }
 
@@ -92,7 +92,7 @@ public class ShopItem extends Item {
     public ShopItem(int id, int amount, boolean defaultStockItem, Map<String, String> attributes, PlaceHolderRule placeHolderRule, int price, int placeholderId, List<Achievement> requiredAchievements, List<StatRequirement> requiredLevels, List<Item> additionalItems, Function<Player, String> additionalRequirements, Consumer<Player> onBuy, RequirementCheckType requirementCheckType) {
         super(id, amount, attributes);
         this.defaultStockItem = defaultStockItem;
-        this.placeholderRule = placeHolderRule != null ? placeHolderRule : PlaceHolderRule.SHOW_ON_EMPTY;
+        this.placeholderRule = placeHolderRule != null ? placeHolderRule : PlaceHolderRule.NONE;
         this.price = price;
         this.placeholderId = placeholderId;
         this.requiredAchievements = requiredAchievements;
@@ -125,7 +125,7 @@ public class ShopItem extends Item {
     }
 
 
-    public PlaceHolderRule placeholderRule = PlaceHolderRule.SHOW_ON_EMPTY;
+    public PlaceHolderRule placeholderRule = PlaceHolderRule.NONE;
     public int price;
 
     public boolean defaultStockItem;
