@@ -267,6 +267,6 @@ public class GameObject extends AttributesHolder {
     static{ //Server Sided Objects
         spawn(12309, 3219, 9623, 0, 10, 1).skipReachCheck = player -> true; // Culimancers Chest
         spawn(31675, 1867, 4233, 0, 10, 0).skipReachCheck = player -> true; // Death Claim Storage
-
+        spawn(10042, 3166, 9622, 0, 10, 0).skipReachCheck = player -> true; // Hamstore Room
     }
 }

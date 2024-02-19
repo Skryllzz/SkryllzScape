@@ -328,6 +328,8 @@ public class Config {
 
     public static final Config HAM_HIDEOUT_ENTRANCE = varpbit(235, false);
 
+    public static final Config HAM_STOREROOM_ENTRANCE = varpbit(235, false);
+
     public static final Config VENG_COOLDOWN = varpbit(2451, false);
 
     public static final Config INFERNO_ENTRANCE = varpbit(5646, true).defaultValue(2); //uhh todo
