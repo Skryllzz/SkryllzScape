@@ -13,12 +13,17 @@ public class Hole {
             return;
         p.startEvent(e -> {
             p.lock(LockType.FULL_DELAY_DAMAGE);
-            p.animate(844);
-            if(p.getAbsY() > hole.y)
-                p.getMovement().force(0, -5, 0, 0, 0, 60, Direction.SOUTH);
-            else
-                p.getMovement().force(0, 5, 0, 0, 0, 60, Direction.NORTH);
+            p.animate(2589);
             e.delay(2);
+            if (p.getAbsY() > hole.y) {
+                p.animate(2590);
+                p.getMovement().force(0, -5, 0, 0, 0, 60, Direction.SOUTH);
+                 } else {
+                p.animate(2590);
+                p.getMovement().force(0, 5, 0, 0, 0, 60, Direction.NORTH);
+            }
+            e.delay(2);
+            p.animate(2591);
             p.getStats().addXp(StatType.Agility, 0.5, true);
             p.unlock();
         });
