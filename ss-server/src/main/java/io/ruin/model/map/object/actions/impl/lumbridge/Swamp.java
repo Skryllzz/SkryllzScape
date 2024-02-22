@@ -1,17 +1,22 @@
 package io.ruin.model.map.object.actions.impl.lumbridge;
 
 import io.ruin.cache.ItemID;
+import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.map.object.actions.ObjectAction;
+import io.ruin.model.stat.StatType;
 
+import static io.ruin.cache.ItemID.*;
 import static io.ruin.model.skills.Tool.TINDER_BOX;
 
 public class Swamp {
 
-    public static final int[] LIGHTSOURCE = {33, 32, 594, 7053 };
+    public static final int[] LIGHTSOURCE = {LIT_CANDLE, LIT_BLACK_CANDLE, LIT_TORCH, LIT_BUG_LANTERN };
+
+    public static final int[] CROSSBOW = {DORGESHUUN_CROSSBOW, MITH_CROSSBOW, ADAMANT_CROSSBOW, RUNE_CROSSBOW, DRAGON_CROSSBOW};
 
     static {
         /** Dark Hole **/
@@ -39,6 +44,30 @@ public class Swamp {
                     new Option("Trowel", () -> player.getInventory().add(ItemID.TROWEL, 1)),
                     new Option("Seed Dibber", () -> player.getInventory().add(ItemID.SEED_DIBBER, 1)),
                     new Option("Watering Can", () -> player.getInventory().add(ItemID.WATERING_CAN, 1))));
+        });
+
+        /** River Lum Grapple **/
+        ObjectAction.register(17068, "grapple", (player, obj) -> {
+            if (!player.getStats().check(StatType.Agility, 8)) {
+                player.dialogue(new MessageDialogue("You need an agility level of 8 to cross here"));
+                return;
+            }
+            if (!player.getStats().check(StatType.Ranged, 37) && player.getStats().check(StatType.Strength, 19)) {
+                player.dialogue(new MessageDialogue("You need a ranged attack level of 37 and a strength level of 19 to cross here"));
+                return;
+            }
+            for (int CB : CROSSBOW) {
+            if (player.getEquipment().hasAtLeastOneOf(CB)) {
+                if (player.getEquipment().hasId(MITH_GRAPPLE_9419)) {
+                    if (player.getAbsX() <= 3250)
+                        player.getMovement().teleport(3259, 3180, 0);
+                    else
+                        player.getMovement().teleport(3246, 3179, 0);
+                    } else {
+                        player.dialogue(new MessageDialogue("You need a grapple equipped to cross here"));
+                    }
+                }
+            }
         });
 
         /** Climb Up from Swamp Dungeon **/
