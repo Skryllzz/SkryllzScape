@@ -1,13 +1,13 @@
 package io.ruin.model.map.object.actions.impl.lumbridge;
 
 import io.ruin.cache.ItemID;
-import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.map.object.actions.ObjectAction;
-import io.ruin.model.stat.StatType;
+
+import java.util.stream.IntStream;
 
 import static io.ruin.cache.ItemID.*;
 import static io.ruin.model.skills.Tool.TINDER_BOX;
@@ -22,7 +22,7 @@ public class Swamp {
         /** Dark Hole **/
         ObjectAction.register(5947, 3169, 3172, 0, "climb-down", (player, obj) -> {
             for (int LS : LIGHTSOURCE) {
-            if (player.getInventory().hasItem(LS, 1)) {
+            if (IntStream.of(LIGHTSOURCE).anyMatch(player.getEquipment()::hasId)) {
                 player.animate(827);
                 player.getMovement().teleport(3169, 9571, 0);
                 } else {
@@ -46,7 +46,7 @@ public class Swamp {
                     new Option("Watering Can", () -> player.getInventory().add(ItemID.WATERING_CAN, 1))));
         });
 
-        /** River Lum Grapple **/
+        /** River Lum Grapple
         ObjectAction.register(17068, "grapple", (player, obj) -> {
             if (!player.getStats().check(StatType.Agility, 8)) {
                 player.dialogue(new MessageDialogue("You need an agility level of 8 to cross here"));
@@ -68,7 +68,7 @@ public class Swamp {
                     }
                 }
             }
-        });
+        }); **/
 
         /** Climb Up from Swamp Dungeon **/
         ObjectAction.register(5946, 3169, 9572, 0, "climb", (player, obj) -> {

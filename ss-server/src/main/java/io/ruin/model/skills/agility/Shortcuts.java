@@ -38,6 +38,12 @@ public class Shortcuts {
         // Consair Cove Climb Over Rock
         ObjectAction.register(31757, 2546, 2872, 0, "climb", Rocks::climb);
 
+        // Varrock Jump over Fence
+        ObjectAction.register(16518, 3240, 3335, 0, "jump-over", (p, obj) -> Fence.jump(p, obj, 13));
+
+        // Cross River Lum to Al Kharid
+        ObjectAction.register(17068, 3252, 3179, 0, "grapple", (p, obj) -> Grappling.grapple(p, obj, 8, 37, 19, 4460, 760, 10, Position.of(3246, 3179, 0), Position.of(3259, 3180, 0)));
+
         // Rope swing to Moss Giant Island
         ObjectAction.register(23568, 2705, 3209, 0, "swing-on", (p, obj) -> RopeSwing.shortcut(p, obj, 10, Position.of(2709, 3209, 0), Position.of(2704, 3209, 0)));
         ObjectAction.register(23569, 2703, 3205, 0, "swing-on", (p, obj) -> RopeSwing.shortcut(p, obj, 10, Position.of(2705, 3205, 0), Position.of(2709, 3205, 0)));
