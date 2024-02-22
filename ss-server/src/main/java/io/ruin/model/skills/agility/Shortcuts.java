@@ -35,7 +35,8 @@ public class Shortcuts {
         // Camelot loose railing
         ObjectAction.register(51, 2662, 3500, 0, "squeeze-through", (p, obj) -> LooseRailing.shortcut(p, obj, 1));
 
-        // (Grapple) Over the River Lum to Al Kharid (FUCK THAT)
+        // Consair Cove Climb Over Rock
+        ObjectAction.register(31757, 2546, 2872, 0, "climb", Rocks::climb);
 
         // Rope swing to Moss Giant Island
         ObjectAction.register(23568, 2705, 3209, 0, "swing-on", (p, obj) -> RopeSwing.shortcut(p, obj, 10, Position.of(2709, 3209, 0), Position.of(2704, 3209, 0)));
