@@ -41,6 +41,9 @@ public class Shortcuts {
         // Varrock Jump over Fence
         ObjectAction.register(16518, 3240, 3335, 0, "jump-over", (p, obj) -> Fence.jump(p, obj, 13));
 
+        // Scale Goblin Village Wall
+        ObjectAction.register(16468, "manoeuvre-past", (p, obj) -> TightGap.shortcut(p, obj, 14));
+
         // Cross River Lum to Al Kharid
         ObjectAction.register(17068, 3252, 3179, 0, "grapple", (p, obj) -> Grappling.grapple(p, obj, 8, 37, 19, 4460, 760, 10, Position.of(3246, 3179, 0), Position.of(3259, 3180, 0)));
 
