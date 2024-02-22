@@ -56,6 +56,10 @@ public class Shortcuts {
         ObjectAction.register(16548, 2601, 3336, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 33));
         ObjectAction.register(16546, 2599, 3336, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 33));
 
+        //Falador Under Wall Shortcut
+        ObjectAction.register(16528, 2948, 3312, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 26));
+        ObjectAction.register(16527, 2948, 3310, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 26));
+
         // Cross River Lum to Al Kharid
         ObjectAction.register(17068, 3252, 3179, 0, "grapple", (p, obj) -> Grappling.grapple(p, obj, 8, 37, 19, 4460, 760, 10, Position.of(3246, 3179, 0), Position.of(3259, 3180, 0)));
 
