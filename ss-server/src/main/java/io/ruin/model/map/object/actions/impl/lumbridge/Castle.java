@@ -5,6 +5,8 @@ import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.map.object.actions.ObjectAction;
 
+import java.util.stream.IntStream;
+
 public class Castle {
 
     public static final int[] LIGHTSOURCE = {33, 32, 594, 7053 };
@@ -91,11 +93,11 @@ public class Castle {
 
        ObjectAction.register(6898, 1, (player, obj) -> {
             for (int LS : LIGHTSOURCE) {
-                if (player.getInventory().hasAnyOf(LS)) {
+                if (!IntStream.of(LIGHTSOURCE).anyMatch(player.getEquipment()::hasId)) {
                     player.dialogue(new MessageDialogue("You need a light source before entering."));
                     return;
                 }
-                if (player.getInventory().hasAtLeastOneOf(LS)) {
+                if (IntStream.of(LIGHTSOURCE).anyMatch(player.getEquipment()::hasId)) {
                     player.startEvent(event -> {
                         player.lock();
                         player.animate(746);
