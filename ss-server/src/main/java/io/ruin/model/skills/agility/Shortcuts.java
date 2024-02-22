@@ -38,28 +38,6 @@ public class Shortcuts {
         // Consair Cove Climb Over Rock
         ObjectAction.register(31757, 2546, 2872, 0, "climb", Rocks::climb);
 
-        // Varrock Jump over Fence
-        ObjectAction.register(16518, 3240, 3335, 0, "jump-over", (p, obj) -> Fence.jump(p, obj, 13));
-
-        // Scale Goblin Village Wall
-        ObjectAction.register(16468, "manoeuvre-past", (p, obj) -> TightGap.shortcut(p, obj, 14));
-
-        // Yanille Castle Wall Shortcut
-        ObjectAction.register(16520, 2575, 3111, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 16));
-        ObjectAction.register(16519, 2575, 3108, 0, "climb-under", (p, obj) -> Hole.shortcut(p, obj, 16));
-
-        // Coal Trucks Log Balance
-        ObjectAction.register(23274, 2602, 3477, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 20));
-        ObjectAction.register(23274, 2599, 3477, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 20));
-
-        // Ardougne Log Balance
-        ObjectAction.register(16548, 2601, 3336, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 33));
-        ObjectAction.register(16546, 2599, 3336, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 33));
-
-        //Falador Under Wall Shortcut
-        ObjectAction.register(16528, 2948, 3312, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 26));
-        ObjectAction.register(16527, 2948, 3310, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 26));
-
         // Cross River Lum to Al Kharid
         ObjectAction.register(17068, 3252, 3179, 0, "grapple", (p, obj) -> Grappling.grapple(p, obj, 8, 37, 19, 4460, 760, 10, Position.of(3246, 3179, 0), Position.of(3259, 3180, 0)));
 
@@ -90,11 +68,20 @@ public class Shortcuts {
 
         // Stepping stones in Brimhaven Dungeon
         // Varrock south fence jump
+        ObjectAction.register(16518, 3240, 3335, 0, "jump-over", (p, obj) -> Fence.jump(p, obj, 13));
+
         // Scale Goblin Village wall
+        ObjectAction.register(16468, "manoeuvre-past", (p, obj) -> TightGap.shortcut(p, obj, 14));
+
         // Monkey bars under Edgeville
         // Yanille Agility Shortcut
+        ObjectAction.register(16520, 2575, 3111, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 16));
+        ObjectAction.register(16519, 2575, 3108, 0, "climb-under", (p, obj) -> Hole.shortcut(p, obj, 16));
+
         // Watchtower wall climb
         // Coal Truck log balance
+        ObjectAction.register(23274, 2602, 3477, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 20));
+        ObjectAction.register(23274, 2599, 3477, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 20));
 
         // Grand Exchange Agility Shortcut
         ObjectAction.register(16529, "climb-into", (p, obj) -> UnderwallTunnel.shortcut(p, obj, 21));
@@ -103,11 +90,18 @@ public class Shortcuts {
         // Pipe contortion in Brimhaven Dungeon
         // Eagles' Peak Agility Shortcut
         // Underwall tunnel	Falador Agility Shortcut
+        ObjectAction.register(16528, 2948, 3312, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 26));
+        ObjectAction.register(16527, 2948, 3310, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 26));
+
         // Stepping stones in Brimhaven Dungeon
         // Draynor Manor stones to Champions' Guild
+        ObjectAction.register(16533, "jump-onto", ((player, obj) -> SteppingStone.crossEW(player, obj, 31)));
         // (Grapple) Scale Catherby cliffside
         // Cairn Isle rock slide climb
         // Ardougne log balance shortcut
+        ObjectAction.register(16548, 2601, 3336, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 33));
+        ObjectAction.register(16546, 2599, 3336, 0, "walk-across", (p, obj) -> LogBalance.shortcut(p, obj, 33));
+
         // Pipe contortion in Brimhaven Dungeon
         // Trollweiss/Rellekka Hunter area cliff scramble
         // (Grapple) Escape from the Water Obelisk Island
