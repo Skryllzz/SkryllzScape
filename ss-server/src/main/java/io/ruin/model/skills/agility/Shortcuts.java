@@ -44,6 +44,10 @@ public class Shortcuts {
         // Scale Goblin Village Wall
         ObjectAction.register(16468, "manoeuvre-past", (p, obj) -> TightGap.shortcut(p, obj, 14));
 
+        // Yanille Castle Wall Shortcut
+        ObjectAction.register(16520, 2575, 3111, 0, "climb-into", (p, obj) -> Hole.shortcut(p, obj, 16));
+        ObjectAction.register(16519, 2575, 3108, 0, "climb-under", (p, obj) -> Hole.shortcut(p, obj, 16));
+
         // Cross River Lum to Al Kharid
         ObjectAction.register(17068, 3252, 3179, 0, "grapple", (p, obj) -> Grappling.grapple(p, obj, 8, 37, 19, 4460, 760, 10, Position.of(3246, 3179, 0), Position.of(3259, 3180, 0)));
 
