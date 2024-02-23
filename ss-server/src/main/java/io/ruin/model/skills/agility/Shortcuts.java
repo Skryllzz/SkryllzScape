@@ -1,5 +1,6 @@
 package io.ruin.model.skills.agility;
 
+import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.map.Position;
 import io.ruin.model.map.Tile;
 import io.ruin.model.map.object.actions.ObjectAction;
@@ -96,6 +97,7 @@ public class Shortcuts {
         // Stepping stones in Brimhaven Dungeon
         // Draynor Manor stones to Champions' Guild
         ObjectAction.register(16533, "jump-onto", ((player, obj) -> SteppingStone.crossEW(player, obj, 31)));
+
         // (Grapple) Scale Catherby cliffside
         // Cairn Isle rock slide climb
         // Ardougne log balance shortcut
@@ -150,6 +152,12 @@ public class Shortcuts {
         // Cosmic Temple advanced narrow walkway
         // Lumbridge Swamp to Al Kharid narrow crevice
         // Heroes' Guild tunnel
+        ObjectAction.register(9739, "use", ((player, obj) -> {
+          player.dialogue(new MessageDialogue("This shortcut will be added with the Falador Hard Diary. Please check back later."));
+        }));
+        ObjectAction.register(9740, "use", ((player, obj) -> {
+            player.dialogue(new MessageDialogue("This shortcut will be added with the Falador Hard Diary. Please check back later."));
+        }));
         // Yanille Dungeon's rubble climb
         // Elven Overpass (Arandar) medium cliffside scramble
         // Arceuus essence mine northern scramble
