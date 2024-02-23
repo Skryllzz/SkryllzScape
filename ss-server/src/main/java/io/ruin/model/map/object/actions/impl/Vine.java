@@ -3,14 +3,10 @@ package io.ruin.model.map.object.actions.impl;
 import io.ruin.model.World;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.StepType;
-import io.ruin.model.item.containers.Equipment;
-import io.ruin.model.item.containers.Inventory;
 import io.ruin.model.map.object.GameObject;
 import io.ruin.model.map.object.actions.ObjectAction;
 import io.ruin.model.skills.woodcutting.Hatchet;
 import io.ruin.model.stat.StatType;
-
-import static io.ruin.cache.ItemID.*;
 
 public class Vine {
 
@@ -27,24 +23,9 @@ public class Vine {
         }
 
         player.startEvent(event -> {
-            Equipment equipment = player.getEquipment();
-            Inventory inventory = player.getInventory();
-            if (equipment.hasId(DRAGON_AXE) || inventory.hasId(DRAGON_AXE)) {
-                player.animate(Hatchet.DRAGON.animationId);
-            } else if (equipment.hasId(RUNE_AXE) || inventory.hasId(RUNE_AXE)) {
-                player.animate(Hatchet.RUNE.animationId);
-            } else if (equipment.hasId(ADAMANT_AXE) || inventory.hasId(ADAMANT_AXE)) {
-                player.animate(Hatchet.ADAMANT.animationId);
-            } else if (equipment.hasId(MITHRIL_AXE) || inventory.hasId(MITHRIL_AXE)) {
-                player.animate(Hatchet.MITHRIL.animationId);
-            } else if (equipment.hasId(STEEL_AXE) || inventory.hasId(STEEL_AXE)) {
-                player.animate(Hatchet.STEEL.animationId);
-            } else if (equipment.hasId(BLACK_AXE) || inventory.hasId(BLACK_AXE)) {
-                player.animate(Hatchet.BLACK.animationId);
-            } else if (equipment.hasId(IRON_AXE) || inventory.hasId(IRON_AXE)) {
-                player.animate(Hatchet.IRON.animationId);
-            } else if (equipment.hasId(BRONZE_AXE) || inventory.hasId(BRONZE_AXE)) {
-                player.animate(Hatchet.BRONZE.animationId);
+            Hatchet bestHatchet = Hatchet.find(player);
+            if (bestHatchet != null) {
+                player.animate(bestHatchet.animationId);
             }
             event.delay(3);
             if(vines.id != -1) {
