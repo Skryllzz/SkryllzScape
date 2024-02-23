@@ -253,7 +253,7 @@ public class Server extends ServerWrapper {
             DiscordMessager.sendOnlineStatus(World.type.getWorldName()+" World 1 (Beta) is back online!");
         }
         if (World.isDev()) {
-            DiscordMessager.sendOnlineStatus(World.type.getWorldName()+" World 2 (Dev) is back online!");
+            //DiscordMessager.sendOnlineStatus(World.type.getWorldName()+" World 2 (Dev) is back online!");
         }
 
         /*
