@@ -28,7 +28,7 @@ public enum PlayerGroup {
     RUBY(13, 11, 21, 0),
     EMERALD(12, 10, 20, 0),
     SAPPHIRE(11, 9, 19, 0),
-    REGISTERED(2, 0, 0, 0),
+    REGISTERED(2, -1, -1, 0),
     BANNED(18, 0, -1, 0);
 
     public final int id;
