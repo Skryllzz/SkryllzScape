@@ -17,7 +17,7 @@ import io.ruin.model.skills.magic.spells.modern.*;
 public enum SpellBook {
 
     MODERN(
-            HomeTeleport.MODERN,
+            HomeTeleport.PORTAL,
             new WindStrike(),
             new Confuse(),
             new EnchantCrossbowBolt(),
@@ -114,10 +114,10 @@ public enum SpellBook {
             new AncientTeleport(84, 94.0, new Bounds(3162, 3663, 3164, 3665, 0), Rune.LAW.toItem(2), Rune.SOUL.toItem(2)),
             new AncientTeleport(90, 100.0, new Bounds(3287, 3886, 3288, 3887, 0), Rune.LAW.toItem(2), Rune.BLOOD.toItem(2)),
             new AncientTeleport(96, 106.0, new Bounds(2970, 3871, 2975, 3875, 0), Rune.LAW.toItem(2), Rune.WATER.toItem(8)),
-            HomeTeleport.ANCIENT
+            HomeTeleport.PORTAL
     ),
     LUNAR(
-            HomeTeleport.LUNAR,
+            HomeTeleport.PORTAL,
             new BakePie(),
             new TodoSpell("Cure Plant"),
             new MonsterExamine(),
@@ -163,7 +163,7 @@ public enum SpellBook {
             new TodoSpell("Ourania Teleport")
     ),
     ARCEUUS(
-            HomeTeleport.ARCEUUS,
+            HomeTeleport.PORTAL,
             new Reanimate(Reanimate.Monster.GOBLIN),
             new ArceuusTeleport(6, 10.0, new Bounds(3241, 3195, 3242, 3196, 0), Rune.LAW.toItem(1), Rune.EARTH.toItem(2)),
             new Reanimate(Reanimate.Monster.MONKEY),

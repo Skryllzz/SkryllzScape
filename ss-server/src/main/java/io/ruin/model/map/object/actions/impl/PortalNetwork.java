@@ -15,8 +15,12 @@ public class PortalNetwork {
 
     static {
         ObjectAction.register(36240, "Travel", (player, obj) -> {
-            OptionScroll.open(player, "Portal Network. Charges: " + player.PNCredit + ".", getOptions(player));
+            open(player);
         });
+    }
+
+    public static void open(Player player) {
+        OptionScroll.open(player, "Portal Network. Charges: " + player.PNCredit + ".", getOptions(player));
     }
 
     public static void teleport(Player player, int x, int y, int z, int cred, int total) {
@@ -85,7 +89,7 @@ public class PortalNetwork {
                 }
             }
     }
-    private static List<Option> getOptions(Player player) {
+    public static List<Option> getOptions(Player player) {
         List<Option> options = new ArrayList<>();
         options.add(new Option("Lumbridge - Free - Total: 1", () -> teleport(player, 3232, 3223, 0, 0, 1)));
         options.add(new Option("Al Kharid - 1 Charges - Total: 50", () -> teleport(player, 3297, 3175, 0, 1, 50)));
