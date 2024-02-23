@@ -269,5 +269,21 @@ public class GameObject extends AttributesHolder {
         spawn(31675, 1867, 4233, 0, 10, 0).skipReachCheck = player -> true; // Death Claim Storage
         spawn(10042, 3166, 9622, 0, 10, 0).skipReachCheck = player -> true; // Hamstore Room
         spawn(17068, 3252, 3179, 0, 10, 0).skipReachCheck = player -> true; // Grapple Lumb to Al Kharid
+
+        /** Portal Network (Similar to RS3)**/
+        spawn(36240, 3231, 3223, 0, 10, 0); // Lumbridge Portal
+        spawn(36240, 3298, 3175, 0, 10, 0); // Al Kharid Portal
+        spawn(36240, 3215, 3380, 0, 10, 1); // Varrock Portal
+        spawn(36240, 3089, 3260, 0, 10, 0); // Draynor Portal
+        spawn(36240, 3075, 3510, 0, 10, 0); // Edgeville Portal
+        spawn(36240, 3059, 3349, 0, 10, 0); // Falador Portal
+        spawn(36240, 3010, 3221, 0, 10, 0); // Port Sarim Portal
+        spawn(36240, 2897, 3505, 0, 10, 0); // Burthorpe Portal
+        spawn(36240, 2640, 3360, 0, 10, 0); // Ardougne Portal
+        spawn(36240, 2619, 3094, 0, 10, 0); // Yanille Portal
+        spawn(36240, 1771, 3594, 0, 10, 0); // Hosidius Portal
+        spawn(36240, 1652, 3762, 0, 10, 1); // Arceuus Portal
+        spawn(36240, 3505, 3471, 0, 10, 0); // Canifis Portal
+
     }
 }
