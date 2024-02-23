@@ -10,6 +10,8 @@ import io.ruin.model.inter.dialogue.PlayerDialogue;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.stat.StatType;
 
+import static io.ruin.cache.ItemID.COINS_995;
+
 public class Varrock {
 
     static {
@@ -39,6 +41,45 @@ public class Varrock {
                                 })
                         ));
             }
+        });
+
+        /** SUROK MAGIS **/
+        NPCAction.register(NpcID.SUROK_MAGIS, "talk-to", (player, npc) -> {
+            player.dialogue(new NPCDialogue(npc, "Hello " + player.getName() + " what do you need?."),
+                    new OptionsDialogue(
+                            new Option("Would like to purchase some PN Credits.", () -> {
+                                player.dialogue(new PlayerDialogue("I would like to purchase some PN Credits."),
+                                                new NPCDialogue(npc, "That is going to cost you 10,000 gp per credit, would you like to continue?"),
+                                                new OptionsDialogue(
+                                                        new Option("Yes", () -> {
+                                                            player.integerInput("How many credits would you like?", amt -> {
+                                                               if (player.getInventory().hasItem(COINS_995, 10000 * amt)) {
+                                                                   npc.startEvent(event -> {
+                                                                       npc.face(player);
+                                                                       npc.forceText("hocus-pocus....");
+                                                                       npc.animate(724);
+                                                                       npc.graphics(343);
+                                                                       player.getInventory().remove(COINS_995, 10000 * amt);
+                                                                       player.PNCredit += amt;
+                                                                       event.delay(2);
+                                                                       player.dialogue(new NPCDialogue(npc, "I have charged your soul with " + amt + " PN Credits."),
+                                                                               new PlayerDialogue("Thanks!"));
+                                                                       npc.faceNone(true);
+                                                                   });
+                                                               } else {
+                                                                   player.dialogue(new PlayerDialogue("I'm sorry, but you don't have enough money."));
+                                                               }
+                                                            });
+                                                        }),
+                                                        new Option("No", () -> {
+                                                            player.dialogue(new NPCDialogue(npc, "Ok, come back when you change your mind."));
+                                                        })
+                                                ));
+                            }),
+                            new Option("Nothing at the moment", () -> {
+                               player.closeDialogue();
+                            })
+                    ));
         });
     }
 }
