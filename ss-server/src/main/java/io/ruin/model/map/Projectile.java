@@ -331,6 +331,12 @@ public class Projectile {
 
     public static final Projectile WATER_STRIKE = new Projectile(94, 43, 31, 51, 56, 10, 16, 64);
 
+    public static final Projectile FIRE_STRIKE = new Projectile(100, 43, 31, 51, 56, 10, 16, 64);
+
+    public static final Projectile AIR_STRIKE = new Projectile(91, 43, 31, 51, 56, 10, 16, 64);
+
+    public static final Projectile EARTH_STRIKE = new Projectile(97, 43, 31, 51, 56, 10, 16, 64);
+
 
     public static final Projectile DRAGON_BOLT = new Projectile(1468, 38, 36, 41, 51, 5, 5, 11);
 
