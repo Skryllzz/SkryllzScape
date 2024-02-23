@@ -4,6 +4,7 @@ import io.ruin.Server;
 import io.ruin.cache.ItemID;
 import io.ruin.cache.ObjectDef;
 import io.ruin.model.achievements.listeners.ardougne.ArdyEasy;
+import io.ruin.model.content.QuestReqs;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.StepType;
 import io.ruin.model.inter.dialogue.MessageDialogue;
@@ -135,6 +136,17 @@ public class Door {
                     return;
                 } else if (player.getAbsX() == 3202) {
                     player.stepAbs(3201, 3169, StepType.FORCE_WALK);
+                    return;
+                }
+            }
+        }
+        if ((def.id == 2624 && obj.x == 2902 && obj.y == 3510 || (def.id == 2625 && obj.x == 2902 && obj.y == 3511))) { //Heros Guild entrance
+            if (QuestReqs.HerosQuest(player)) {
+                if (player.getAbsX() > 2901) {
+                    player.stepAbs(player.getAbsX() - 1, player.getAbsY(), StepType.FORCE_WALK);
+                    return;
+                } else if (player.getAbsX() == 2901) {
+                    player.stepAbs(player.getAbsX() + 1, player.getAbsY(), StepType.FORCE_WALK);
                     return;
                 }
             }

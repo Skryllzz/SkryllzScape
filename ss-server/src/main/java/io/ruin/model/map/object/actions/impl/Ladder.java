@@ -135,6 +135,11 @@ public class Ladder {
         ObjectAction.register(11498, 3108, 3362, 0, "climb-up", (player, obj) -> player.getMovement().teleport(3108, 3366, 1));
         ObjectAction.register(11499, 3108, 3364, 1, "climb-down", (player, obj) -> player.getMovement().teleport(3108, 3361, 0));
 
+        //Heroes' Guild
+        ObjectAction.register(16671, 2895, 3513, 0, "climb-up", (player, obj) -> player.getMovement().teleport(2897, 3513, 1));
+        ObjectAction.register(16673, 2896, 3513, 1, "climb-down", (player, obj) -> player.getMovement().teleport(2896, 3512, 0));
+        ObjectAction.register(17384, 2892, 3507, 0, "climb-down", ((player, obj) -> climb(player, 2893, 9907, 0, false, true, false)));
+        ObjectAction.register(17387, 2892, 9907, 0, "climb-up", ((player, obj) -> climb(player, 2893, 3507, 0, true, true, false)));
 
         /**
          * Ladders we don't want to work!
