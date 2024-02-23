@@ -182,12 +182,6 @@ public class NPCDef {
             name = World.type.getWorldName() + " Wizard";
             options[0] = "Teleport";
             options[2] = "Teleport-previous";
-        } else if(id == 4159) {
-            name = World.type.getWorldName() + " Wizard";
-            options[0] = null;
-            options[1] = null;
-            options[2] = null;
-            options[3] = null;
         } else if(id == 2462) {
             /* Shanomi */
             options[2] = "Trade";

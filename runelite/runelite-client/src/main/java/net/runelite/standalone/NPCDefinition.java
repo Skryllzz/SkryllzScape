@@ -705,11 +705,6 @@ public class NPCDefinition extends DualNode implements RSNPCDefinition {
          name = CustomMain.worldType.getName() + " Wizard";
          actions[0] = "Teleport";
          actions[2] = "Teleport-previous";
-      } else if (id == 4159) {
-         /* PVP Wizard */
-         name = CustomMain.worldType.getName() + " Wizard";
-         actions[0] = "Teleport";
-         actions[2] = "Teleport-previous";
       } else if (id == 2462) {
          /* Shanomi */
          actions[2] = "Trade";
