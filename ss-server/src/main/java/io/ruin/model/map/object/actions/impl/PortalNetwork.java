@@ -98,7 +98,7 @@ public class PortalNetwork {
         options.add(new Option("Edgeville - 3 Charges - Total: 200", () -> teleport(player, 3074, 3510, 0, 3, 200)));
         options.add(new Option("Falador - 4 Charges - Total: 250", () -> teleport(player, 3058, 3349, 0, 4, 250)));
         options.add(new Option("Port Sarim - 5 Charges - Total: 300", () -> teleport(player, 3009, 3221, 0, 5, 300)));
-        options.add(new Option("Burthrope - 6 Charges - Total: 350", () -> teleport(player, 3215, 3379, 0, 6, 350)));
+        options.add(new Option("Burthrope - 6 Charges - Total: 350", () -> teleport(player, 2898, 3505, 0, 6, 350)));
         options.add(new Option("Ardougne - 7 Charges - Total: 400", () -> teleport(player, 2639, 3360, 0, 7, 400)));
         options.add(new Option("Canifis - 8 Charges - Total: 450", () -> teleport(player, 3506, 3471, 0, 8, 450)));
         options.add(new Option("Yanille - 9 Charges - Total: 500", () -> teleport(player, 2618, 3094, 0, 9, 500)));
