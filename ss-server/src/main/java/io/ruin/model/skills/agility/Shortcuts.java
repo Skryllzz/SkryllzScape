@@ -119,12 +119,27 @@ public class Shortcuts {
         // Dwarven Mine narrow crevice
         // Draynor narrow tunnel
         // Trollheim medium cliffside scramble
+        ObjectAction.register(3803, 2885, 3683, 0, "climb", (p, obj) -> Rocks.diagclimb(p, obj, 43));
+        ObjectAction.register(3804, 2885, 3684, 0, "climb", (p, obj) -> Rocks.diagclimb(p, obj, 43));
+        ObjectAction.register(16522, 2878, 3666, 0, "climb", (p, obj) -> Rocks.LNSClimb(p, obj, 43));
+        ObjectAction.register(16522, 2878, 3667, 0, "climb", (p, obj) -> Rocks.LNSClimb(p, obj, 43));
+        ObjectAction.register(3748, 2910, 3686, 0, "climb", (p, obj) -> Rocks.EWClimb(p, obj, 43));
+        ObjectAction.register(3748, 2910, 3687, 0, "climb", (p, obj) -> Rocks.EWClimb(p, obj, 43));
+        ObjectAction.register(16521, 2871, 3671, 0, "climb", (p, obj) -> Rocks.EWClimb(p, obj, 43));
+        ObjectAction.register(16521, 2870, 3671, 0, "climb", (p, obj) -> Rocks.EWClimb(p, obj, 43));
         // Trollheim advanced cliffside scramble
+        ObjectAction.register(16524, 2901, 3680, 0, "climb", (p, obj) -> Rocks.LEWClimb(p, obj, 47));
+        ObjectAction.register(16524, 2902, 3680, 0, "climb", (p, obj) -> Rocks.LEWClimb(p, obj, 47));
         // Kourend river jump
         // Tirannwn log balance
         // Cosmic Temple - medium narrow walkway
         // Deep Wilderness Dungeon narrow shortcut
         // Trollheim hard cliffside scramble
+        ObjectAction.register(16523, 2908, 3682, 0, "climb", (p, obj) -> Rocks.ldiagClimb(p, obj, 44));
+        ObjectAction.register(16523, 2909, 3683, 0, "climb", (p, obj) -> Rocks.ldiagClimb(p, obj, 44));
+        ObjectAction.register(26415, 2898, 3716, 0, "move", (p, obj) -> Rocks.Boulder(p, obj, 60));
+        ObjectAction.register(26382, 2904, 3719, 0, "crawl-through", (p, obj) -> Crevice.LittleCrack(p, obj, 60));
+        ObjectAction.register(26382, 2900, 3713, 0, "crawl-through", (p, obj) -> Crevice.LittleCrack(p, obj, 60));
         // Log balance to Fremennik Province
         // Contortion in Yanille Dungeon small room
         // Arceuus essence mine boulder leap
