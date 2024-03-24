@@ -1,23 +1,26 @@
 package io.ruin.model.skills.slayer;
 
 import io.ruin.api.utils.Random;
+import io.ruin.cache.Color;
 import io.ruin.cache.ItemDef;
 import io.ruin.cache.NPCDef;
 import io.ruin.model.World;
 import io.ruin.model.activities.wilderness.Wilderness;
-import io.ruin.model.combat.RangedAmmo;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.listeners.DeathListener;
 import io.ruin.model.inter.utils.Config;
 import io.ruin.model.item.containers.Equipment;
+import io.ruin.model.map.Bounds;
 import io.ruin.model.map.ground.GroundItem;
 import io.ruin.model.stat.StatType;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static io.ruin.cache.ItemID.*;
 
 public class Slayer {
 
@@ -33,8 +36,17 @@ public class Slayer {
         player.slayerTaskAmountAssigned = 0;
     }
 
+    public static void potatoreset(Player player) {
+        player.slayerTask = null;
+        player.slayerTaskName = null;
+        player.slayerTaskRemaining = 0;
+        player.slayerTaskDangerous = false;
+        player.slayerTaskAmountAssigned = 0;
+        player.sendMessage("Your slayer task has been reset.");
+    }
+
     public static void test(Player player) {
-        List<SlayerTask> tasks = getPossibleTasks(player, SlayerTask.Type.HARD, false);
+        List<SlayerTask> tasks = getPossibleTasks(player, SlayerTask.Type.BOSS, false);
         tasks.forEach(it -> {
             player.sendMessage(it.name + " " + it.level);
         });
@@ -68,6 +80,7 @@ public class Slayer {
         }
         player.slayerTask = task;
         player.slayerTaskName = task.name;
+        player.slayerTaskType = type;
         int taskAmount = task.type[0] == SlayerTask.Type.BOSS ? -1 : Random.get(task.min, task.max);
         player.slayerTaskRemaining = taskAmount;
         player.slayerTaskAmountAssigned = taskAmount;
@@ -110,27 +123,58 @@ public class Slayer {
     }
 
     public static void onNPCKill(Player player, NPC npc) {
+        boolean isKrystiliaTask = player.slayerTaskType == SlayerTask.Type.KRYSTILIA;
+        boolean isKonarTask = player.slayerTaskType == SlayerTask.Type.KONAR;
         if (isTask(player, npc)) {
+            if (isKrystiliaTask) {
+                if (Wilderness.getLevel(npc.getPosition()) > 0) {
+                    npc.deathEndListener = (DeathListener.SimpleKiller) killer -> {
+                        if (isTask(player, npc)) {
+                            if (Random.get(1, 40) == 1) {
+                                new GroundItem(LARRANS_KEY, 1).owner(killer.player).position(npc.getPosition()).spawn();
+                            }
+                            if (Random.rollDie((int) Math.ceil(combatLevelDropRate(npc) * 500), 1)) {
+                                new GroundItem(12746, 1).owner(killer.player).position(npc.getPosition()).spawn(); //Drops the first emblem
+                            }
+                            if (Random.rollDie((int) Math.ceil(combatLevelDropRate(npc) * 40), 1)) { //40-47
+                                new GroundItem(RESOURCE_PACK, 1).owner(killer.player).position(npc.getPosition()).spawn();
+                            }
+                        }
+                    };
+                    player.slayerTaskRemaining--;
+                    player.getStats().addXp(StatType.Slayer, npc.getCombat().getInfo().slayer_xp, true);
+                    if (player.slayerTaskRemaining <= 0) {
+                        finishTask(player);
+                    }
+                }
+            } else if (isKonarTask) {
+                String monsterName = npc.getDef().name;
+
+                // Get the bounds for the monster's assigned area
+                Bounds monsterBounds = KonarLocations.getBoundsForMonster(monsterName);
+
+                // Check if the player is in the correct area based on the monster's bounds
+                if (monsterBounds != null && player.getPosition().inBounds(monsterBounds)) {
+                    player.slayerTaskRemaining--;
+                    player.getStats().addXp(StatType.Slayer, npc.getCombat().getInfo().slayer_xp, true);
+                    npc.deathEndListener = (DeathListener.SimpleKiller) killer -> {
+                        if (isTask(player, npc)) {
+                            if (Random.get(1, 40) == 1) {
+                                new GroundItem(BRIMSTONE_KEY, 1).owner(killer.player).position(npc.getPosition()).spawn();
+                            }
+                        }
+                    };
+                    if (player.slayerTaskRemaining <= 0) {
+                        finishTask(player);
+                    }
+                }
+            } else {
             player.slayerTaskRemaining--;
             player.getStats().addXp(StatType.Slayer, npc.getCombat().getInfo().slayer_xp, true);
-            if (Wilderness.getLevel(npc.getPosition()) > 0) {
-                npc.deathEndListener = (DeathListener.SimpleKiller) killer -> {
-                    if (isTask(player, npc)) {
-                        if (Random.get(1, 40) == 1) {
-                            new GroundItem(23490, 1).owner(killer.player).position(npc.getPosition()).spawn();
-                        }
-                        if (Random.rollDie((int) Math.ceil(combatLevelDropRate(npc) * 500), 1)) {
-                            new GroundItem(12746, 1).owner(killer.player).position(npc.getPosition()).spawn(); //Drops the first emblem
-                        }
-                        if (Random.rollDie((int) Math.ceil(combatLevelDropRate(npc) * 40), 1)) { //40-47
-                            new GroundItem(30104, 1).owner(killer.player).position(npc.getPosition()).spawn();
-                        }
-                    }
-                };
-            }
             if (player.slayerTaskRemaining <= 0) {
                 finishTask(player);
             }
+        }
         }
     }
 
@@ -148,41 +192,78 @@ public class Slayer {
 
     private static void finishTask(Player player) {
         SlayerTask task = getTask(player);
+        boolean isTuraelTask = player.slayerTaskType == SlayerTask.Type.TURAEL;
         if (player.slayerTaskDangerous)
             PlayerCounter.WILDERNESS_SLAYER_TASKS_COMPLETED.increment(player, 1);
         else
             PlayerCounter.SLAYER_TASKS_COMPLETED.increment(player, 1);
-        int reward = getPointsReward(task, player.slayerTaskDangerous ? player.wildernessTasksCompleted : player.slayerTasksCompleted);
-        reward *= task.getHighestType().modifier; // TODO fix this
+        int reward = getPointsReward(player, task, player.slayerTaskDangerous ? player.wildernessTasksCompleted : player.slayerTasksCompleted);
+        //reward *= task.getHighestType().modifier; // TODO fix this
         if (World.doubleSlayer)
             reward *= 2;
         player.sendMessage("Your slayer task is now complete.");
-        Config.SLAYER_POINTS.set(player, reward + Config.SLAYER_POINTS.get(player));
         if (player.slayerTaskDangerous) {
             player.wildernessSlayerPoints += reward;
             player.wildernessTasksCompleted++;
-            player.sendMessage("You've completed a total of " + PlayerCounter.WILDERNESS_SLAYER_TASKS_COMPLETED.get(player) + " wilderness tasks, earning " + reward + " wilderness points," +
-                    " You now have a total of " + player.wildernessSlayerPoints + " points.");
+            player.sendMessage(Color.DARK_RED.wrap("You've completed a total of " + PlayerCounter.WILDERNESS_SLAYER_TASKS_COMPLETED.get(player) + " wilderness tasks, earning " + reward + " wilderness points," +
+                    " You now have a total of " + player.wildernessSlayerPoints + " points."));
+        } else if (isTuraelTask) {
+            player.sendMessage(Color.DARK_RED.wrap("You've completed a total of " + PlayerCounter.SLAYER_TASKS_COMPLETED.get(player) + " tasks. Tasks by Tureal do not earn slayer points. Please see another slayer master for another task."));
         } else {
-            player.sendMessage("You've completed a total of " + PlayerCounter.SLAYER_TASKS_COMPLETED.get(player) + " tasks, earning " + reward + " points" +
-                    ". You now have a total of " + Config.SLAYER_POINTS.get(player) + " points.");
+            Config.SLAYER_POINTS.set(player, reward + Config.SLAYER_POINTS.get(player));
+            player.sendMessage(Color.DARK_RED.wrap("You've completed a total of " + PlayerCounter.SLAYER_TASKS_COMPLETED.get(player) + " tasks, earning " + reward + " points" +
+                    ". You now have a total of " + Config.SLAYER_POINTS.get(player) + " points."));
         }
         reset(player);
     }
 
-    public static int getPointsReward(SlayerTask task, int tasks) {
-        int base = 30;
-        if (tasks % 1000 == 0)
-            return base * 50;
-        else if (tasks % 250 == 0)
-            return base * 35;
-        else if (tasks % 100 == 0)
-            return base * 25;
-        else if (tasks % 50 == 0)
-            return base * 15;
-        else if (tasks % 10 == 0)
-            return base * 5;
-        return base;
+    public static int getPointsReward(Player player, SlayerTask task, int tasks) {
+        int base = 0;
+
+        int assigned = player.slayerTaskAmountAssigned;
+
+        // Get the task for the player using getTask method
+        SlayerTask playerTask = getTask(player);
+
+        // Get the player's slayer task type
+        SlayerTask.Type playerTaskType = player.slayerTaskType;
+
+        // Find the base points for the player's task type
+        for (SlayerTask.Type type : SlayerTask.Type.values()) {
+            if (type == playerTaskType) {
+                base = type.basePoints;
+                break;
+            }
+        }
+
+        // Calculate the total points reward
+        int totalPoints = base;
+
+        // Calculate the bonus points based on the total points and milestone tasks
+        int bonus = calculateBonusPoints(tasks) * base;
+
+        // Calculate the final points reward
+        int finalPoints = totalPoints + bonus;
+
+        return finalPoints;
+    }
+
+    private static int calculateBonusPoints(int tasks) {
+        int bonus = 0;
+
+        if (tasks % 1000 == 0) {
+            bonus = 50;
+        } else if (tasks % 250 == 0) {
+            bonus = 35;
+        } else if (tasks % 100 == 0) {
+            bonus = 25;
+        } else if (tasks % 50 == 0) {
+            bonus = 15;
+        } else if (tasks % 10 == 0) {
+            bonus = 5;
+        }
+
+        return bonus;
     }
 
 

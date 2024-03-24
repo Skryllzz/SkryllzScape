@@ -1,29 +1,27 @@
 package io.ruin.model.entity.npc.actions.edgeville;
 
 import io.ruin.api.utils.Random;
-import io.ruin.cache.Color;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.inter.dialogue.ActionDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.dialogue.PlayerDialogue;
-import io.ruin.model.inter.utils.Config;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.shop.ShopManager;
+import io.ruin.model.skills.slayer.KonarLocations;
 import io.ruin.model.skills.slayer.Slayer;
 import io.ruin.model.skills.slayer.SlayerTask;
 import io.ruin.model.skills.slayer.SlayerUnlock;
 
-import static io.ruin.cache.NpcID.TURAEL;
+import static io.ruin.cache.NpcID.*;
 import static io.ruin.model.skills.slayer.Slayer.reset;
 import static io.ruin.model.skills.slayer.Slayer.set;
 
 public class SlayerMaster {
 
-    public static final int[] IDS = {6797, 7663, 8623, 401 };
+    public static final int[] IDS = {NIEVE, KRYSTILIA, TURAEL, KONAR_QUO_MATEN, MAZCHNA, VANNAKA, CHAELDAR, DURADEL };
 
     static {
         for(int ID : IDS) {
@@ -31,7 +29,7 @@ public class SlayerMaster {
                     new NPCDialogue(npc, "Yeah? What do you want?"),
                     new OptionsDialogue(
                             player.slayerTask == null ?
-                                    new Option("I want a Slayer assignment.", () -> {
+                                    new Option("Speak about assignment.", () -> {
                                         player.dialogue(
                                                 new PlayerDialogue("I want a Slayer assignment."),
                                                 new ActionDialogue(() -> assignment(player, npc))
@@ -62,7 +60,7 @@ public class SlayerMaster {
                     )
             ));
             NPCAction.register(ID, "Assignment", SlayerMaster::assignment);
-            NPCAction.register(ID, "Trade", (player, npc) -> ShopManager.openIfExists(player, "44f369bf-6369-48c5-9952-b9b50011e89b"));
+            NPCAction.register(ID, "Trade", (player, npc) -> ShopManager.openIfExists(player, "06bf1d5a-e4d8-49f5-9aac-6229a965b98a"));
             NPCAction.register(ID, "Rewards", (player, npc) -> rewards(player));
         }
     }
@@ -74,13 +72,13 @@ public class SlayerMaster {
     private static void assignment(Player player, NPC npc) {
         if (npc.getId() == TURAEL) {
             if (Slayer.getTask(player) != null) {
-                player.dialogue(new NPCDialogue(npc, "Would you like me to reset your current task? You will be assigned an " + Color.CRIMSON.wrap("easy") + " task."),
+                player.dialogue(new NPCDialogue(npc, "Would you like me to reset your current task? I can give you another task but this will reset your task streak."),
                         new OptionsDialogue(
                                 new Option("Yes please.", () -> player.dialogue(
                                         new PlayerDialogue("Yes please."),
                                         new ActionDialogue(() -> {
                                             reset(player);
-                                            set(player, SlayerTask.Type.EASY, false);
+                                            set(player, SlayerTask.Type.TURAEL, false);
                                             player.dialogue(new NPCDialogue(npc, "Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName + ".<br>Good luck!").lineHeight(28));
                                         }))),
                                 new Option("No, thanks.")
@@ -94,40 +92,95 @@ public class SlayerMaster {
             return;
         }
         if(Slayer.getTask(player) == null) {
-            if (PlayerCounter.SLAYER_TASKS_COMPLETED.get(player) == 0) {
-                set(player, SlayerTask.Type.EASY, false);
-                player.dialogue(new NPCDialogue(npc, "Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName + ".<br>Good luck!").lineHeight(28));
-                return;
+            if (npc.getId() == TURAEL) {
+                player.dialogue(new PlayerDialogue("I need another assignment"),
+                        new ActionDialogue(() -> {
+                            reset(player);
+                            set(player, SlayerTask.Type.TURAEL, false);
+                            player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                        }));
             }
-            player.dialogue(
-                    new NPCDialogue(npc, "What kind of task would you like?"),
-                    new OptionsDialogue(
-                            new Option("I want an easy task.", () -> player.dialogue(
-                                    new PlayerDialogue("I want an " + Color.CRIMSON.wrap("easy") + " task."),
-                                    new ActionDialogue(() -> assign(player, npc, SlayerTask.Type.EASY))
-                            )),
-                            new Option("I want a medium task.", () -> player.dialogue(
-                                    new PlayerDialogue("I want a " + Color.CRIMSON.wrap("medium") + " task."),
-                                    new ActionDialogue(() -> assign(player, npc, SlayerTask.Type.MEDIUM))
-                            )),
-                            new Option("I want a hard task.", () -> player.dialogue(
-                                    new PlayerDialogue("I want a " + Color.CRIMSON.wrap("hard") + " task."),
-                                    new ActionDialogue(() -> assign(player, npc, SlayerTask.Type.HARD))
-                            )),
-                            new Option("I want a boss task.", () -> {
-                                if (Config.LIKE_A_BOSS.get(player) == 1)
-                                    player.dialogue(
-                                            new PlayerDialogue("I want a " + Color.CRIMSON.wrap("boss") + " task."),
-                                            new ActionDialogue(() -> assign(player, npc, SlayerTask.Type.BOSS))
-                                    );
-                                else
-                                    player.dialogue(
-                                            new PlayerDialogue("I want a " + Color.CRIMSON.wrap("boss") + " task."),
-                                            new NPCDialogue(npc, "You haven't unlocked the ability to receive boss tasks yet.")
-                                    );
-                            })
-                    )
-            );
+            if (npc.getId() == MAZCHNA) {
+                player.dialogue(new PlayerDialogue("I need another assignment"),
+                        new ActionDialogue(() -> {
+                            reset(player);
+                            set(player, SlayerTask.Type.MAZCHNA, false);
+                            player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                        }));
+            }
+            if (npc.getId() == VANNAKA) {
+                player.dialogue(new PlayerDialogue("I need another assignment"),
+                        new ActionDialogue(() -> {
+                            reset(player);
+                            set(player, SlayerTask.Type.VANNAKA, false);
+                            player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                        }));
+            }
+            if (npc.getId() == CHAELDAR) {
+                player.dialogue(new PlayerDialogue("I need another assignment"),
+                        new ActionDialogue(() -> {
+                            reset(player);
+                            set(player, SlayerTask.Type.CHAELDAR, false);
+                            player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                        }));
+            }
+            if (npc.getId() == NIEVE) {
+                player.dialogue(new PlayerDialogue("I need another assignment"),
+                        new ActionDialogue(() -> {
+                            reset(player);
+                            set(player, SlayerTask.Type.NIEVE, false);
+                            player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                        }));
+            }
+            if (npc.getId() == DURADEL) {
+                player.dialogue(new NPCDialogue(npc, "'Ello, and what are you after then?"),
+                        new OptionsDialogue(
+                                new Option("I need another assignment.", () -> player.dialogue(
+                                        new PlayerDialogue("Yes please."),
+                                        new ActionDialogue(() -> {
+                                            reset(player);
+                                            set(player, SlayerTask.Type.DURADEL, false);
+                                            player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                                        }))),
+                                new Option("I would love a boss assignment.", () -> {
+                                    if (player.getCombat().getLevel() >= 100) {
+                                        player.dialogue(
+                                                new PlayerDialogue("I would love a boss assignment."),
+                                                new ActionDialogue(() -> {
+                                                    reset(player);
+                                                    set(player, SlayerTask.Type.BOSS, false);
+                                                    player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                                                }));
+                                    } else {
+                                        player.dialogue(new PlayerDialogue("I'm sorry, but you need to be level 100 combat to get a boss task.").animate(588));
+
+                                    }
+                                })));
+            }
+            if (npc.getId() == KONAR_QUO_MATEN) {
+                player.dialogue(new NPCDialogue(npc, "'Ello, and what are you after then?"),
+                        new OptionsDialogue(
+                                new Option("I need another assignment.", () -> player.dialogue(
+                                        new PlayerDialogue("Yes please."),
+                                        new ActionDialogue(() -> {
+                                            reset(player);
+                                            set(player, SlayerTask.Type.KONAR, false);
+                                            KonarLocations.Area slayerTaskArea = KonarLocations.slayerMonsterAreas.get(player.slayerTaskName);
+                                            String areaName = slayerTaskArea != null ? KonarLocations.GetAreaName(slayerTaskArea) : "Unknown Area";
+                                            player.dialogue(new NPCDialogue(npc, "You are to bring balance to " + player.slayerTaskRemaining + " " + player.slayerTaskName + " in " + areaName).lineHeight(28));
+                                        }))),
+                                new Option("Er... Nothing....", () -> {
+                                    player.dialogue(new PlayerDialogue("Er... Nothing...").animate(588));
+                                })));
+            }
+            if (npc.getId() == KRYSTILIA) {
+                player.dialogue(new PlayerDialogue("I need another assignment"),
+                        new ActionDialogue(() -> {
+                            reset(player);
+                            set(player, SlayerTask.Type.KRYSTILIA, false);
+                            player.dialogue(new NPCDialogue(npc, "Excellent, you're doing great. Your new task is to kill " + player.slayerTaskRemaining + " " + player.slayerTaskName).lineHeight(28));
+                        }));
+            }
             return;
         }
         player.dialogue(new NPCDialogue(npc, "You're currently assigned to kill " + player.slayerTaskName + "; only " + player.slayerTaskRemaining + " more to go.")/* Your reward point tally is " + tally + ".")*/.lineHeight(28));

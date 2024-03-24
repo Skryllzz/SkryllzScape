@@ -109,17 +109,23 @@ public class SlayerTask {
                 }
                 int defaultMin, defaultMax;
                 Type highest = Arrays.stream(task.type).min(Comparator.comparing(Type::ordinal)).orElse(null);
-                if(highest == Type.EASY) {
-                    defaultMin = 10;
-                    defaultMax = 25;
-                } else if(highest == Type.MEDIUM) {
-                    defaultMin = 20;
-                    defaultMax = 50;
-                } else if(highest == Type.HARD) {
-                    defaultMin = 50;
-                    defaultMax = 115;
+                if(highest == Type.VANNAKA) {
+                    defaultMin = 25;
+                    defaultMax = 60;
+                } else if(highest == Type.CHAELDAR) {
+                    defaultMin = 30;
+                    defaultMax = 80;
+                } else if(highest == Type.NIEVE) {
+                    defaultMin = 40;
+                    defaultMax = 100;
+                } else if(highest == Type.DURADEL) {
+                    defaultMin = 45;
+                    defaultMax = 90;
+                } else if(highest == Type.BOSS) {
+                    defaultMin = 5;
+                    defaultMax = 15;
                 } else {
-                    defaultMin = 1;
+                    defaultMin = 5;
                     defaultMax = 35;
                 }
                 if(task.min == 0)
@@ -144,6 +150,16 @@ public class SlayerTask {
         });
     }
 
+    private final Type taskType; // Add a field for task type
+
+    public SlayerTask(Type taskType) {
+        this.taskType = taskType;
+    }
+
+    public Type getType() {
+        return taskType; // Getter method to retrieve task type
+    }
+
     public Type getHighestType() {
         Type highest = type[0];
         for (int i = 1; i < type.length; i++) {
@@ -164,13 +180,17 @@ public class SlayerTask {
     }
 
     public enum Type {
-
-        EASY(5, 1.0/3, 3),
-        MEDIUM(15, 2.0/3, 60),
-        HARD(25, 1.0, 80),
+        TURAEL(0, 0, 3),
+        MAZCHNA(2, 2.5, 20),
+        VANNAKA(4, 1.0/3, 40),
+        CHAELDAR(10, 2.0/3, 70),
+        NIEVE(12, 2.0/3, 85),
+        DURADEL(15, 1.0, 100),
+        KONAR(20, 1.0, 75),
+        KRYSTILIA(25, 1.0, 1),
         BOSS(100, 1.0, 100);
 
-        private final int basePoints;
+        public final int basePoints;
 
         public final double modifier;
 
