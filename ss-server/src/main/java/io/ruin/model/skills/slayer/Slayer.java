@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.ruin.cache.ItemID.*;
+import static io.ruin.model.skills.slayer.KonarLocations.slayerMonsterAreas;
 
 public class Slayer {
 
@@ -148,24 +149,30 @@ public class Slayer {
                     }
                 }
             } else if (isKonarTask) {
-                String monsterName = npc.getDef().name;
+                String playerSlayerTask = player.slayerTaskName; // Assuming you have a method to retrieve the slayer task name from the player file
 
                 // Get the bounds for the monster's assigned area
-                Bounds monsterBounds = KonarLocations.getBoundsForMonster(monsterName);
+                Bounds monsterBounds = KonarLocations.getBoundsForMonster(playerSlayerTask);
 
-                // Check if the player is in the correct area based on the monster's bounds
-                if (monsterBounds != null && player.getPosition().inBounds(monsterBounds)) {
-                    player.slayerTaskRemaining--;
-                    player.getStats().addXp(StatType.Slayer, npc.getCombat().getInfo().slayer_xp, true);
-                    npc.deathEndListener = (DeathListener.SimpleKiller) killer -> {
-                        if (isTask(player, npc)) {
-                            if (Random.get(1, 40) == 1) {
-                                new GroundItem(BRIMSTONE_KEY, 1).owner(killer.player).position(npc.getPosition()).spawn();
+                if (playerSlayerTask != null && slayerMonsterAreas.containsKey(playerSlayerTask)) {
+                    KonarLocations.Area assignedArea = slayerMonsterAreas.get(playerSlayerTask);
+                    if (assignedArea != null) {
+                        assert monsterBounds != null;
+                        if (player.getPosition().inBounds(monsterBounds)) {
+                            player.slayerTaskRemaining--;
+                            player.getStats().addXp(StatType.Slayer, npc.getCombat().getInfo().slayer_xp, true);
+                            npc.deathEndListener = (DeathListener.SimpleKiller) killer -> {
+                                if (isTask(player, npc)) {
+                                    if (Random.get(1, 80) == 1) {
+                                        new GroundItem(BRIMSTONE_KEY, 1).owner(killer.player).position(npc.getPosition()).spawn();
+                                        player.sendMessage(Color.RED.wrap("A brimstone key has dropped from the monster!"));
+                                    }
+                                }
+                            };
+                            if (player.slayerTaskRemaining <= 0) {
+                                finishTask(player);
                             }
                         }
-                    };
-                    if (player.slayerTaskRemaining <= 0) {
-                        finishTask(player);
                     }
                 }
             } else {
@@ -305,9 +312,9 @@ public class Slayer {
     public static void check(Player player) {
         SlayerTask task = Slayer.getTask(player);
         if (task == null) {
-            player.sendMessage("You do not currently have a slayer assignment. Talk to Krystilia in Edgeville to receive one.");
+            player.sendMessage("You do not currently have a slayer assignment. Speak to a slayer master to get one.");
         } else {
-            player.sendMessage("Your current slayer assignment is " + task.name + ". Only " + player.slayerTaskRemaining + " left to go.");
+            player.sendMessage(Color.BLUE.wrap("Your current slayer assignment is " + task.name + ". Only " + player.slayerTaskRemaining + " left to go."));
         }
     }
 }

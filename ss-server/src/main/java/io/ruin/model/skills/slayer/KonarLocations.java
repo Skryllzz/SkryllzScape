@@ -137,9 +137,9 @@ public class KonarLocations {
             case SLAYER_TOWER_1st_FLOOR:
                 return new Bounds(3404, 3531, 3454, 3579, 0);
             case SLAYER_TOWER_2nd_FLOOR:
-                return new Bounds(3404, 3531, 3454, 3579, 1);
+                return new Bounds(3405, 3530, 3455, 3580, 1);
             case SLAYER_TOWER_3rd_FLOOR:
-                return new Bounds(3404, 3531, 3454, 3579, 2);
+                return new Bounds(3403, 3529, 3456, 3581, 2);
             case KRAKEN_COVE:
                 return new Bounds(2245, 9989, 2303, 10046, 0);
             case STRONGHOLD_SLAYER_CAVE:
