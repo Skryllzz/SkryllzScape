@@ -25,6 +25,7 @@ import io.ruin.utility.DebugMessage;
 import java.util.Arrays;
 
 import static io.ruin.cache.ItemID.ROTTEN_POTATO;
+import static io.ruin.model.skills.slayer.Slayer.potatoreset;
 
 public class RottenPotato {
 
@@ -65,7 +66,8 @@ public class RottenPotato {
     static void peel(Player player, Item item) {
         player.dialogue(new OptionsDialogue(
                 new Option("Open Bank", () -> player.getBank().open()),
-                new Option("Teleport Menu", () -> teleports.open(player))
+                new Option("Teleport Menu", () -> teleports.open(player)),
+                new Option("Reset Slayer Task", () -> potatoreset(player))
         ));
     }
 
