@@ -18,7 +18,7 @@ public enum XpMode {
     EASY("Easy", 100, 30, 15, 0),
     //NORMAL("Normal", 5, 5, 5, 0)
     //NORMAL("Normal", 10, 10, 10, 0) //double exp
-    NORMAL("Normal", 50, 50, 50, 0) //beta
+    NORMAL("Normal", 100, 100, 100, 0) //beta
     ;
     @Getter
     private final String name;
